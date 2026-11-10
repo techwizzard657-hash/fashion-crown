@@ -134,11 +134,11 @@
 @keyframes goldPulse {
     0% {
         border-color: var(--gold);
-        box-shadow: 0 0 20px rgba(201, 168, 76, 0.2);
+        box-shadow: 0 0 20px rgba(255, 77, 109, 0.2);
     }
     50% {
         border-color: transparent;
-        box-shadow: 0 0 0 rgba(201, 168, 76, 0);
+        box-shadow: 0 0 0 rgba(255, 77, 109, 0);
     }
     100% {
         border-color: var(--border-subtle);
@@ -152,7 +152,7 @@
         background-color: transparent;
     }
     25% {
-        background-color: rgba(201, 168, 76, 0.08);
+        background-color: rgba(255, 77, 109, 0.08);
     }
     100% {
         background-color: transparent;
@@ -175,10 +175,10 @@
 /* Glow Pulse — premium gold glow effect */
 @keyframes glowPulse {
     0%, 100% {
-        box-shadow: 0 0 10px rgba(201, 168, 76, 0.1);
+        box-shadow: 0 0 10px rgba(255, 77, 109, 0.1);
     }
     50% {
-        box-shadow: 0 0 25px rgba(201, 168, 76, 0.25);
+        box-shadow: 0 0 25px rgba(255, 77, 109, 0.25);
     }
 }
 
@@ -479,7 +479,7 @@ body {
 }
 
 .hover-border:hover {
-    border-color: rgba(201, 168, 76, 0.3);
+    border-color: rgba(255, 77, 109, 0.3);
 }
 
 /* Opacity reveal on hover */
@@ -678,13 +678,13 @@ body {
     width: 3px;
     height: 3px;
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(201, 168, 76, 0.6), transparent);
+    background: radial-gradient(circle, rgba(255, 77, 109, 0.6), transparent);
     box-shadow:
-        calc(10vw) calc(20vh) 0 0 rgba(201, 168, 76, 0.3),
+        calc(10vw) calc(20vh) 0 0 rgba(255, 77, 109, 0.3),
         calc(25vw) calc(45vh) 0 1px rgba(232, 213, 163, 0.25),
-        calc(70vw) calc(15vh) 0 0 rgba(201, 168, 76, 0.35),
+        calc(70vw) calc(15vh) 0 0 rgba(255, 77, 109, 0.35),
         calc(85vw) calc(60vh) 0 1px rgba(232, 213, 163, 0.2),
-        calc(40vw) calc(75vh) 0 0 rgba(201, 168, 76, 0.3),
+        calc(40vw) calc(75vh) 0 0 rgba(255, 77, 109, 0.3),
         calc(55vw) calc(30vh) 0 1px rgba(232, 213, 163, 0.15);
     animation: particleFloat1 8s ease-in-out infinite;
     top: 0;
@@ -700,11 +700,11 @@ body {
     border-radius: 50%;
     background: radial-gradient(circle, rgba(232, 213, 163, 0.5), transparent);
     box-shadow:
-        calc(15vw) calc(55vh) 0 0 rgba(201, 168, 76, 0.25),
+        calc(15vw) calc(55vh) 0 0 rgba(255, 77, 109, 0.25),
         calc(35vw) calc(10vh) 0 1px rgba(232, 213, 163, 0.3),
-        calc(60vw) calc(70vh) 0 0 rgba(201, 168, 76, 0.2),
+        calc(60vw) calc(70vh) 0 0 rgba(255, 77, 109, 0.2),
         calc(80vw) calc(35vh) 0 0 rgba(232, 213, 163, 0.3),
-        calc(45vw) calc(50vh) 0 1px rgba(201, 168, 76, 0.15),
+        calc(45vw) calc(50vh) 0 1px rgba(255, 77, 109, 0.15),
         calc(92vw) calc(80vh) 0 0 rgba(232, 213, 163, 0.25);
     animation: particleFloat2 10s ease-in-out infinite;
     top: 0;
@@ -1037,11 +1037,11 @@ body {
 @keyframes focusRing {
     0% {
         outline-offset: 0px;
-        outline-color: rgba(201, 168, 76, 0.5);
+        outline-color: rgba(255, 77, 109, 0.5);
     }
     50% {
         outline-offset: 4px;
-        outline-color: rgba(201, 168, 76, 0.8);
+        outline-color: rgba(255, 77, 109, 0.8);
     }
     100% {
         outline-offset: 2px;
@@ -1100,7 +1100,7 @@ body {
     height: 300px;
     background: radial-gradient(
         circle,
-        rgba(201, 168, 76, 0.06) 0%,
+        rgba(255, 77, 109, 0.06) 0%,
         transparent 70%
     );
     pointer-events: none;

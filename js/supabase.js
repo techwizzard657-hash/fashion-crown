@@ -43,7 +43,7 @@ const MOCK_DATA = {
         {
             id: 'cont-1',
             name: 'Amara Okafor',
-            bio: 'Award-winning fashion designer known for blending African heritage with modern style. Founder of Amara Couture.',
+            bio: 'High-fashion editorial model & runway muse. Leading contender for the official Face of Fashion Crown 2026.',
             photo_url: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&h=500&fit=crop&crop=face',
             is_demo: false,
             vote_count: 847,
@@ -53,9 +53,9 @@ const MOCK_DATA = {
         {
             id: 'cont-2',
             name: 'Liam Chen',
-            bio: 'Streetwear innovator and sustainable fashion advocate. Featured in Vogue and GQ.',
+            bio: 'Streetwear & editorial model with international runway acclaim. Contender for the Face of Fashion Crown.',
             photo_url: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&h=500&fit=crop&crop=face',
-            is_demo: true,
+            is_demo: false,
             vote_count: 623,
             competition_id: 'comp-1',
             created_at: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000).toISOString()
@@ -63,9 +63,9 @@ const MOCK_DATA = {
         {
             id: 'cont-3',
             name: 'Sofia Martinez',
-            bio: 'Haute couture specialist with 10 years of runway experience. Known for bold colour combinations.',
+            bio: 'Haute couture editorial model and luxury brand muse with 10 years of runway experience.',
             photo_url: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=400&h=500&fit=crop&crop=face',
-            is_demo: true,
+            is_demo: false,
             vote_count: 512,
             competition_id: 'comp-1',
             created_at: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000).toISOString()
@@ -73,9 +73,9 @@ const MOCK_DATA = {
         {
             id: 'cont-4',
             name: 'David Kimani',
-            bio: 'Emerging talent in Kenyan fashion. Specializes in bespoke menswear and traditional fusion.',
+            bio: 'Nairobi-based high-fashion model and style icon. Representing modern contemporary Kenyan elegance.',
             photo_url: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=500&fit=crop&crop=face',
-            is_demo: true,
+            is_demo: false,
             vote_count: 389,
             competition_id: 'comp-1',
             created_at: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000).toISOString()
@@ -83,9 +83,9 @@ const MOCK_DATA = {
         {
             id: 'cont-5',
             name: "Zara Ndung'u",
-            bio: 'Accessories designer and fashion blogger. Creator of the popular ZN Collection.',
+            bio: 'Top style ambassador, editorial model, and creative muse. Finalist for the New Face of Fashion Crown.',
             photo_url: 'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=400&h=500&fit=crop&crop=face',
-            is_demo: true,
+            is_demo: false,
             vote_count: 256,
             competition_id: 'comp-1',
             created_at: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000).toISOString()

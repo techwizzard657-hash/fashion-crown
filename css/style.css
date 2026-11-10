@@ -7,35 +7,49 @@
    1. CSS CUSTOM PROPERTIES (Design Tokens)
    ----------------------------------------------------------- */
 :root {
-    /* Backgrounds */
-    --bg-primary: #0A0A0A;
-    --bg-surface: #111111;
-    --bg-elevated: #141414;
-    --bg-card: rgba(17, 17, 17, 0.8);
-    --bg-glass: rgba(20, 20, 20, 0.6);
+    /* Backgrounds: Soft Sand (#F0E5DB) Foundation */
+    --bg-primary: #F0E5DB;
+    --bg-surface: #FAF5F0;
+    --bg-elevated: #FFFFFF;
+    --bg-card: rgba(255, 255, 255, 0.94);
+    --bg-glass: rgba(240, 229, 219, 0.88);
 
-    /* Borders */
-    --border-subtle: #1E1E1E;
-    --border-visible: #2A2A2A;
+    /* Borders: Warm Sand Contours */
+    --border-subtle: #E2D5C7;
+    --border-visible: #D0C1B0;
 
-    /* Gold Palette */
-    --gold: #C9A84C;
-    --gold-light: #E8D5A3;
-    --gold-dark: #8B7533;
-    --gold-glow: rgba(201, 168, 76, 0.15);
-    --gold-gradient: linear-gradient(135deg, #C9A84C, #E8D5A3);
+    /* Primary Authority: Mocha Green (#474329) */
+    --mocha: #474329;
+    --mocha-dark: #322F1C;
+    --mocha-light: #5F5938;
+    --mocha-gradient: linear-gradient(135deg, #474329, #322F1C);
 
-    /* Text */
-    --text-primary: #F5F5F5;
-    --text-secondary: #8A8A8A;
-    --text-muted: #555555;
+    /* High Fashion Accent: Watermelon Pink */
+    --accent-pink: #FF4D6D;
+    --accent-pink-hover: #E83657;
+    --accent-pink-light: #FF758F;
+    --accent-pink-glow: rgba(255, 77, 109, 0.25);
+    --pink-gradient: linear-gradient(135deg, #FF4D6D, #FF758F);
+    --pink-gradient-hover: linear-gradient(135deg, #E83657, #FF4D6D);
+
+    /* Compatibility mapping for gold tokens -> Watermelon Pink */
+    --gold: #FF4D6D;
+    --gold-light: #FF758F;
+    --gold-dark: #E83657;
+    --gold-glow: rgba(255, 77, 109, 0.22);
+    --gold-gradient: linear-gradient(135deg, #FF4D6D, #FF758F);
+
+    /* Text: Deep Mocha Green */
+    --text-primary: #474329;
+    --text-secondary: #6B6543;
+    --text-muted: #8F8863;
     --white: #FFFFFF;
 
     /* Status */
-    --success: #4CAF50;
-    --error: #EF4444;
-    --pending: #3B82F6;
-    --warning: #F59E0B;
+    --success: #2E7D32;
+    --error: #D32F2F;
+    --pending: #0288D1;
+    --warning: #ED6C02;
 
     /* Typography */
     --font-heading: 'Playfair Display', serif;
@@ -47,11 +61,12 @@
     --radius-lg: 24px;
     --radius-full: 9999px;
 
-    /* Shadows */
-    --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.2);
-    --shadow-md: 0 8px 30px rgba(0, 0, 0, 0.3);
-    --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.4);
-    --shadow-gold: 0 8px 30px rgba(201, 168, 76, 0.15);
+    /* Shadows: Warm Luxury */
+    --shadow-sm: 0 4px 14px rgba(71, 67, 41, 0.06);
+    --shadow-md: 0 8px 30px rgba(71, 67, 41, 0.08);
+    --shadow-lg: 0 20px 60px rgba(71, 67, 41, 0.12);
+    --shadow-gold: 0 8px 30px rgba(255, 77, 109, 0.3);
+    --shadow-pink: 0 8px 30px rgba(255, 77, 109, 0.3);
 
     /* Transitions */
     --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -91,13 +106,13 @@ body {
 
 /* Selection */
 ::selection {
-    background: var(--gold);
-    color: #0A0A0A;
+    background: var(--accent-pink);
+    color: #FFFFFF;
 }
 
 ::-moz-selection {
-    background: var(--gold);
-    color: #0A0A0A;
+    background: var(--accent-pink);
+    color: #FFFFFF;
 }
 
 /* Custom Scrollbar */
@@ -106,22 +121,22 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-    background: #0A0A0A;
+    background: #F0E5DB;
 }
 
 ::-webkit-scrollbar-thumb {
-    background: var(--gold-dark);
+    background: var(--mocha);
     border-radius: var(--radius-full);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: var(--gold);
+    background: var(--accent-pink);
 }
 
 /* Firefox scrollbar */
 * {
     scrollbar-width: thin;
-    scrollbar-color: var(--gold-dark) #0A0A0A;
+    scrollbar-color: var(--mocha) #F0E5DB;
 }
 
 img {
@@ -268,11 +283,12 @@ p {
 }
 
 .navbar.scrolled {
-    background: rgba(10, 10, 10, 0.95);
+    background: rgba(240, 229, 219, 0.96);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     padding: 14px 0;
     border-bottom: 1px solid var(--border-subtle);
+    box-shadow: 0 4px 20px rgba(71, 67, 41, 0.08);
 }
 
 .nav-container {
@@ -291,10 +307,7 @@ p {
     font-family: var(--font-heading);
     font-size: 1.5rem;
     font-weight: 700;
-    background: var(--gold-gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: var(--mocha);
     letter-spacing: 0.12em;
     text-transform: uppercase;
     position: relative;
@@ -309,10 +322,8 @@ p {
 
 .nav-logo i {
     font-size: 1.25rem;
-    background: var(--gold-gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    filter: drop-shadow(0 2px 8px rgba(201, 168, 76, 0.4));
+    color: var(--accent-pink);
+    filter: drop-shadow(0 2px 8px rgba(255, 77, 109, 0.4));
 }
 
 .nav-menu {
@@ -324,10 +335,10 @@ p {
 
 .nav-menu a {
     font-size: 0.8rem;
-    font-weight: 400;
+    font-weight: 500;
     letter-spacing: 0.15em;
     text-transform: uppercase;
-    color: var(--text-secondary);
+    color: var(--text-primary);
     transition: color 0.3s ease;
     position: relative;
     padding: 4px 0;
@@ -339,14 +350,14 @@ p {
     bottom: -4px;
     left: 0;
     width: 0;
-    height: 1px;
-    background: var(--gold);
+    height: 2px;
+    background: var(--accent-pink);
     transition: width 0.3s ease;
 }
 
 .nav-menu a:hover,
 .nav-menu a.active {
-    color: var(--text-primary);
+    color: var(--accent-pink);
 }
 
 .nav-menu a.active::after,
@@ -369,8 +380,8 @@ p {
 .nav-toggle span {
     display: block;
     width: 24px;
-    height: 1.5px;
-    background: var(--gold);
+    height: 2px;
+    background: var(--mocha);
     transition: var(--transition);
     transform-origin: center;
 }
@@ -412,9 +423,9 @@ p {
     inset: 0;
     background: linear-gradient(
         180deg,
-        rgba(10, 10, 10, 0.3) 0%,
-        rgba(10, 10, 10, 0.7) 50%,
-        rgba(10, 10, 10, 0.95) 100%
+        rgba(71, 67, 41, 0.45) 0%,
+        rgba(71, 67, 41, 0.78) 55%,
+        #F0E5DB 100%
     );
 }
 
@@ -431,9 +442,9 @@ p {
     text-transform: uppercase;
     letter-spacing: 0.3em;
     font-size: 0.75rem;
-    color: var(--gold);
+    color: var(--accent-pink);
     margin-bottom: 24px;
-    font-weight: 500;
+    font-weight: 600;
     display: block;
 }
 
@@ -446,7 +457,7 @@ p {
 }
 
 .hero h1 span.gold-text {
-    background: var(--gold-gradient);
+    background: var(--pink-gradient);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -454,7 +465,7 @@ p {
 
 .hero-description {
     font-size: 1.15rem;
-    color: var(--text-secondary);
+    color: #FAF5F0;
     max-width: 600px;
     margin: 0 auto 40px;
     font-weight: 300;
@@ -478,17 +489,17 @@ p {
     left: 50%;
     transform: translateX(-50%);
     z-index: 3;
-    color: var(--text-muted);
+    color: var(--mocha);
     font-size: 1.2rem;
     animation: bounceDown 2s ease-in-out infinite;
-    opacity: 0.5;
+    opacity: 0.7;
     cursor: pointer;
     transition: opacity 0.3s ease;
 }
 
 .hero-scroll-indicator:hover {
     opacity: 1;
-    color: var(--gold);
+    color: var(--accent-pink);
 }
 
 
@@ -532,16 +543,16 @@ p {
 
 .btn-gold,
 .btn-primary {
-    background: var(--gold-gradient);
-    color: #0A0A0A;
-    box-shadow: var(--shadow-gold);
+    background: var(--pink-gradient);
+    color: #FFFFFF;
+    box-shadow: 0 8px 25px rgba(255, 77, 109, 0.35);
     font-weight: 600;
 }
 
 .btn-gold:hover,
 .btn-primary:hover {
     transform: translateY(-2px);
-    box-shadow: 0 12px 40px rgba(201, 168, 76, 0.25);
+    box-shadow: 0 12px 35px rgba(255, 77, 109, 0.45);
 }
 
 .btn-gold:active,
@@ -552,14 +563,26 @@ p {
 .btn-outline,
 .btn-secondary {
     background: transparent;
-    border: 1px solid var(--gold);
-    color: var(--gold);
+    border: 1.5px solid var(--mocha);
+    color: var(--mocha);
+    font-weight: 600;
 }
 
 .btn-outline:hover,
 .btn-secondary:hover {
-    background: rgba(201, 168, 76, 0.1);
+    background: var(--mocha);
+    color: #F0E5DB;
     transform: translateY(-2px);
+}
+
+.hero .btn-outline {
+    border-color: #FFFFFF;
+    color: #FFFFFF;
+}
+
+.hero .btn-outline:hover {
+    background: #FFFFFF;
+    color: var(--mocha);
 }
 
 .btn-lg {
@@ -685,7 +708,7 @@ p {
     border: 1px solid var(--border-subtle);
     border-radius: var(--radius);
     position: relative;
-    box-shadow: inset 0 0 20px rgba(201, 168, 76, 0.05);
+    box-shadow: inset 0 0 20px rgba(255, 77, 109, 0.05);
     transition: border-color 0.3s ease;
 }
 
@@ -749,7 +772,7 @@ p {
 .contestant-card:hover {
     transform: translateY(-8px);
     box-shadow: var(--shadow-lg);
-    border-color: rgba(201, 168, 76, 0.2);
+    border-color: rgba(255, 77, 109, 0.2);
 }
 
 .contestant-photo {
@@ -803,25 +826,12 @@ p {
 }
 
 .vote-count {
-    color: var(--gold);
-    font-weight: 600;
+    color: var(--accent-pink);
+    font-weight: 700;
 }
 
 .demo-badge {
-    position: absolute;
-    top: 16px;
-    left: 16px;
-    background: rgba(10, 10, 10, 0.7);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    padding: 4px 12px;
-    border-radius: var(--radius-full);
-    font-size: 0.65rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--text-secondary);
-    border: 1px solid var(--border-subtle);
-    z-index: 2;
+    display: none !important;
 }
 
 .rank-badge {
@@ -864,7 +874,7 @@ p {
 }
 
 .contestant-card-detailed:hover {
-    border-color: rgba(201, 168, 76, 0.15);
+    border-color: rgba(255, 77, 109, 0.15);
     box-shadow: var(--shadow-md);
 }
 
@@ -1041,8 +1051,8 @@ p {
     width: 32px;
     height: 32px;
     border-radius: 50%;
-    background: var(--gold-gradient);
-    color: #0A0A0A;
+    background: var(--pink-gradient);
+    color: #FFFFFF;
     font-size: 0.75rem;
     font-weight: 700;
     flex-shrink: 0;
@@ -1100,7 +1110,7 @@ p {
 
 .selector-card.selected {
     border-color: var(--gold);
-    background: rgba(201, 168, 76, 0.05);
+    background: rgba(255, 77, 109, 0.05);
     box-shadow: var(--shadow-gold);
 }
 
@@ -1143,12 +1153,7 @@ p {
 }
 
 .selector-demo {
-    font-size: 0.55rem;
-    letter-spacing: 0.1em;
-    color: var(--text-muted);
-    display: block;
-    margin-top: 4px;
-    text-transform: uppercase;
+    display: none !important;
 }
 
 /* Amount Grid */
@@ -1176,8 +1181,8 @@ p {
 
 .amount-btn.selected {
     border-color: var(--gold);
-    background: rgba(201, 168, 76, 0.06);
-    box-shadow: 0 0 20px rgba(201, 168, 76, 0.1);
+    background: rgba(255, 77, 109, 0.06);
+    box-shadow: 0 0 20px rgba(255, 77, 109, 0.1);
 }
 
 .amount-btn-full {
@@ -1347,7 +1352,7 @@ p {
 .mpesa-prompt-notice {
     text-align: center;
     padding: 16px;
-    background: rgba(201, 168, 76, 0.06);
+    background: rgba(255, 77, 109, 0.06);
     border-radius: var(--radius);
     margin-bottom: 24px;
     font-size: 0.85rem;
@@ -1571,7 +1576,7 @@ p {
 
 .podium-first .podium-photo {
     border-color: var(--gold);
-    box-shadow: 0 0 30px rgba(201, 168, 76, 0.2);
+    box-shadow: 0 0 30px rgba(255, 77, 109, 0.2);
 }
 
 .podium-second .podium-photo {
@@ -1642,18 +1647,18 @@ p {
 }
 
 .podium-medal.gold {
-    background: var(--gold);
-    color: #0A0A0A;
+    background: var(--accent-pink);
+    color: #FFFFFF;
 }
 
 .podium-medal.silver {
-    background: #C0C0C0;
-    color: #0A0A0A;
+    background: #A89E8A;
+    color: #FFFFFF;
 }
 
 .podium-medal.bronze {
-    background: #CD7F32;
-    color: #FFF;
+    background: #806A50;
+    color: #FFFFFF;
 }
 
 .podium-stand {
@@ -1669,7 +1674,8 @@ p {
 
 .podium-stand-1 {
     height: 120px;
-    background: linear-gradient(to bottom, rgba(201, 168, 76, 0.1), var(--bg-surface));
+    background: linear-gradient(to bottom, rgba(255, 77, 109, 0.15), var(--bg-surface));
+    border-top: 3px solid var(--accent-pink);
 }
 
 .podium-stand-2 {
@@ -1722,7 +1728,7 @@ p {
 }
 
 .rankings-table tbody tr:hover {
-    background: rgba(201, 168, 76, 0.03);
+    background: rgba(255, 77, 109, 0.04);
 }
 
 .rankings-table tbody tr:last-child {
@@ -1753,18 +1759,18 @@ p {
 }
 
 .rank-1 {
-    background: var(--gold) !important;
-    color: #0A0A0A !important;
+    background: var(--accent-pink) !important;
+    color: #FFFFFF !important;
 }
 
 .rank-2 {
-    background: #C0C0C0 !important;
-    color: #0A0A0A !important;
+    background: #A89E8A !important;
+    color: #FFFFFF !important;
 }
 
 .rank-3 {
-    background: #CD7F32 !important;
-    color: #FFF !important;
+    background: #806A50 !important;
+    color: #FFFFFF !important;
 }
 
 .ranking-photo {
@@ -1819,17 +1825,7 @@ p {
 }
 
 .badge-demo {
-    font-size: 0.6rem;
-    padding: 2px 8px;
-    background: rgba(201, 168, 76, 0.1);
-    color: var(--gold);
-    border-radius: var(--radius-full);
-    margin-left: 8px;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    display: inline-block;
-    vertical-align: middle;
-    font-weight: 500;
+    display: none !important;
 }
 
 .hide-mobile {
@@ -1966,7 +1962,7 @@ p {
     width: 36px;
     height: 36px;
     border-radius: 50%;
-    background: rgba(201, 168, 76, 0.1);
+    background: rgba(255, 77, 109, 0.1);
     color: var(--gold);
     display: flex;
     align-items: center;
@@ -2072,7 +2068,7 @@ p {
 .milestone-dot.active {
     background: var(--gold);
     border-color: var(--gold);
-    box-shadow: 0 0 10px rgba(201, 168, 76, 0.3);
+    box-shadow: 0 0 10px rgba(255, 77, 109, 0.3);
 }
 
 .milestone span {
@@ -2128,8 +2124,8 @@ p {
     width: 80px;
     height: 80px;
     border-radius: 50%;
-    background: rgba(201, 168, 76, 0.08);
-    border: 1px solid rgba(201, 168, 76, 0.15);
+    background: rgba(255, 77, 109, 0.08);
+    border: 1px solid rgba(255, 77, 109, 0.15);
     color: var(--gold);
     display: flex;
     align-items: center;
@@ -2140,9 +2136,9 @@ p {
 }
 
 .step-card:hover .step-icon {
-    background: rgba(201, 168, 76, 0.15);
+    background: rgba(255, 77, 109, 0.15);
     transform: translateY(-4px);
-    box-shadow: 0 10px 30px rgba(201, 168, 76, 0.1);
+    box-shadow: 0 10px 30px rgba(255, 77, 109, 0.1);
 }
 
 /* Connector line between steps (desktop) */
@@ -2228,9 +2224,10 @@ p {
    21. FOOTER (Premium)
    ----------------------------------------------------------- */
 .footer {
-    background: var(--bg-surface);
-    border-top: 1px solid var(--border-subtle);
+    background: #38341F;
+    border-top: 1px solid #4D492E;
     padding: 80px 0 40px;
+    color: #F0E5DB;
 }
 
 .footer-content {
@@ -2244,10 +2241,7 @@ p {
     font-family: var(--font-heading);
     font-size: 1.4rem;
     font-weight: 700;
-    background: var(--gold-gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: #FFFFFF;
     letter-spacing: 0.12em;
     text-transform: uppercase;
     display: inline-flex;
@@ -2258,14 +2252,12 @@ p {
 
 .footer-logo i {
     font-size: 1.2rem;
-    background: var(--gold-gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    filter: drop-shadow(0 2px 8px rgba(201, 168, 76, 0.3));
+    color: var(--accent-pink);
+    filter: drop-shadow(0 2px 8px rgba(255, 77, 109, 0.4));
 }
 
 .footer-tagline {
-    color: var(--text-muted);
+    color: #D3C7B7;
     font-size: 0.85rem;
     margin-top: 12px;
     max-width: 300px;
@@ -2276,9 +2268,9 @@ p {
     font-size: 0.75rem;
     text-transform: uppercase;
     letter-spacing: 0.15em;
-    color: var(--text-primary);
+    color: #FFFFFF;
     margin-bottom: 20px;
-    font-weight: 500;
+    font-weight: 600;
     font-family: var(--font-body);
 }
 
@@ -2293,13 +2285,13 @@ p {
 .footer-links a {
     display: block;
     padding: 6px 0;
-    color: var(--text-secondary);
+    color: #E2D5C7;
     font-size: 0.85rem;
     transition: color 0.3s ease;
 }
 
 .footer-links a:hover {
-    color: var(--gold);
+    color: var(--accent-pink-light);
 }
 
 .footer-social {
@@ -2312,36 +2304,36 @@ p {
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    border: 1px solid var(--border-subtle);
+    border: 1px solid #575235;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--text-secondary);
+    color: #E2D5C7;
     transition: var(--transition);
     font-size: 0.9rem;
 }
 
 .footer-social a:hover {
-    border-color: var(--gold);
-    color: var(--gold);
-    background: rgba(201, 168, 76, 0.05);
+    border-color: var(--accent-pink);
+    color: var(--accent-pink);
+    background: rgba(255, 77, 109, 0.12);
 }
 
 .footer-bottom {
-    border-top: 1px solid var(--border-subtle);
+    border-top: 1px solid #4D492E;
     padding-top: 30px;
     text-align: center;
     font-size: 0.75rem;
-    color: var(--text-muted);
+    color: #BDB1A1;
 }
 
 .footer-bottom a {
-    color: var(--text-secondary);
+    color: #E2D5C7;
     transition: color 0.3s ease;
 }
 
 .footer-bottom a:hover {
-    color: var(--gold);
+    color: var(--accent-pink-light);
 }
 
 
@@ -2432,8 +2424,7 @@ p {
 }
 
 .badge-demo {
-    background: rgba(201, 168, 76, 0.1);
-    color: var(--gold);
+    display: none !important;
 }
 
 .badge-warning {
@@ -2588,7 +2579,7 @@ p {
 .loading-overlay {
     position: absolute;
     inset: 0;
-    background: rgba(10, 10, 10, 0.8);
+    background: rgba(240, 229, 219, 0.85);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -2796,9 +2787,10 @@ p {
         width: 100%;
         height: 100vh;
         height: 100dvh;
-        background: rgba(10, 10, 10, 0.97);
+        background: rgba(240, 229, 219, 0.98);
         backdrop-filter: blur(30px);
         -webkit-backdrop-filter: blur(30px);
+        border-left: 1px solid var(--border-subtle);
         flex-direction: column;
         justify-content: center;
         align-items: center;

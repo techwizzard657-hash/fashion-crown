@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Meet the exceptional fashion designers and icons competing for the Fashion Crown. Browse profiles, check live vote counts, and vote via M-Pesa.">
-    <meta name="theme-color" content="#0A0A0A">
-    <title>Contenders — Fashion Crown Kenya 2026</title>
+    <meta name="description" content="Meet the exceptional models and style contenders competing to become the New Face of Fashion Crown. Check live vote counts and vote via M-Pesa.">
+    <meta name="theme-color" content="#F0E5DB">
+    <title>Contenders — Selecting The New Face of Fashion Crown 2026</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
@@ -33,11 +33,11 @@
 
     <!-- Page Header -->
     <section class="page-header" style="background-image: url('https://images.unsplash.com/photo-1509631179647-0177331693ae?w=1920&q=80&fit=crop'); background-size: cover; background-position: center top; position: relative;">
-        <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(10,10,10,0.6) 0%, rgba(10,10,10,0.9) 70%, rgba(10,10,10,1) 100%);"></div>
+        <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(71, 67, 41, 0.5) 0%, rgba(71, 67, 41, 0.8) 60%, #F0E5DB 100%);"></div>
         <div class="container" style="position: relative; z-index: 2;">
-            <p class="section-label scroll-animate">Official Nominees</p>
-            <h1 class="page-title scroll-animate">Contenders for the <span class="gold-text">Crown</span></h1>
-            <p class="page-subtitle scroll-animate" style="color: var(--text-secondary, #8A8A8A); max-width: 500px; margin: 16px auto 0; font-weight: 300;">Discover the visionary designers and style trailblazers competing for Kenya's most coveted fashion crown</p>
+            <p class="section-label scroll-animate" style="color: var(--accent-pink);">Official Nominees</p>
+            <h1 class="page-title scroll-animate" style="color: #FFFFFF;">Contenders for the <span class="gold-text">New Face</span></h1>
+            <p class="page-subtitle scroll-animate" style="color: #FAF5F0; max-width: 520px; margin: 16px auto 0; font-weight: 300;">Discover the visionary models and style trailblazers competing to become the official face of Fashion Crown Kenya</p>
         </div>
     </section>
 
@@ -56,7 +56,7 @@
                     <div class="lb-stat-label">Total Votes</div>
                 </div>
                 <div class="lb-stat-card scroll-animate">
-                    <div class="lb-stat-icon"><i class="fas fa-circle" style="font-size: 0.5rem; color: #4CAF50; animation: pulse 2s infinite;"></i></div>
+                    <div class="lb-stat-icon"><i class="fas fa-circle" style="font-size: 0.5rem; color: #2E7D32; animation: pulse 2s infinite;"></i></div>
                     <div class="lb-stat-value" style="font-size: 1rem; font-family: var(--font-body, sans-serif);">Active</div>
                     <div class="lb-stat-label">Status</div>
                 </div>
@@ -74,10 +74,10 @@
         <div class="container" style="max-width: 900px;">
             <div style="display: flex; gap: 16px; flex-wrap: wrap; align-items: center;">
                 <div style="flex: 1; min-width: 200px; position: relative;">
-                    <i class="fas fa-search" style="position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: var(--text-muted, #555); font-size: 0.85rem;"></i>
-                    <input type="text" id="contestant-search" placeholder="Search contestants..." style="width: 100%; padding: 14px 18px 14px 42px; background: var(--bg-surface, #111); border: 1px solid var(--border-subtle, #1E1E1E); border-radius: var(--radius, 16px); color: var(--text-primary, #F5F5F5); font-family: var(--font-body, 'Inter', sans-serif); font-size: 0.9rem; outline: none; transition: border-color 0.3s;" onfocus="this.style.borderColor='var(--gold, #C9A84C)'" onblur="this.style.borderColor='var(--border-subtle, #1E1E1E)'">
+                    <i class="fas fa-search" style="position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: var(--text-muted); font-size: 0.85rem;"></i>
+                    <input type="text" id="contestant-search" placeholder="Search contenders..." style="width: 100%; padding: 14px 18px 14px 42px; background: var(--bg-elevated); border: 1px solid var(--border-subtle); border-radius: var(--radius); color: var(--text-primary); font-family: var(--font-body, 'Inter', sans-serif); font-size: 0.9rem; outline: none; transition: border-color 0.3s;" onfocus="this.style.borderColor='var(--accent-pink)'" onblur="this.style.borderColor='var(--border-subtle)'">
                 </div>
-                <select id="contestant-sort" style="padding: 14px 18px; background: var(--bg-surface, #111); border: 1px solid var(--border-subtle, #1E1E1E); border-radius: var(--radius, 16px); color: var(--text-primary, #F5F5F5); font-family: var(--font-body, 'Inter', sans-serif); font-size: 0.85rem; outline: none; cursor: pointer; min-width: 160px;">
+                <select id="contestant-sort" style="padding: 14px 18px; background: var(--bg-elevated); border: 1px solid var(--border-subtle); border-radius: var(--radius); color: var(--text-primary); font-family: var(--font-body, 'Inter', sans-serif); font-size: 0.85rem; outline: none; cursor: pointer; min-width: 160px;">
                     <option value="votes-desc">Most Votes</option>
                     <option value="votes-asc">Fewest Votes</option>
                     <option value="name-asc">Name A–Z</option>
@@ -100,10 +100,10 @@
     <section class="cta-banner">
         <div class="container">
             <div class="cta-content scroll-animate">
-                <p class="section-label">Make Your Mark</p>
-                <h2 class="cta-heading">Ready to support your <span class="gold-text">favourite</span>?</h2>
-                <p class="cta-text" style="color: var(--text-secondary, #8A8A8A); margin-bottom: 32px;">Every vote counts. Cast yours now and help crown the fashion champion.</p>
-                <a href="vote.html" class="btn btn-gold btn-lg"><i class="fas fa-crown"></i> Vote Now</a>
+                <p class="section-label" style="color: var(--accent-pink);">Make Your Mark</p>
+                <h2 class="cta-heading" style="color: #FFFFFF;">Ready to support the next <span class="gold-text">Face</span>?</h2>
+                <p class="cta-text" style="color: #E2D5C7; margin-bottom: 32px;">Every vote counts. Cast yours now and help crown the New Face of Fashion Crown 2026.</p>
+                <a href="vote.html" class="btn btn-gold btn-lg"><i class="fas fa-crown"></i> Vote for the New Face</a>
             </div>
         </div>
     </section>

@@ -72,7 +72,7 @@
                 photoHTML = MalonteUtils.generateAvatarHTML(contestant.name, 60);
             }
 
-            var demoBadge = contestant.is_demo ? '<span class="selector-demo">DEMO</span>' : '';
+            var demoBadge = '';
 
             card.innerHTML =
                 '<div class="selector-photo">' + photoHTML + '</div>' +

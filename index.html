@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Fashion Crown — Kenya's premier online fashion awards and voting competition. Support your favourite designer via M-Pesa and crown the style icon of the year.">
-    <meta name="theme-color" content="#0A0A0A">
-    <title>Fashion Crown — The Ultimate Fashion Awards 2026</title>
+    <meta name="description" content="Selecting The New Face of Fashion Crown 2026. Kenya's premier model & style icon search. Support your favourite contender securely via M-Pesa.">
+    <meta name="theme-color" content="#F0E5DB">
+    <title>Selecting The New Face of Fashion Crown 2026</title>
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -32,7 +32,7 @@
             position: absolute;
             width: 3px;
             height: 3px;
-            background: var(--gold, #C9A84C);
+            background: var(--accent-pink, #FF4D6D);
             border-radius: 50%;
             opacity: 0;
             animation: particleFloat 8s infinite ease-in-out;
@@ -52,11 +52,11 @@
             transform: translateX(-50%);
             z-index: 3;
             animation: scrollBounce 2s infinite ease-in-out;
-            color: rgba(201, 168, 76, 0.4);
+            color: var(--mocha, #474329);
             font-size: 1.2rem;
         }
         @keyframes scrollBounce {
-            0%, 100% { transform: translateX(-50%) translateY(0); opacity: 0.4; }
+            0%, 100% { transform: translateX(-50%) translateY(0); opacity: 0.5; }
             50% { transform: translateX(-50%) translateY(10px); opacity: 1; }
         }
 
@@ -67,14 +67,15 @@
             gap: 28px;
         }
         .step-card {
-            background: var(--bg-surface, #111111);
-            border: 1px solid var(--border-subtle, #1E1E1E);
+            background: var(--bg-elevated, #FFFFFF);
+            border: 1px solid var(--border-subtle, #E2D5C7);
             border-radius: 16px;
             padding: 40px 28px;
             text-align: center;
             transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             position: relative;
             overflow: hidden;
+            box-shadow: var(--shadow-sm);
         }
         .step-card::before {
             content: '';
@@ -82,15 +83,15 @@
             top: 0;
             left: 0;
             right: 0;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, var(--gold, #C9A84C), transparent);
+            height: 3px;
+            background: var(--pink-gradient);
             opacity: 0;
             transition: opacity 0.4s ease;
         }
         .step-card:hover {
             transform: translateY(-4px);
-            border-color: rgba(201, 168, 76, 0.2);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            border-color: var(--accent-pink);
+            box-shadow: var(--shadow-md);
         }
         .step-card:hover::before {
             opacity: 1;
@@ -99,88 +100,94 @@
             width: 64px;
             height: 64px;
             border-radius: 50%;
-            background: rgba(201, 168, 76, 0.08);
-            border: 1px solid rgba(201, 168, 76, 0.15);
+            background: rgba(255, 77, 109, 0.08);
+            border: 1px solid rgba(255, 77, 109, 0.2);
             display: flex;
             align-items: center;
             justify-content: center;
             margin: 0 auto 20px;
             font-size: 1.3rem;
-            color: var(--gold, #C9A84C);
+            color: var(--accent-pink, #FF4D6D);
         }
         .step-number {
             font-family: 'Inter', sans-serif;
             font-size: 0.65rem;
             text-transform: uppercase;
             letter-spacing: 0.2em;
-            color: var(--gold, #C9A84C);
+            color: var(--accent-pink, #FF4D6D);
             margin-bottom: 12px;
-            font-weight: 500;
+            font-weight: 600;
         }
         .step-title {
             font-family: 'Playfair Display', serif;
             font-size: 1.15rem;
-            color: var(--text-primary, #F5F5F5);
+            color: var(--text-primary, #474329);
             margin-bottom: 12px;
         }
         .step-description {
             font-family: 'Inter', sans-serif;
             font-weight: 300;
             font-size: 0.85rem;
-            color: var(--text-secondary, #8A8A8A);
+            color: var(--text-secondary, #6B6543);
             line-height: 1.7;
         }
 
         /* Rule cards */
         .rule-card {
-            background: var(--bg-surface, #111111);
-            border: 1px solid var(--border-subtle, #1E1E1E);
+            background: var(--bg-elevated, #FFFFFF);
+            border: 1px solid var(--border-subtle, #E2D5C7);
             border-radius: 16px;
             padding: 32px 24px;
             transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            box-shadow: var(--shadow-sm);
         }
         .rule-card:hover {
-            border-color: rgba(201, 168, 76, 0.15);
+            border-color: var(--accent-pink);
             transform: translateY(-2px);
         }
         .rule-icon {
             width: 48px;
             height: 48px;
             border-radius: 12px;
-            background: rgba(201, 168, 76, 0.08);
+            background: rgba(255, 77, 109, 0.08);
             display: flex;
             align-items: center;
             justify-content: center;
             margin-bottom: 16px;
-            color: var(--gold, #C9A84C);
+            color: var(--accent-pink, #FF4D6D);
             font-size: 1.1rem;
         }
         .rule-card h3 {
             font-family: 'Playfair Display', serif;
             font-size: 1.05rem;
-            color: var(--text-primary, #F5F5F5);
+            color: var(--text-primary, #474329);
             margin-bottom: 8px;
         }
         .rule-card p {
             font-family: 'Inter', sans-serif;
             font-weight: 300;
             font-size: 0.82rem;
-            color: var(--text-secondary, #8A8A8A);
+            color: var(--text-secondary, #6B6543);
             line-height: 1.7;
         }
 
         /* FAQ Accordion */
         .faq-item {
-            border-bottom: 1px solid var(--border-subtle, #1E1E1E);
+            background: var(--bg-elevated, #FFFFFF);
+            border: 1px solid var(--border-subtle, #E2D5C7);
+            border-radius: 12px;
+            margin-bottom: 12px;
+            padding: 0 20px;
+            box-shadow: var(--shadow-sm);
         }
         .faq-item:last-child {
-            border-bottom: none;
+            margin-bottom: 0;
         }
         .faq-item summary {
             font-family: 'Inter', sans-serif;
-            font-weight: 400;
+            font-weight: 500;
             font-size: 0.95rem;
-            color: var(--text-primary, #F5F5F5);
+            color: var(--text-primary, #474329);
             padding: 20px 0;
             cursor: pointer;
             list-style: none;
@@ -198,7 +205,7 @@
             font-family: 'Font Awesome 6 Free';
             font-weight: 900;
             font-size: 0.7rem;
-            color: var(--gold, #C9A84C);
+            color: var(--accent-pink, #FF4D6D);
             transition: transform 0.3s ease;
             flex-shrink: 0;
         }
@@ -206,13 +213,13 @@
             transform: rotate(180deg);
         }
         .faq-item summary:hover {
-            color: var(--gold, #C9A84C);
+            color: var(--accent-pink, #FF4D6D);
         }
         .faq-answer {
             font-family: 'Inter', sans-serif;
             font-weight: 300;
             font-size: 0.87rem;
-            color: var(--text-secondary, #8A8A8A);
+            color: var(--text-secondary, #6B6543);
             line-height: 1.8;
             padding: 0 0 20px 0;
         }
@@ -223,6 +230,7 @@
             padding: 100px 0;
             overflow: hidden;
             text-align: center;
+            background: var(--mocha, #474329);
         }
         .cta-banner .cta-bg {
             position: absolute;
@@ -230,12 +238,12 @@
             background-image: url('https://images.unsplash.com/photo-1509631179647-0177331693ae?w=1920&q=80&fit=crop');
             background-size: cover;
             background-position: center;
-            filter: brightness(0.25);
+            filter: brightness(0.2);
         }
         .cta-banner .cta-overlay {
             position: absolute;
             inset: 0;
-            background: linear-gradient(135deg, rgba(10, 10, 10, 0.85), rgba(10, 10, 10, 0.7));
+            background: linear-gradient(135deg, rgba(71, 67, 41, 0.92), rgba(50, 47, 28, 0.96));
         }
         .cta-banner .cta-content {
             position: relative;
@@ -244,13 +252,13 @@
         .cta-banner h2 {
             font-family: 'Playfair Display', serif;
             font-size: clamp(1.6rem, 4vw, 2.4rem);
-            color: var(--text-primary, #F5F5F5);
+            color: #FFFFFF;
             margin-bottom: 16px;
         }
         .cta-banner p {
             font-family: 'Inter', sans-serif;
             font-weight: 300;
-            color: var(--text-secondary, #8A8A8A);
+            color: #E2D5C7;
             font-size: 1rem;
             margin-bottom: 32px;
             max-width: 500px;
@@ -287,15 +295,15 @@
         <div class="hero-overlay"></div>
         <div class="hero-particles" id="hero-particles"></div>
         <div class="hero-content">
-            <p class="hero-label scroll-animate"><i class="fa-solid fa-crown" style="color: var(--gold); margin-right: 6px;"></i> The Grand Gala · 2026</p>
-            <h1 class="scroll-animate">Crown The Next <span class="gold-text">Fashion</span> Icon</h1>
-            <p class="hero-description scroll-animate">Kenya's premier fashion awards. Support exceptional designers and visionary style icons. Cast your vote via M-Pesa to decide who claims the Fashion Crown.</p>
+            <p class="hero-label scroll-animate"><i class="fa-solid fa-crown" style="color: var(--accent-pink); margin-right: 6px;"></i> Official Brand Ambassador Search · 2026</p>
+            <h1 class="scroll-animate">Selecting The New <span class="gold-text">Face</span> of Fashion Crown</h1>
+            <p class="hero-description scroll-animate">Kenya's premier model & style icon search. Vote to crown the next official face and brand ambassador for Fashion Crown 2026. Powered by secure M-Pesa voting.</p>
             <div class="hero-cta scroll-animate">
-                <a href="vote.html" class="btn btn-gold btn-lg"><i class="fas fa-crown"></i> Vote for the Crown</a>
+                <a href="vote.html" class="btn btn-gold btn-lg"><i class="fas fa-crown"></i> Vote for the New Face</a>
                 <a href="contestants.html" class="btn btn-outline btn-lg">Explore Contenders</a>
             </div>
             <div class="hero-countdown scroll-animate">
-                <p class="countdown-title" style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.2em; color: var(--text-muted, #555); margin-bottom: 20px;">Coronation Countdown</p>
+                <p class="countdown-title" style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.2em; color: #E2D5C7; margin-bottom: 20px;">Coronation Countdown</p>
                 <div class="countdown-timer" id="countdown-timer">
                     <!-- Built by countdown.js -->
                 </div>
@@ -342,9 +350,9 @@
     <section class="section" id="contestants-section">
         <div class="container">
             <div class="section-header scroll-animate" style="text-align: center; margin-bottom: 60px;">
-                <p class="section-label">Official Nominees</p>
-                <h2 class="section-title">Contenders for the <span class="gold-text">Fashion Crown</span></h2>
-                <p style="color: var(--text-secondary, #8A8A8A); max-width: 500px; margin: 16px auto 0; font-weight: 300;">Discover the visionary designers and style trailblazers competing for Kenya's most coveted fashion crown.</p>
+                <p class="section-label">Official Contenders</p>
+                <h2 class="section-title">Contenders for the <span class="gold-text">New Face</span></h2>
+                <p style="color: var(--text-secondary); max-width: 520px; margin: 16px auto 0; font-weight: 300;">Discover the visionary models and style trailblazers competing to become the official face of Fashion Crown Kenya.</p>
             </div>
             <div class="contestants-grid" id="contestants-grid">
                 <!-- Populated by app.js -->
@@ -362,14 +370,14 @@
         <div class="container">
             <div class="section-header scroll-animate" style="text-align: center; margin-bottom: 60px;">
                 <p class="section-label">The Coronation Process</p>
-                <h2 class="section-title">How to Vote for the <span class="gold-text">Crown</span></h2>
+                <h2 class="section-title">How to Vote for the <span class="gold-text">Next Face</span></h2>
             </div>
             <div class="steps-container">
                 <div class="step-card scroll-animate">
                     <div class="step-icon"><i class="fas fa-hand-pointer"></i></div>
                     <p class="step-number">Step 01</p>
                     <h3 class="step-title">Choose Your Contender</h3>
-                    <p class="step-description">Browse through our nominated designers and pick the fashion icon worthy of the crown.</p>
+                    <p class="step-description">Browse through our nominated models and style contenders to pick the new face of Fashion Crown.</p>
                 </div>
                 <div class="step-card scroll-animate">
                     <div class="step-icon"><i class="fas fa-coins"></i></div>
@@ -387,42 +395,42 @@
                     <div class="step-icon"><i class="fas fa-crown"></i></div>
                     <p class="step-number">Step 04</p>
                     <h3 class="step-title">Elevate Their Rank</h3>
-                    <p class="step-description">Once confirmed, votes are instantly credited and your chosen nominee rises toward the Fashion Crown.</p>
+                    <p class="step-description">Once confirmed, votes are instantly credited and your chosen contender rises toward becoming the Face of Fashion Crown.</p>
                 </div>
             </div>
 
             <!-- Voting Price Table -->
-            <div class="pricing-table scroll-animate" style="max-width: 600px; margin: 60px auto 0; background: var(--bg-surface, #111); border: 1px solid var(--border-subtle, #1E1E1E); border-radius: 16px; overflow: hidden;">
-                <div style="padding: 24px; text-align: center; border-bottom: 1px solid var(--border-subtle, #1E1E1E);">
-                    <h3 style="font-family: 'Playfair Display', serif; font-size: 1.3rem;">Voting Prices</h3>
+            <div class="pricing-table scroll-animate" style="max-width: 600px; margin: 60px auto 0; background: var(--bg-elevated); border: 1px solid var(--border-subtle); border-radius: 16px; overflow: hidden; box-shadow: var(--shadow-sm);">
+                <div style="padding: 24px; text-align: center; border-bottom: 1px solid var(--border-subtle);">
+                    <h3 style="font-family: 'Playfair Display', serif; font-size: 1.3rem; color: var(--text-primary);">Voting Prices</h3>
                 </div>
                 <table style="width: 100%; border-collapse: collapse;">
                     <thead>
-                        <tr style="border-bottom: 1px solid var(--border-subtle, #1E1E1E);">
-                            <th style="padding: 14px 24px; text-align: left; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--text-muted, #555); font-weight: 500;">Amount</th>
-                            <th style="padding: 14px 24px; text-align: right; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--text-muted, #555); font-weight: 500;">Votes</th>
+                        <tr style="border-bottom: 1px solid var(--border-subtle); background: var(--bg-surface);">
+                            <th style="padding: 14px 24px; text-align: left; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--text-muted); font-weight: 500;">Amount</th>
+                            <th style="padding: 14px 24px; text-align: right; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--text-muted); font-weight: 500;">Votes</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr style="border-bottom: 1px solid var(--border-subtle, #1E1E1E);">
-                            <td style="padding: 14px 24px; color: var(--text-secondary, #8A8A8A);">KSh 50</td>
-                            <td style="padding: 14px 24px; text-align: right; color: var(--gold, #C9A84C); font-weight: 600;">1 Vote</td>
+                        <tr style="border-bottom: 1px solid var(--border-subtle);">
+                            <td style="padding: 14px 24px; color: var(--text-secondary);">KSh 50</td>
+                            <td style="padding: 14px 24px; text-align: right; color: var(--accent-pink); font-weight: 600;">1 Vote</td>
                         </tr>
-                        <tr style="border-bottom: 1px solid var(--border-subtle, #1E1E1E);">
-                            <td style="padding: 14px 24px; color: var(--text-secondary, #8A8A8A);">KSh 100</td>
-                            <td style="padding: 14px 24px; text-align: right; color: var(--gold, #C9A84C); font-weight: 600;">2 Votes</td>
+                        <tr style="border-bottom: 1px solid var(--border-subtle);">
+                            <td style="padding: 14px 24px; color: var(--text-secondary);">KSh 100</td>
+                            <td style="padding: 14px 24px; text-align: right; color: var(--accent-pink); font-weight: 600;">2 Votes</td>
                         </tr>
-                        <tr style="border-bottom: 1px solid var(--border-subtle, #1E1E1E);">
-                            <td style="padding: 14px 24px; color: var(--text-secondary, #8A8A8A);">KSh 250</td>
-                            <td style="padding: 14px 24px; text-align: right; color: var(--gold, #C9A84C); font-weight: 600;">5 Votes</td>
+                        <tr style="border-bottom: 1px solid var(--border-subtle);">
+                            <td style="padding: 14px 24px; color: var(--text-secondary);">KSh 250</td>
+                            <td style="padding: 14px 24px; text-align: right; color: var(--accent-pink); font-weight: 600;">5 Votes</td>
                         </tr>
-                        <tr style="border-bottom: 1px solid var(--border-subtle, #1E1E1E);">
-                            <td style="padding: 14px 24px; color: var(--text-secondary, #8A8A8A);">KSh 500</td>
-                            <td style="padding: 14px 24px; text-align: right; color: var(--gold, #C9A84C); font-weight: 600;">10 Votes</td>
+                        <tr style="border-bottom: 1px solid var(--border-subtle);">
+                            <td style="padding: 14px 24px; color: var(--text-secondary);">KSh 500</td>
+                            <td style="padding: 14px 24px; text-align: right; color: var(--accent-pink); font-weight: 600;">10 Votes</td>
                         </tr>
                         <tr>
-                            <td style="padding: 14px 24px; color: var(--text-secondary, #8A8A8A);">KSh 1,000</td>
-                            <td style="padding: 14px 24px; text-align: right; color: var(--gold, #C9A84C); font-weight: 600;">20 Votes <i class="fas fa-crown" style="font-size: 0.7rem;"></i></td>
+                            <td style="padding: 14px 24px; color: var(--text-secondary);">KSh 1,000</td>
+                            <td style="padding: 14px 24px; text-align: right; color: var(--accent-pink); font-weight: 600;">20 Votes <i class="fas fa-crown" style="font-size: 0.7rem;"></i></td>
                         </tr>
                     </tbody>
                 </table>
@@ -466,9 +474,9 @@
                     <p>The competition runs for 7 days from the official start date. All votes must be cast before the countdown timer reaches zero.</p>
                 </div>
                 <div class="rule-card scroll-animate">
-                    <div class="rule-icon"><i class="fas fa-flask-vial"></i></div>
-                    <h3>Demo Profiles</h3>
-                    <p>Some contestant profiles are marked with a "Demo" badge for testing purposes. These profiles showcase how the platform works and may contain simulated vote data.</p>
+                    <div class="rule-icon"><i class="fas fa-camera"></i></div>
+                    <h3>The Face of Fashion Crown</h3>
+                    <p>The crowned winner becomes the official brand ambassador, starring in the 2026 Fashion Crown campaign, magazine cover feature, and nationwide runway tour.</p>
                 </div>
             </div>
         </div>
@@ -477,7 +485,7 @@
     <!-- ============================================ -->
     <!-- FAQ SECTION -->
     <!-- ============================================ -->
-    <section class="section" style="background: var(--bg-surface, #111);">
+    <section class="section" style="background: var(--bg-primary);">
         <div class="container">
             <div class="section-header scroll-animate" style="text-align: center; margin-bottom: 60px;">
                 <p class="section-label">Questions</p>
@@ -521,9 +529,9 @@
                     </div>
                 </details>
                 <details class="faq-item scroll-animate">
-                    <summary>Are demo profiles real contestants?</summary>
+                    <summary>What does the "Face of Fashion Crown" title include?</summary>
                     <div class="faq-answer">
-                        Profiles marked with a <strong>"Demo"</strong> badge are sample profiles used to demonstrate how the platform works. They may contain simulated vote data. Real contestants do not have this badge. During the official competition, all active contestants are verified participants.
+                        The crowned winner becomes the official <strong>Face of Fashion Crown 2026</strong>. Privileges include a national media press tour, cash prizes, an exclusive editorial portfolio shoot, luxury brand endorsements, and premier representation as the brand ambassador for Fashion Crown Kenya.
                     </div>
                 </details>
                 <details class="faq-item scroll-animate">
@@ -543,11 +551,11 @@
         <div class="cta-bg"></div>
         <div class="cta-overlay"></div>
         <div class="cta-content container scroll-animate">
-            <h2>Who Will Claim The <span class="gold-text">Fashion Crown</span>?</h2>
-            <p>Every vote counts towards crowning Kenya's next style icon. Support your favourite designer and shape the future of haute couture.</p>
+            <h2>Who Will Become The New <span class="gold-text">Face of Fashion Crown</span>?</h2>
+            <p>Every vote brings your favourite contender closer to the crown and official brand ambassadorship. Support them with secure M-Pesa voting.</p>
             <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
-                <a href="vote.html" class="btn btn-gold btn-lg"><i class="fas fa-crown"></i> Vote for the Crown</a>
-                <a href="leaderboard.html" class="btn btn-outline btn-lg"><i class="fas fa-trophy"></i> View Crown Standings</a>
+                <a href="vote.html" class="btn btn-gold btn-lg"><i class="fas fa-crown"></i> Vote for the New Face</a>
+                <a href="leaderboard.html" class="btn btn-outline btn-lg" style="border-color: #FFFFFF; color: #FFFFFF;"><i class="fas fa-trophy"></i> View Standings</a>
             </div>
         </div>
     </section>

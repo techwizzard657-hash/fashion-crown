@@ -378,9 +378,7 @@
             photoHTML = MalonteUtils.generateAvatarHTML(contestant.name, 200);
         }
 
-        var demoBadge = contestant.is_demo
-            ? '<span class="demo-badge"><i class="fa-solid fa-flask"></i> Demo</span>'
-            : '';
+        var demoBadge = '';
 
         card.innerHTML =
             '<div class="contestant-photo">' +
@@ -391,11 +389,11 @@
                 '<h3 class="contestant-name">' + contestant.name + '</h3>' +
                 '<p class="contestant-bio">' + (contestant.bio || '') + '</p>' +
                 '<div class="contestant-votes">' +
-                    '<i class="fa-solid fa-heart" style="color:var(--gold,#C9A84C);"></i> ' +
+                    '<i class="fa-solid fa-heart" style="color:var(--accent-pink,#FF4D6D);"></i> ' +
                     '<span class="vote-count">' + MalonteUtils.formatNumber(contestant.vote_count) + '</span> votes' +
                 '</div>' +
                 '<a href="vote.html?id=' + contestant.id + '" class="btn btn-gold btn-vote">' +
-                    '<i class="fa-solid fa-crown"></i> Vote for Crown' +
+                    '<i class="fa-solid fa-crown"></i> Vote for New Face' +
                 '</a>' +
             '</div>';
 
@@ -457,17 +455,15 @@
             photoHTML = MalonteUtils.generateAvatarHTML(contestant.name, 200);
         }
 
-        var demoBadge = contestant.is_demo
-            ? '<span class="demo-badge"><i class="fa-solid fa-flask"></i> DEMO</span>'
-            : '';
+        var demoBadge = '';
 
         var rankBadge = '';
         if (rank === 1) {
-            rankBadge = '<span class="rank-badge" style="background:#C9A84C;color:#0A0A0A;font-weight:700;"><i class="fa-solid fa-crown"></i> Crown Leader</span>';
+            rankBadge = '<span class="rank-badge" style="background:#FF4D6D;color:#FFFFFF;font-weight:700;"><i class="fa-solid fa-crown"></i> Crown Leader</span>';
         } else if (rank <= 3) {
-            var rankColors = { 2: '#C0C0C0', 3: '#CD7F32' };
+            var rankColors = { 2: '#A89E8A', 3: '#806A50' };
             var rankIcons = { 2: 'fa-medal', 3: 'fa-award' };
-            rankBadge = '<span class="rank-badge" style="background:' + rankColors[rank] + ';color:#111;">' +
+            rankBadge = '<span class="rank-badge" style="background:' + rankColors[rank] + ';color:#FFFFFF;">' +
                 '<i class="fa-solid ' + rankIcons[rank] + '"></i> #' + rank + '</span>';
         } else {
             rankBadge = '<span class="rank-badge">#' + rank + '</span>';
@@ -485,11 +481,11 @@
                 '<p class="contestant-bio">' + (contestant.bio || '') + '</p>' +
                 '<div class="contestant-card-footer">' +
                     '<div class="contestant-votes">' +
-                        '<i class="fa-solid fa-heart" style="color:#C9A84C;"></i> ' +
+                        '<i class="fa-solid fa-heart" style="color:var(--accent-pink,#FF4D6D);"></i> ' +
                         '<strong>' + MalonteUtils.formatNumber(contestant.vote_count) + '</strong> votes' +
                     '</div>' +
                     '<a href="vote.html?id=' + contestant.id + '" class="btn btn-gold btn-sm">' +
-                        '<i class="fa-solid fa-crown"></i> Vote for Crown' +
+                        '<i class="fa-solid fa-crown"></i> Vote for New Face' +
                     '</a>' +
                 '</div>' +
             '</div>';
@@ -580,24 +576,7 @@
     }
 
     function showDemoBanner() {
-        // Only show once per session
-        if (sessionStorage.getItem('malonte_demo_banner_shown')) return;
-        sessionStorage.setItem('malonte_demo_banner_shown', '1');
-
-        var banner = document.createElement('div');
-        banner.id = 'demo-banner';
-        banner.style.cssText =
-            'position:fixed;bottom:0;left:0;right:0;z-index:9999;' +
-            'background:linear-gradient(90deg,#D4AF37,#F0D060);color:#111;' +
-            'padding:10px 20px;font-family:"Inter",sans-serif;font-size:13px;' +
-            'text-align:center;font-weight:600;display:flex;align-items:center;' +
-            'justify-content:center;gap:8px;';
-        banner.innerHTML =
-            '<i class="fa-solid fa-flask"></i> ' +
-            'Demo Mode — No Supabase connected. Using mock data. ' +
-            '<button onclick="this.parentElement.remove()" style="background:#111;color:#D4AF37;' +
-            'border:none;border-radius:6px;padding:4px 12px;cursor:pointer;font-size:12px;margin-left:8px;">Dismiss</button>';
-        document.body.appendChild(banner);
+        return; // Production mode: demo banner disabled
     }
 
     // Run on DOM ready

@@ -116,7 +116,7 @@
             }
 
             // Demo badge
-            var demoBadge = contestant.is_demo ? ' <span class="badge badge-demo">DEMO</span>' : '';
+            var demoBadge = '';
 
             // Percentage bar
             var pct = totalVotes > 0 ? ((contestant.vote_count / totalVotes) * 100).toFixed(1) : '0.0';
