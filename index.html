@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Fashion Crown — Kenya's premier online fashion awards and voting competition. Support your favourite designer via M-Pesa and crown the style icon of the year.">
+    <meta name="theme-color" content="#0A0A0A">
+    <title>Fashion Crown — The Ultimate Fashion Awards 2026</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+
+    <style>
+        /* Hero Particles */
+        .hero-particles {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 1;
+        }
+        .hero-particles .particle {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: var(--gold, #C9A84C);
+            border-radius: 50%;
+            opacity: 0;
+            animation: particleFloat 8s infinite ease-in-out;
+        }
+        @keyframes particleFloat {
+            0% { opacity: 0; transform: translateY(0) scale(0); }
+            10% { opacity: 0.6; }
+            50% { opacity: 0.3; }
+            100% { opacity: 0; transform: translateY(-100vh) scale(1); }
+        }
+
+        /* Hero scroll indicator */
+        .hero-scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 3;
+            animation: scrollBounce 2s infinite ease-in-out;
+            color: rgba(201, 168, 76, 0.4);
+            font-size: 1.2rem;
+        }
+        @keyframes scrollBounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); opacity: 0.4; }
+            50% { transform: translateX(-50%) translateY(10px); opacity: 1; }
+        }
+
+        /* Steps container */
+        .steps-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 28px;
+        }
+        .step-card {
+            background: var(--bg-surface, #111111);
+            border: 1px solid var(--border-subtle, #1E1E1E);
+            border-radius: 16px;
+            padding: 40px 28px;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+            overflow: hidden;
+        }
+        .step-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--gold, #C9A84C), transparent);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        .step-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(201, 168, 76, 0.2);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+        .step-card:hover::before {
+            opacity: 1;
+        }
+        .step-icon {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: rgba(201, 168, 76, 0.08);
+            border: 1px solid rgba(201, 168, 76, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 1.3rem;
+            color: var(--gold, #C9A84C);
+        }
+        .step-number {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--gold, #C9A84C);
+            margin-bottom: 12px;
+            font-weight: 500;
+        }
+        .step-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.15rem;
+            color: var(--text-primary, #F5F5F5);
+            margin-bottom: 12px;
+        }
+        .step-description {
+            font-family: 'Inter', sans-serif;
+            font-weight: 300;
+            font-size: 0.85rem;
+            color: var(--text-secondary, #8A8A8A);
+            line-height: 1.7;
+        }
+
+        /* Rule cards */
+        .rule-card {
+            background: var(--bg-surface, #111111);
+            border: 1px solid var(--border-subtle, #1E1E1E);
+            border-radius: 16px;
+            padding: 32px 24px;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .rule-card:hover {
+            border-color: rgba(201, 168, 76, 0.15);
+            transform: translateY(-2px);
+        }
+        .rule-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: rgba(201, 168, 76, 0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 16px;
+            color: var(--gold, #C9A84C);
+            font-size: 1.1rem;
+        }
+        .rule-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.05rem;
+            color: var(--text-primary, #F5F5F5);
+            margin-bottom: 8px;
+        }
+        .rule-card p {
+            font-family: 'Inter', sans-serif;
+            font-weight: 300;
+            font-size: 0.82rem;
+            color: var(--text-secondary, #8A8A8A);
+            line-height: 1.7;
+        }
+
+        /* FAQ Accordion */
+        .faq-item {
+            border-bottom: 1px solid var(--border-subtle, #1E1E1E);
+        }
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+        .faq-item summary {
+            font-family: 'Inter', sans-serif;
+            font-weight: 400;
+            font-size: 0.95rem;
+            color: var(--text-primary, #F5F5F5);
+            padding: 20px 0;
+            cursor: pointer;
+            list-style: none;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            transition: color 0.3s ease;
+        }
+        .faq-item summary::-webkit-details-marker {
+            display: none;
+        }
+        .faq-item summary::after {
+            content: '\f078';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            font-size: 0.7rem;
+            color: var(--gold, #C9A84C);
+            transition: transform 0.3s ease;
+            flex-shrink: 0;
+        }
+        .faq-item[open] summary::after {
+            transform: rotate(180deg);
+        }
+        .faq-item summary:hover {
+            color: var(--gold, #C9A84C);
+        }
+        .faq-answer {
+            font-family: 'Inter', sans-serif;
+            font-weight: 300;
+            font-size: 0.87rem;
+            color: var(--text-secondary, #8A8A8A);
+            line-height: 1.8;
+            padding: 0 0 20px 0;
+        }
+
+        /* CTA Banner */
+        .cta-banner {
+            position: relative;
+            padding: 100px 0;
+            overflow: hidden;
+            text-align: center;
+        }
+        .cta-banner .cta-bg {
+            position: absolute;
+            inset: 0;
+            background-image: url('https://images.unsplash.com/photo-1509631179647-0177331693ae?w=1920&q=80&fit=crop');
+            background-size: cover;
+            background-position: center;
+            filter: brightness(0.25);
+        }
+        .cta-banner .cta-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(10, 10, 10, 0.85), rgba(10, 10, 10, 0.7));
+        }
+        .cta-banner .cta-content {
+            position: relative;
+            z-index: 2;
+        }
+        .cta-banner h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.6rem, 4vw, 2.4rem);
+            color: var(--text-primary, #F5F5F5);
+            margin-bottom: 16px;
+        }
+        .cta-banner p {
+            font-family: 'Inter', sans-serif;
+            font-weight: 300;
+            color: var(--text-secondary, #8A8A8A);
+            font-size: 1rem;
+            margin-bottom: 32px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ============================================ -->
+    <!-- NAVIGATION -->
+    <!-- ============================================ -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo"><i class="fa-solid fa-crown"></i> FASHION CROWN</a>
+            <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+                <span></span><span></span><span></span>
+            </button>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="index.html" class="nav-link active">Home</a></li>
+                <li><a href="contestants.html" class="nav-link">Contenders</a></li>
+                <li><a href="vote.html" class="nav-link">Vote</a></li>
+                <li><a href="leaderboard.html" class="nav-link">Leaderboard</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- ============================================ -->
+    <!-- HERO SECTION -->
+    <!-- ============================================ -->
+    <section class="hero">
+        <div class="hero-bg" style="background-image: url('https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=1920&q=80&fit=crop')"></div>
+        <div class="hero-overlay"></div>
+        <div class="hero-particles" id="hero-particles"></div>
+        <div class="hero-content">
+            <p class="hero-label scroll-animate"><i class="fa-solid fa-crown" style="color: var(--gold); margin-right: 6px;"></i> The Grand Gala · 2026</p>
+            <h1 class="scroll-animate">Crown The Next <span class="gold-text">Fashion</span> Icon</h1>
+            <p class="hero-description scroll-animate">Kenya's premier fashion awards. Support exceptional designers and visionary style icons. Cast your vote via M-Pesa to decide who claims the Fashion Crown.</p>
+            <div class="hero-cta scroll-animate">
+                <a href="vote.html" class="btn btn-gold btn-lg"><i class="fas fa-crown"></i> Vote for the Crown</a>
+                <a href="contestants.html" class="btn btn-outline btn-lg">Explore Contenders</a>
+            </div>
+            <div class="hero-countdown scroll-animate">
+                <p class="countdown-title" style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.2em; color: var(--text-muted, #555); margin-bottom: 20px;">Coronation Countdown</p>
+                <div class="countdown-timer" id="countdown-timer">
+                    <!-- Built by countdown.js -->
+                </div>
+            </div>
+        </div>
+        <div class="hero-scroll-indicator">
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- STATS BAR -->
+    <!-- ============================================ -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="stats-bar">
+                <div class="stat-item scroll-animate">
+                    <div class="stat-icon"><i class="fas fa-check-to-slot"></i></div>
+                    <div class="stat-number" data-stat="total-votes">0</div>
+                    <div class="stat-label">Total Votes</div>
+                </div>
+                <div class="stat-item scroll-animate">
+                    <div class="stat-icon"><i class="fas fa-users"></i></div>
+                    <div class="stat-number" data-stat="contestants">0</div>
+                    <div class="stat-label">Contestants</div>
+                </div>
+                <div class="stat-item scroll-animate">
+                    <div class="stat-icon"><i class="fas fa-hourglass-half"></i></div>
+                    <div class="stat-number" data-stat="days-remaining">0</div>
+                    <div class="stat-label">Days Left</div>
+                </div>
+                <div class="stat-item scroll-animate">
+                    <div class="stat-icon"><i class="fas fa-coins"></i></div>
+                    <div class="stat-number" data-stat="contributions">KSh 0</div>
+                    <div class="stat-label">Total Raised</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- FEATURED CONTESTANTS -->
+    <!-- ============================================ -->
+    <section class="section" id="contestants-section">
+        <div class="container">
+            <div class="section-header scroll-animate" style="text-align: center; margin-bottom: 60px;">
+                <p class="section-label">Official Nominees</p>
+                <h2 class="section-title">Contenders for the <span class="gold-text">Fashion Crown</span></h2>
+                <p style="color: var(--text-secondary, #8A8A8A); max-width: 500px; margin: 16px auto 0; font-weight: 300;">Discover the visionary designers and style trailblazers competing for Kenya's most coveted fashion crown.</p>
+            </div>
+            <div class="contestants-grid" id="contestants-grid">
+                <!-- Populated by app.js -->
+            </div>
+            <div style="text-align: center; margin-top: 48px;" class="scroll-animate">
+                <a href="contestants.html" class="btn btn-outline">View All Contenders <i class="fas fa-arrow-right" style="margin-left: 4px;"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- HOW IT WORKS -->
+    <!-- ============================================ -->
+    <section class="how-it-works section">
+        <div class="container">
+            <div class="section-header scroll-animate" style="text-align: center; margin-bottom: 60px;">
+                <p class="section-label">The Coronation Process</p>
+                <h2 class="section-title">How to Vote for the <span class="gold-text">Crown</span></h2>
+            </div>
+            <div class="steps-container">
+                <div class="step-card scroll-animate">
+                    <div class="step-icon"><i class="fas fa-hand-pointer"></i></div>
+                    <p class="step-number">Step 01</p>
+                    <h3 class="step-title">Choose Your Contender</h3>
+                    <p class="step-description">Browse through our nominated designers and pick the fashion icon worthy of the crown.</p>
+                </div>
+                <div class="step-card scroll-animate">
+                    <div class="step-icon"><i class="fas fa-coins"></i></div>
+                    <p class="step-number">Step 02</p>
+                    <h3 class="step-title">Select Voting Power</h3>
+                    <p class="step-description">Choose your vote package from KSh 50 to KSh 1,000. Every KSh 50 awards one verified vote.</p>
+                </div>
+                <div class="step-card scroll-animate">
+                    <div class="step-icon"><i class="fas fa-mobile-screen-button"></i></div>
+                    <p class="step-number">Step 03</p>
+                    <h3 class="step-title">Pay via M-Pesa</h3>
+                    <p class="step-description">Complete payment securely through M-Pesa. Authorize the prompt on your phone with your PIN.</p>
+                </div>
+                <div class="step-card scroll-animate">
+                    <div class="step-icon"><i class="fas fa-crown"></i></div>
+                    <p class="step-number">Step 04</p>
+                    <h3 class="step-title">Elevate Their Rank</h3>
+                    <p class="step-description">Once confirmed, votes are instantly credited and your chosen nominee rises toward the Fashion Crown.</p>
+                </div>
+            </div>
+
+            <!-- Voting Price Table -->
+            <div class="pricing-table scroll-animate" style="max-width: 600px; margin: 60px auto 0; background: var(--bg-surface, #111); border: 1px solid var(--border-subtle, #1E1E1E); border-radius: 16px; overflow: hidden;">
+                <div style="padding: 24px; text-align: center; border-bottom: 1px solid var(--border-subtle, #1E1E1E);">
+                    <h3 style="font-family: 'Playfair Display', serif; font-size: 1.3rem;">Voting Prices</h3>
+                </div>
+                <table style="width: 100%; border-collapse: collapse;">
+                    <thead>
+                        <tr style="border-bottom: 1px solid var(--border-subtle, #1E1E1E);">
+                            <th style="padding: 14px 24px; text-align: left; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--text-muted, #555); font-weight: 500;">Amount</th>
+                            <th style="padding: 14px 24px; text-align: right; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--text-muted, #555); font-weight: 500;">Votes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="border-bottom: 1px solid var(--border-subtle, #1E1E1E);">
+                            <td style="padding: 14px 24px; color: var(--text-secondary, #8A8A8A);">KSh 50</td>
+                            <td style="padding: 14px 24px; text-align: right; color: var(--gold, #C9A84C); font-weight: 600;">1 Vote</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--border-subtle, #1E1E1E);">
+                            <td style="padding: 14px 24px; color: var(--text-secondary, #8A8A8A);">KSh 100</td>
+                            <td style="padding: 14px 24px; text-align: right; color: var(--gold, #C9A84C); font-weight: 600;">2 Votes</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--border-subtle, #1E1E1E);">
+                            <td style="padding: 14px 24px; color: var(--text-secondary, #8A8A8A);">KSh 250</td>
+                            <td style="padding: 14px 24px; text-align: right; color: var(--gold, #C9A84C); font-weight: 600;">5 Votes</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--border-subtle, #1E1E1E);">
+                            <td style="padding: 14px 24px; color: var(--text-secondary, #8A8A8A);">KSh 500</td>
+                            <td style="padding: 14px 24px; text-align: right; color: var(--gold, #C9A84C); font-weight: 600;">10 Votes</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 14px 24px; color: var(--text-secondary, #8A8A8A);">KSh 1,000</td>
+                            <td style="padding: 14px 24px; text-align: right; color: var(--gold, #C9A84C); font-weight: 600;">20 Votes <i class="fas fa-crown" style="font-size: 0.7rem;"></i></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- COMPETITION RULES -->
+    <!-- ============================================ -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header scroll-animate" style="text-align: center; margin-bottom: 60px;">
+                <p class="section-label">Guidelines</p>
+                <h2 class="section-title">Competition <span class="gold-text">Rules</span></h2>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; max-width: 900px; margin: 0 auto;">
+                <div class="rule-card scroll-animate">
+                    <div class="rule-icon"><i class="fas fa-wallet"></i></div>
+                    <h3>Minimum Vote</h3>
+                    <p>The minimum voting amount is KSh 50, which equals one vote. All payments are processed securely through M-Pesa.</p>
+                </div>
+                <div class="rule-card scroll-animate">
+                    <div class="rule-icon"><i class="fas fa-arrow-up-right-dots"></i></div>
+                    <h3>Maximum Per Transaction</h3>
+                    <p>Each transaction can be up to KSh 1,000 (20 votes). You may choose any preset amount or enter a custom amount in multiples of KSh 50.</p>
+                </div>
+                <div class="rule-card scroll-animate">
+                    <div class="rule-icon"><i class="fas fa-infinity"></i></div>
+                    <h3>Unlimited Transactions</h3>
+                    <p>There is no limit on the number of transactions you can make. Vote as many times as you like for one or multiple contestants.</p>
+                </div>
+                <div class="rule-card scroll-animate">
+                    <div class="rule-icon"><i class="fas fa-shield-halved"></i></div>
+                    <h3>Payment Verification</h3>
+                    <p>Votes are only credited after successful M-Pesa payment confirmation. No votes are added without a verified transaction.</p>
+                </div>
+                <div class="rule-card scroll-animate">
+                    <div class="rule-icon"><i class="fas fa-calendar-days"></i></div>
+                    <h3>Competition Duration</h3>
+                    <p>The competition runs for 7 days from the official start date. All votes must be cast before the countdown timer reaches zero.</p>
+                </div>
+                <div class="rule-card scroll-animate">
+                    <div class="rule-icon"><i class="fas fa-flask-vial"></i></div>
+                    <h3>Demo Profiles</h3>
+                    <p>Some contestant profiles are marked with a "Demo" badge for testing purposes. These profiles showcase how the platform works and may contain simulated vote data.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- FAQ SECTION -->
+    <!-- ============================================ -->
+    <section class="section" style="background: var(--bg-surface, #111);">
+        <div class="container">
+            <div class="section-header scroll-animate" style="text-align: center; margin-bottom: 60px;">
+                <p class="section-label">Questions</p>
+                <h2 class="section-title">Frequently <span class="gold-text">Asked</span></h2>
+            </div>
+            <div class="faq-container" style="max-width: 700px; margin: 0 auto;">
+                <details class="faq-item scroll-animate">
+                    <summary>How do I vote for a contestant?</summary>
+                    <div class="faq-answer">
+                        Navigate to the <strong>Vote</strong> page, select your preferred contestant, choose a voting amount (or enter a custom amount), then enter your M-Pesa phone number. You'll receive an STK push notification on your phone to complete the payment. Once confirmed, your votes are instantly credited.
+                    </div>
+                </details>
+                <details class="faq-item scroll-animate">
+                    <summary>What payment methods are accepted?</summary>
+                    <div class="faq-answer">
+                        Currently, we accept payments exclusively through <strong>Safaricom M-Pesa</strong>. This ensures fast, secure, and widely accessible transactions for all voters across Kenya. Simply enter your Safaricom phone number and approve the STK push notification.
+                    </div>
+                </details>
+                <details class="faq-item scroll-animate">
+                    <summary>How many times can I vote?</summary>
+                    <div class="faq-answer">
+                        There is <strong>no limit</strong> on the number of times you can vote. You can make as many transactions as you like, for the same contestant or different contestants. Each successful payment adds votes accordingly.
+                    </div>
+                </details>
+                <details class="faq-item scroll-animate">
+                    <summary>When does the competition end?</summary>
+                    <div class="faq-answer">
+                        The competition runs for a fixed 7-day period. You can see the exact time remaining on the countdown timer displayed on the homepage and leaderboard. No votes will be accepted after the timer reaches zero.
+                    </div>
+                </details>
+                <details class="faq-item scroll-animate">
+                    <summary>How are votes counted?</summary>
+                    <div class="faq-answer">
+                        Votes are calculated based on the amount paid: every <strong>KSh 50 equals 1 vote</strong>. For example, paying KSh 250 gives 5 votes, and KSh 1,000 gives 20 votes. Custom amounts must be in multiples of KSh 50.
+                    </div>
+                </details>
+                <details class="faq-item scroll-animate">
+                    <summary>What happens after the competition ends?</summary>
+                    <div class="faq-answer">
+                        Once the countdown ends, voting closes and the final results are tallied. The contestant with the most votes is officially crowned the <strong>Fashion Crown 2026 Champion</strong> and awarded the Fashion Crown Trophy, cash prizes, and an exclusive magazine feature. Winners and final standings are announced on the leaderboard.
+                    </div>
+                </details>
+                <details class="faq-item scroll-animate">
+                    <summary>Are demo profiles real contestants?</summary>
+                    <div class="faq-answer">
+                        Profiles marked with a <strong>"Demo"</strong> badge are sample profiles used to demonstrate how the platform works. They may contain simulated vote data. Real contestants do not have this badge. During the official competition, all active contestants are verified participants.
+                    </div>
+                </details>
+                <details class="faq-item scroll-animate">
+                    <summary>How do I know my payment was successful?</summary>
+                    <div class="faq-answer">
+                        After approving the M-Pesa STK push on your phone, the website will display a <strong>success confirmation</strong> with your transaction details, including the number of votes credited and the contestant who received them. You will also receive an M-Pesa confirmation SMS from Safaricom.
+                    </div>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- CTA BANNER -->
+    <!-- ============================================ -->
+    <section class="cta-banner">
+        <div class="cta-bg"></div>
+        <div class="cta-overlay"></div>
+        <div class="cta-content container scroll-animate">
+            <h2>Who Will Claim The <span class="gold-text">Fashion Crown</span>?</h2>
+            <p>Every vote counts towards crowning Kenya's next style icon. Support your favourite designer and shape the future of haute couture.</p>
+            <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+                <a href="vote.html" class="btn btn-gold btn-lg"><i class="fas fa-crown"></i> Vote for the Crown</a>
+                <a href="leaderboard.html" class="btn btn-outline btn-lg"><i class="fas fa-trophy"></i> View Crown Standings</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- FOOTER -->
+    <!-- ============================================ -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <a href="index.html" class="footer-logo"><i class="fa-solid fa-crown"></i> FASHION CROWN</a>
+                    <p class="footer-tagline">Kenya's premier online fashion awards platform. Crowning extraordinary talent, visionary design, and cultural elegance.</p>
+                    <div class="footer-social">
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="X (Twitter)"><i class="fab fa-x-twitter"></i></a>
+                        <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h4 style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--text-primary, #F5F5F5); margin-bottom: 20px;">Quick Links</h4>
+                    <div class="footer-links">
+                        <a href="index.html">Home</a>
+                        <a href="contestants.html">Contenders</a>
+                        <a href="vote.html">Vote for the Crown</a>
+                        <a href="leaderboard.html">Crown Standings</a>
+                    </div>
+                </div>
+                <div>
+                    <h4 style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--text-primary, #F5F5F5); margin-bottom: 20px;">Contact</h4>
+                    <div class="footer-links">
+                        <a href="#"><i class="fas fa-envelope" style="margin-right: 8px; color: var(--gold, #C9A84C);"></i> awards@fashioncrown.co.ke</a>
+                        <a href="#"><i class="fab fa-whatsapp" style="margin-right: 8px; color: var(--gold, #C9A84C);"></i> +254 700 000 000</a>
+                        <a href="#"><i class="fas fa-map-marker-alt" style="margin-right: 8px; color: var(--gold, #C9A84C);"></i> Nairobi, Kenya</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Fashion Crown Kenya. All rights reserved. Powered by M-Pesa.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ============================================ -->
+    <!-- SCRIPTS -->
+    <!-- ============================================ -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/config.js"></script>
+    <script src="js/countdown.js"></script>
+    <script src="js/app.js"></script>
+
+    <!-- Navbar scroll effect -->
+    <script>
+        window.addEventListener('scroll', function() {
+            var navbar = document.getElementById('navbar');
+            if (navbar) {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            }
+        });
+    </script>
+
+    <!-- Hero particles -->
+    <script>
+        (function() {
+            var container = document.getElementById('hero-particles');
+            if (!container) return;
+            for (var i = 0; i < 30; i++) {
+                var particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = (60 + Math.random() * 40) + '%';
+                particle.style.width = (2 + Math.random() * 3) + 'px';
+                particle.style.height = particle.style.width;
+                particle.style.animationDelay = (Math.random() * 8) + 's';
+                particle.style.animationDuration = (6 + Math.random() * 6) + 's';
+                container.appendChild(particle);
+            }
+        })();
+    </script>
+</body>
+</html>

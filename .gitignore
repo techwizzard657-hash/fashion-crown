@@ -1,0 +1,12 @@
+# Environment variables
+.env
+*.env
+supabase/.env
+
+# Dependencies & caches
+node_modules/
+.DS_Store
+Thumbs.db
+
+# OS files
+*.log

@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Cast your vote for your favourite designer in the Fashion Crown competition. Pay securely via M-Pesa — KSh 50 per vote, up to KSh 1,000 for 20 votes.">
+    <meta property="og:title" content="Vote for the Crown — Fashion Crown Kenya">
+    <meta property="og:description" content="Cast your vote via M-Pesa. Choose your designer, select your vote package, and vote instantly.">
+    <meta property="og:type" content="website">
+    <title>Vote for the Crown — Fashion Crown Kenya 2026</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar scrolled" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo"><i class="fa-solid fa-crown"></i> FASHION CROWN</a>
+            <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+                <span></span><span></span><span></span>
+            </button>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="contestants.html" class="nav-link">Contenders</a></li>
+                <li><a href="vote.html" class="nav-link active">Vote</a></li>
+                <li><a href="leaderboard.html" class="nav-link">Leaderboard</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header" style="padding: 160px 0 80px;">
+        <div class="container" style="text-align: center;">
+            <p class="section-label scroll-animate">Support Your Icon</p>
+            <h1 class="page-title scroll-animate">Cast Your Vote for the <span class="gold-text">Crown</span></h1>
+            <p class="page-subtitle scroll-animate" style="max-width: 520px; margin: 16px auto 0;">Support your favourite fashion designer via secure M-Pesa STK push. Every KSh 50 awards 1 verified vote.</p>
+        </div>
+    </section>
+
+    <!-- Voting Steps -->
+    <section class="vote-page">
+        <div class="container">
+            <div class="vote-wrapper">
+
+                <!-- Step 1: Select Contestant -->
+                <div class="vote-step scroll-animate" id="vote-step-1">
+                    <div class="step-header">
+                        <span class="step-badge">1</span>
+                        <h2 class="step-heading">Select Contender</h2>
+                    </div>
+                    <div class="contestant-selector" id="contestant-selector">
+                        <div class="selector-placeholder">
+                            <div class="selector-skeleton"></div>
+                            <div class="selector-skeleton"></div>
+                            <div class="selector-skeleton"></div>
+                            <div class="selector-skeleton"></div>
+                        </div>
+                    </div>
+                    <p class="step-hint"><i class="fas fa-hand-pointer"></i> Tap a contender to support them for the Fashion Crown</p>
+                </div>
+
+                <!-- Step 2: Choose Amount -->
+                <div class="vote-step scroll-animate" id="vote-step-2">
+                    <div class="step-header">
+                        <span class="step-badge">2</span>
+                        <h2 class="step-heading">Select Voting Amount</h2>
+                    </div>
+                    <div class="amount-grid" id="amount-grid">
+                        <button class="amount-btn" data-amount="50" data-votes="1">
+                            <span class="amount-value">KSh 50</span>
+                            <span class="amount-votes">1 Vote</span>
+                        </button>
+                        <button class="amount-btn" data-amount="100" data-votes="2">
+                            <span class="amount-value">KSh 100</span>
+                            <span class="amount-votes">2 Votes</span>
+                        </button>
+                        <button class="amount-btn" data-amount="200" data-votes="4">
+                            <span class="amount-value">KSh 200</span>
+                            <span class="amount-votes">4 Votes</span>
+                        </button>
+                        <button class="amount-btn" data-amount="250" data-votes="5">
+                            <span class="amount-value">KSh 250</span>
+                            <span class="amount-votes">5 Votes</span>
+                        </button>
+                        <button class="amount-btn" data-amount="500" data-votes="10">
+                            <span class="amount-value">KSh 500</span>
+                            <span class="amount-votes">10 Votes</span>
+                        </button>
+                        <button class="amount-btn" data-amount="750" data-votes="15">
+                            <span class="amount-value">KSh 750</span>
+                            <span class="amount-votes">15 Votes</span>
+                        </button>
+                        <button class="amount-btn amount-btn-full" data-amount="1000" data-votes="20">
+                            <span class="amount-value">KSh 1,000</span>
+                            <span class="amount-votes">20 Votes <i class="fas fa-crown"></i></span>
+                        </button>
+                    </div>
+                    <div class="custom-amount">
+                        <label for="custom-amount-input" class="custom-amount-label">Or enter a custom amount</label>
+                        <div class="custom-amount-row">
+                            <div class="custom-input-wrapper">
+                                <span class="input-prefix">KSh</span>
+                                <input type="number" id="custom-amount-input" min="50" max="1000" step="50" placeholder="50 – 1,000">
+                            </div>
+                            <div class="custom-votes-display">
+                                = <span id="custom-votes-count">0</span> votes
+                            </div>
+                        </div>
+                        <p class="custom-amount-hint">Amount must be between KSh 50 and KSh 1,000 (multiples of 50)</p>
+                    </div>
+                </div>
+
+                <!-- Step 3: Phone Number -->
+                <div class="vote-step scroll-animate" id="vote-step-3">
+                    <div class="step-header">
+                        <span class="step-badge">3</span>
+                        <h2 class="step-heading">Enter M-Pesa Number</h2>
+                    </div>
+                    <div class="phone-input-group">
+                        <div class="phone-input-wrapper">
+                            <div class="phone-prefix">
+                                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 900 600'%3E%3Crect width='900' height='200' fill='%23000'/%3E%3Crect y='200' width='900' height='200' fill='%23b00'/%3E%3Crect y='400' width='900' height='200' fill='%23060'/%3E%3Crect y='185' width='900' height='30' fill='%23fff'/%3E%3Crect y='385' width='900' height='30' fill='%23fff'/%3E%3C/svg%3E" alt="KE" class="flag-icon">
+                                <span>+254</span>
+                            </div>
+                            <input type="tel" id="phone-input" placeholder="712 345 678" maxlength="12" autocomplete="tel">
+                        </div>
+                        <p class="phone-hint">e.g. 254712345678 — You will receive an M-Pesa prompt</p>
+                        <div class="phone-validation" id="phone-validation" style="display: none;">
+                            <i class="fas fa-circle-check"></i>
+                            <span>Valid M-Pesa number</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 4: Confirm & Pay -->
+                <div class="vote-step scroll-animate" id="vote-step-4">
+                    <div class="step-header">
+                        <span class="step-badge">4</span>
+                        <h2 class="step-heading">Confirm &amp; Pay</h2>
+                    </div>
+                    <div class="summary-card" id="summary-card">
+                        <div class="summary-row">
+                            <span class="summary-label">Contender</span>
+                            <span class="summary-value" id="summary-contestant">—</span>
+                        </div>
+                        <div class="summary-divider"></div>
+                        <div class="summary-row">
+                            <span class="summary-label">Amount</span>
+                            <span class="summary-value" id="summary-amount">KSh —</span>
+                        </div>
+                        <div class="summary-divider"></div>
+                        <div class="summary-row">
+                            <span class="summary-label">Votes to Credit</span>
+                            <span class="summary-value summary-votes" id="summary-votes">—</span>
+                        </div>
+                        <div class="summary-divider"></div>
+                        <div class="summary-row">
+                            <span class="summary-label">M-Pesa Number</span>
+                            <span class="summary-value" id="summary-phone">—</span>
+                        </div>
+                    </div>
+                    <p class="mpesa-prompt-notice">
+                        <i class="fas fa-mobile-screen-button"></i>
+                        You will receive an M-Pesa prompt on your phone. Enter your PIN to confirm.
+                    </p>
+                    <button class="btn btn-gold btn-lg btn-block" id="pay-button" disabled>
+                        <span class="btn-text"><i class="fas fa-crown"></i> Pay &amp; Cast Votes</span>
+                        <span class="btn-loading" style="display: none;">
+                            <i class="fas fa-spinner fa-spin"></i> Processing...
+                        </span>
+                    </button>
+                </div>
+
+                <!-- Result Area -->
+                <div class="vote-result" id="vote-result" style="display: none;">
+                    <div class="result-state result-success" id="result-success" style="display: none;">
+                        <div class="result-icon"><i class="fas fa-circle-check"></i></div>
+                        <h3 class="result-heading">Payment Received!</h3>
+                        <p class="result-message" id="success-message">Your votes have been credited.</p>
+                        <div class="result-actions">
+                            <a href="leaderboard.html" class="btn btn-outline">View Crown Standings</a>
+                            <button class="btn btn-gold" id="vote-again-btn">Vote Again</button>
+                        </div>
+                    </div>
+                    <div class="result-state result-error" id="result-error" style="display: none;">
+                        <div class="result-icon"><i class="fas fa-circle-xmark"></i></div>
+                        <h3 class="result-heading">Payment Failed</h3>
+                        <p class="result-message" id="error-message">Something went wrong. Please try again.</p>
+                        <div class="result-actions">
+                            <button class="btn btn-gold" id="try-again-btn"><i class="fas fa-rotate-right"></i> Try Again</button>
+                        </div>
+                    </div>
+                    <div class="result-state result-pending" id="result-pending" style="display: none;">
+                        <div class="result-icon"><i class="fas fa-spinner fa-spin"></i></div>
+                        <h3 class="result-heading">Waiting for M-Pesa Confirmation</h3>
+                        <p class="result-message">Please check your phone and enter your M-Pesa PIN to complete the payment.</p>
+                    </div>
+                </div>
+
+                <!-- Trust Indicators -->
+                <div class="trust-indicators scroll-animate">
+                    <div class="trust-item">
+                        <i class="fas fa-lock"></i>
+                        <span>Secure M-Pesa Payment</span>
+                    </div>
+                    <div class="trust-item">
+                        <i class="fas fa-shield-halved"></i>
+                        <span>Votes credited only after verification</span>
+                    </div>
+                    <div class="trust-item">
+                        <i class="fas fa-clock"></i>
+                        <span>Instant vote counting</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <a href="index.html" class="footer-logo"><i class="fa-solid fa-crown"></i> FASHION CROWN</a>
+                    <p class="footer-tagline">Kenya's premier online fashion awards platform. Crowning extraordinary talent, visionary design, and cultural elegance.</p>
+                    <div class="footer-social">
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Twitter / X"><i class="fab fa-x-twitter"></i></a>
+                        <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="footer-heading">Quick Links</h4>
+                    <div class="footer-links">
+                        <a href="index.html">Home</a>
+                        <a href="contestants.html">Contenders</a>
+                        <a href="vote.html">Vote for the Crown</a>
+                        <a href="leaderboard.html">Crown Standings</a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="footer-heading">Contact</h4>
+                    <div class="footer-links">
+                        <a href="#"><i class="fas fa-envelope" style="margin-right:8px;color:var(--gold,#C9A84C);"></i> awards@fashioncrown.co.ke</a>
+                        <a href="#"><i class="fab fa-whatsapp" style="margin-right:8px;color:var(--gold,#C9A84C);"></i> +254 700 000 000</a>
+                        <a href="#"><i class="fas fa-map-marker-alt" style="margin-right:8px;color:var(--gold,#C9A84C);"></i> Nairobi, Kenya</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Fashion Crown Kenya. All rights reserved. Powered by M-Pesa.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/config.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/vote.js"></script>
+    <script>
+    window.addEventListener('scroll', function() {
+        var navbar = document.getElementById('navbar');
+        if (navbar) navbar.classList.toggle('scrolled', window.scrollY > 50);
+    });
+    </script>
+</body>
+</html>

@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Live leaderboard for Fashion Crown Kenya. Real-time rankings, vote counts, and the race for the 2026 Fashion Crown.">
+    <meta name="theme-color" content="#0A0A0A">
+    <title>Live Crown Standings — Fashion Crown Kenya 2026</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar scrolled" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo"><i class="fa-solid fa-crown"></i> FASHION CROWN</a>
+            <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+                <span></span><span></span><span></span>
+            </button>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="contestants.html" class="nav-link">Contenders</a></li>
+                <li><a href="vote.html" class="nav-link">Vote</a></li>
+                <li><a href="leaderboard.html" class="nav-link active">Leaderboard</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container" style="text-align: center;">
+            <p class="section-label scroll-animate">
+                <span class="live-indicator"><i class="fas fa-circle pulse-dot" style="font-size: 0.5rem; margin-right: 6px;"></i>LIVE CORONATION RACE</span>
+            </p>
+            <h1 class="page-title scroll-animate">
+                The Crown <span class="gold-text">Standings</span>
+            </h1>
+            <p class="page-subtitle scroll-animate" style="color: var(--text-secondary, #8A8A8A); margin-top: 12px;">Live rankings update in real-time as verified M-Pesa votes are credited</p>
+            <div class="competition-badge scroll-animate" style="display: inline-flex; align-items: center; gap: 10px; padding: 8px 24px; background: var(--bg-surface, #111); border: 1px solid var(--border-subtle, #1E1E1E); border-radius: 9999px; font-size: 0.8rem; color: var(--text-secondary, #8A8A8A); margin-top: 24px;">
+                <i class="fas fa-crown" style="color: var(--gold, #C9A84C);"></i>
+                <span>Fashion Crown Kenya 2026</span>
+                <span style="color: var(--text-muted, #555);">|</span>
+                <span id="lb-time-remaining">— days left</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Podium Section -->
+    <section style="padding: 40px 0 60px;">
+        <div class="container">
+            <div class="podium" id="podium">
+                <!-- 2nd Place -->
+                <div class="podium-position podium-second scroll-animate">
+                    <div class="podium-photo">
+                        <div class="podium-photo-inner" id="podium-2-photo">
+                            <i class="fas fa-user-large"></i>
+                        </div>
+                        <div class="podium-medal silver"><i class="fas fa-medal"></i></div>
+                    </div>
+                    <h3 class="podium-name" id="podium-2-name">—</h3>
+                    <p class="podium-votes" id="podium-2-votes">0 votes</p>
+                    <div class="podium-stand podium-stand-2"><span class="podium-rank">2</span></div>
+                </div>
+
+                <!-- 1st Place -->
+                <div class="podium-position podium-first scroll-animate">
+                    <div class="podium-crown"><i class="fas fa-crown"></i></div>
+                    <div class="podium-photo podium-photo-lg">
+                        <div class="podium-photo-inner" id="podium-1-photo">
+                            <i class="fas fa-user-large"></i>
+                        </div>
+                        <div class="podium-medal gold"><i class="fas fa-medal"></i></div>
+                    </div>
+                    <h3 class="podium-name" id="podium-1-name">—</h3>
+                    <p class="podium-votes" id="podium-1-votes">0 votes</p>
+                    <div class="podium-stand podium-stand-1"><span class="podium-rank">1</span></div>
+                </div>
+
+                <!-- 3rd Place -->
+                <div class="podium-position podium-third scroll-animate">
+                    <div class="podium-photo">
+                        <div class="podium-photo-inner" id="podium-3-photo">
+                            <i class="fas fa-user-large"></i>
+                        </div>
+                        <div class="podium-medal bronze"><i class="fas fa-medal"></i></div>
+                    </div>
+                    <h3 class="podium-name" id="podium-3-name">—</h3>
+                    <p class="podium-votes" id="podium-3-votes">0 votes</p>
+                    <div class="podium-stand podium-stand-3"><span class="podium-rank">3</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Cards -->
+    <section style="padding: 0 0 60px;">
+        <div class="container">
+            <div class="lb-stats-grid">
+                <div class="lb-stat-card scroll-animate">
+                    <div class="lb-stat-icon"><i class="fas fa-check-to-slot"></i></div>
+                    <div class="lb-stat-value" id="lb-total-votes">0</div>
+                    <div class="lb-stat-label">Total Votes</div>
+                </div>
+                <div class="lb-stat-card scroll-animate">
+                    <div class="lb-stat-icon"><i class="fas fa-arrow-up-wide-short"></i></div>
+                    <div class="lb-stat-value" id="lb-leading-by">0</div>
+                    <div class="lb-stat-label">Leading By</div>
+                </div>
+                <div class="lb-stat-card scroll-animate">
+                    <div class="lb-stat-icon"><i class="fas fa-users"></i></div>
+                    <div class="lb-stat-value" id="lb-voters-count">0</div>
+                    <div class="lb-stat-label">Voters</div>
+                </div>
+                <div class="lb-stat-card scroll-animate">
+                    <div class="lb-stat-icon"><i class="fas fa-chart-simple"></i></div>
+                    <div class="lb-stat-value" id="lb-avg-votes">0</div>
+                    <div class="lb-stat-label">Avg per Contestant</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Full Rankings Table -->
+    <section class="section" style="padding-top: 0;">
+        <div class="container">
+            <h2 class="section-title scroll-animate" style="text-align: center; margin-bottom: 40px;">Full <span class="gold-text">Rankings</span></h2>
+            <div class="rankings-table-wrapper">
+                <table class="rankings-table" id="rankings-table">
+                    <thead>
+                        <tr>
+                            <th class="col-pos">#</th>
+                            <th class="col-photo hide-mobile">Photo</th>
+                            <th class="col-name">Contestant</th>
+                            <th class="col-votes">Votes</th>
+                            <th class="col-pct">%</th>
+                            <th class="col-change">Change</th>
+                        </tr>
+                    </thead>
+                    <tbody id="rankings-body">
+                        <tr class="ranking-row skeleton-row" aria-hidden="true"><td class="col-pos"><div class="placeholder-circle"></div></td><td class="col-photo hide-mobile"><div class="placeholder-photo-sm"></div></td><td class="col-name"><div class="placeholder-line w-60"></div></td><td class="col-votes"><div class="placeholder-line w-40"></div></td><td class="col-pct"><div class="placeholder-line w-30"></div></td><td class="col-change"><div class="placeholder-line w-20"></div></td></tr>
+                        <tr class="ranking-row skeleton-row" aria-hidden="true"><td class="col-pos"><div class="placeholder-circle"></div></td><td class="col-photo hide-mobile"><div class="placeholder-photo-sm"></div></td><td class="col-name"><div class="placeholder-line w-60"></div></td><td class="col-votes"><div class="placeholder-line w-40"></div></td><td class="col-pct"><div class="placeholder-line w-30"></div></td><td class="col-change"><div class="placeholder-line w-20"></div></td></tr>
+                        <tr class="ranking-row skeleton-row" aria-hidden="true"><td class="col-pos"><div class="placeholder-circle"></div></td><td class="col-photo hide-mobile"><div class="placeholder-photo-sm"></div></td><td class="col-name"><div class="placeholder-line w-60"></div></td><td class="col-votes"><div class="placeholder-line w-40"></div></td><td class="col-pct"><div class="placeholder-line w-30"></div></td><td class="col-change"><div class="placeholder-line w-20"></div></td></tr>
+                        <tr class="ranking-row skeleton-row" aria-hidden="true"><td class="col-pos"><div class="placeholder-circle"></div></td><td class="col-photo hide-mobile"><div class="placeholder-photo-sm"></div></td><td class="col-name"><div class="placeholder-line w-60"></div></td><td class="col-votes"><div class="placeholder-line w-40"></div></td><td class="col-pct"><div class="placeholder-line w-30"></div></td><td class="col-change"><div class="placeholder-line w-20"></div></td></tr>
+                        <tr class="ranking-row skeleton-row" aria-hidden="true"><td class="col-pos"><div class="placeholder-circle"></div></td><td class="col-photo hide-mobile"><div class="placeholder-photo-sm"></div></td><td class="col-name"><div class="placeholder-line w-60"></div></td><td class="col-votes"><div class="placeholder-line w-40"></div></td><td class="col-pct"><div class="placeholder-line w-30"></div></td><td class="col-change"><div class="placeholder-line w-20"></div></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Activity: Recent Votes + Competition Progress -->
+    <section class="section" style="padding-top: 0;">
+        <div class="container">
+            <div class="activity-grid">
+                <!-- Recent Votes Feed -->
+                <div class="recent-votes-panel scroll-animate">
+                    <h3 class="panel-heading"><i class="fas fa-bolt"></i> Recent Votes</h3>
+                    <div class="recent-votes-feed" id="recent-votes">
+                        <div class="vote-feed-item placeholder-feed" aria-hidden="true"><div class="feed-icon"><i class="fas fa-heart"></i></div><div class="feed-content"><div class="placeholder-line w-80"></div><div class="placeholder-line w-40"></div></div></div>
+                        <div class="vote-feed-item placeholder-feed" aria-hidden="true"><div class="feed-icon"><i class="fas fa-heart"></i></div><div class="feed-content"><div class="placeholder-line w-80"></div><div class="placeholder-line w-40"></div></div></div>
+                        <div class="vote-feed-item placeholder-feed" aria-hidden="true"><div class="feed-icon"><i class="fas fa-heart"></i></div><div class="feed-content"><div class="placeholder-line w-80"></div><div class="placeholder-line w-40"></div></div></div>
+                    </div>
+                </div>
+
+                <!-- Competition Progress -->
+                <div class="competition-progress-panel scroll-animate">
+                    <h3 class="panel-heading"><i class="fas fa-chart-line"></i> Competition Progress</h3>
+                    <div class="progress-content">
+                        <div class="progress-bar-wrapper">
+                            <div class="progress-bar-track">
+                                <div class="progress-bar-fill" id="competition-progress-bar" style="width: 0%"></div>
+                            </div>
+                            <div class="progress-labels">
+                                <span id="progress-start-date">Start</span>
+                                <span id="progress-current-day">Day 1 of 7</span>
+                                <span id="progress-end-date">End</span>
+                            </div>
+                        </div>
+                        <div class="progress-milestones">
+                            <div class="milestone" id="milestone-1"><div class="milestone-dot active"></div><span>Day 1</span></div>
+                            <div class="milestone" id="milestone-2"><div class="milestone-dot"></div><span>Day 2</span></div>
+                            <div class="milestone" id="milestone-3"><div class="milestone-dot"></div><span>Day 3</span></div>
+                            <div class="milestone" id="milestone-4"><div class="milestone-dot"></div><span>Day 4</span></div>
+                            <div class="milestone" id="milestone-5"><div class="milestone-dot"></div><span>Day 5</span></div>
+                            <div class="milestone" id="milestone-6"><div class="milestone-dot"></div><span>Day 6</span></div>
+                            <div class="milestone" id="milestone-7"><div class="milestone-dot"></div><span>Day 7</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-banner">
+        <div class="container">
+            <div class="cta-content scroll-animate">
+                <p class="section-label">Make a Difference</p>
+                <h2 class="cta-heading">Want to change the <span class="gold-text">rankings</span>?</h2>
+                <p class="cta-text" style="color: var(--text-secondary, #8A8A8A); margin-bottom: 32px;">Your vote could make the difference. Support your favourite contestant now!</p>
+                <a href="vote.html" class="btn btn-gold btn-lg"><i class="fas fa-crown"></i> Vote Now</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <a href="index.html" class="footer-logo"><i class="fa-solid fa-crown"></i> FASHION CROWN</a>
+                    <p class="footer-tagline">Kenya's premier online fashion awards platform. Crowning extraordinary talent, visionary design, and cultural elegance.</p>
+                    <div class="footer-social">
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="X (Twitter)"><i class="fab fa-x-twitter"></i></a>
+                        <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h4 style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--text-primary, #F5F5F5); margin-bottom: 20px;">Quick Links</h4>
+                    <div class="footer-links">
+                        <a href="index.html">Home</a>
+                        <a href="contestants.html">Contenders</a>
+                        <a href="vote.html">Vote for the Crown</a>
+                        <a href="leaderboard.html">Crown Standings</a>
+                    </div>
+                </div>
+                <div>
+                    <h4 style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--text-primary, #F5F5F5); margin-bottom: 20px;">Contact</h4>
+                    <div class="footer-links">
+                        <a href="#"><i class="fas fa-envelope" style="margin-right: 8px; color: var(--gold, #C9A84C);"></i> awards@fashioncrown.co.ke</a>
+                        <a href="#"><i class="fab fa-whatsapp" style="margin-right: 8px; color: var(--gold, #C9A84C);"></i> +254 700 000 000</a>
+                        <a href="#"><i class="fas fa-map-marker-alt" style="margin-right: 8px; color: var(--gold, #C9A84C);"></i> Nairobi, Kenya</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Fashion Crown Kenya. All rights reserved. Powered by M-Pesa.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/config.js"></script>
+    <script src="js/countdown.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/leaderboard.js"></script>
+    <script>
+        window.addEventListener('scroll', function() {
+            var navbar = document.getElementById('navbar');
+            if (navbar) navbar.classList.toggle('scrolled', window.scrollY > 50);
+        });
+    </script>
+</body>
+</html>

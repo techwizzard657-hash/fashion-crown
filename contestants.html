@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Meet the exceptional fashion designers and icons competing for the Fashion Crown. Browse profiles, check live vote counts, and vote via M-Pesa.">
+    <meta name="theme-color" content="#0A0A0A">
+    <title>Contenders — Fashion Crown Kenya 2026</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar scrolled" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo"><i class="fa-solid fa-crown"></i> FASHION CROWN</a>
+            <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+                <span></span><span></span><span></span>
+            </button>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="contestants.html" class="nav-link active">Contenders</a></li>
+                <li><a href="vote.html" class="nav-link">Vote</a></li>
+                <li><a href="leaderboard.html" class="nav-link">Leaderboard</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header" style="background-image: url('https://images.unsplash.com/photo-1509631179647-0177331693ae?w=1920&q=80&fit=crop'); background-size: cover; background-position: center top; position: relative;">
+        <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(10,10,10,0.6) 0%, rgba(10,10,10,0.9) 70%, rgba(10,10,10,1) 100%);"></div>
+        <div class="container" style="position: relative; z-index: 2;">
+            <p class="section-label scroll-animate">Official Nominees</p>
+            <h1 class="page-title scroll-animate">Contenders for the <span class="gold-text">Crown</span></h1>
+            <p class="page-subtitle scroll-animate" style="color: var(--text-secondary, #8A8A8A); max-width: 500px; margin: 16px auto 0; font-weight: 300;">Discover the visionary designers and style trailblazers competing for Kenya's most coveted fashion crown</p>
+        </div>
+    </section>
+
+    <!-- Quick Stats -->
+    <section style="padding: 48px 0;">
+        <div class="container">
+            <div class="lb-stats-grid" style="max-width: 800px; margin: 0 auto;">
+                <div class="lb-stat-card scroll-animate">
+                    <div class="lb-stat-icon"><i class="fas fa-crown"></i></div>
+                    <div class="lb-stat-value" data-stat="leading-contestant">—</div>
+                    <div class="lb-stat-label">Crown Leader</div>
+                </div>
+                <div class="lb-stat-card scroll-animate">
+                    <div class="lb-stat-icon"><i class="fas fa-check-to-slot"></i></div>
+                    <div class="lb-stat-value" data-stat="total-votes">0</div>
+                    <div class="lb-stat-label">Total Votes</div>
+                </div>
+                <div class="lb-stat-card scroll-animate">
+                    <div class="lb-stat-icon"><i class="fas fa-circle" style="font-size: 0.5rem; color: #4CAF50; animation: pulse 2s infinite;"></i></div>
+                    <div class="lb-stat-value" style="font-size: 1rem; font-family: var(--font-body, sans-serif);">Active</div>
+                    <div class="lb-stat-label">Status</div>
+                </div>
+                <div class="lb-stat-card scroll-animate">
+                    <div class="lb-stat-icon"><i class="fas fa-hourglass-half"></i></div>
+                    <div class="lb-stat-value" data-stat="days-remaining" style="font-size: 1.5rem;">—</div>
+                    <div class="lb-stat-label">Days Left</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Search & Sort -->
+    <section style="padding: 0 0 24px;">
+        <div class="container" style="max-width: 900px;">
+            <div style="display: flex; gap: 16px; flex-wrap: wrap; align-items: center;">
+                <div style="flex: 1; min-width: 200px; position: relative;">
+                    <i class="fas fa-search" style="position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: var(--text-muted, #555); font-size: 0.85rem;"></i>
+                    <input type="text" id="contestant-search" placeholder="Search contestants..." style="width: 100%; padding: 14px 18px 14px 42px; background: var(--bg-surface, #111); border: 1px solid var(--border-subtle, #1E1E1E); border-radius: var(--radius, 16px); color: var(--text-primary, #F5F5F5); font-family: var(--font-body, 'Inter', sans-serif); font-size: 0.9rem; outline: none; transition: border-color 0.3s;" onfocus="this.style.borderColor='var(--gold, #C9A84C)'" onblur="this.style.borderColor='var(--border-subtle, #1E1E1E)'">
+                </div>
+                <select id="contestant-sort" style="padding: 14px 18px; background: var(--bg-surface, #111); border: 1px solid var(--border-subtle, #1E1E1E); border-radius: var(--radius, 16px); color: var(--text-primary, #F5F5F5); font-family: var(--font-body, 'Inter', sans-serif); font-size: 0.85rem; outline: none; cursor: pointer; min-width: 160px;">
+                    <option value="votes-desc">Most Votes</option>
+                    <option value="votes-asc">Fewest Votes</option>
+                    <option value="name-asc">Name A–Z</option>
+                    <option value="name-desc">Name Z–A</option>
+                </select>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contestants Grid -->
+    <section style="padding: 24px 0 100px;">
+        <div class="container">
+            <div class="contestants-grid" id="contestants-container">
+                <!-- Populated by app.js -->
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-banner">
+        <div class="container">
+            <div class="cta-content scroll-animate">
+                <p class="section-label">Make Your Mark</p>
+                <h2 class="cta-heading">Ready to support your <span class="gold-text">favourite</span>?</h2>
+                <p class="cta-text" style="color: var(--text-secondary, #8A8A8A); margin-bottom: 32px;">Every vote counts. Cast yours now and help crown the fashion champion.</p>
+                <a href="vote.html" class="btn btn-gold btn-lg"><i class="fas fa-crown"></i> Vote Now</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <a href="index.html" class="footer-logo"><i class="fa-solid fa-crown"></i> FASHION CROWN</a>
+                    <p class="footer-tagline">Kenya's premier online fashion awards platform. Crowning extraordinary talent, visionary design, and cultural elegance.</p>
+                    <div class="footer-social">
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="X (Twitter)"><i class="fab fa-x-twitter"></i></a>
+                        <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h4 style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--text-primary, #F5F5F5); margin-bottom: 20px;">Quick Links</h4>
+                    <div class="footer-links">
+                        <a href="index.html">Home</a>
+                        <a href="contestants.html">Contenders</a>
+                        <a href="vote.html">Vote for the Crown</a>
+                        <a href="leaderboard.html">Crown Standings</a>
+                    </div>
+                </div>
+                <div>
+                    <h4 style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--text-primary, #F5F5F5); margin-bottom: 20px;">Contact</h4>
+                    <div class="footer-links">
+                        <a href="#"><i class="fas fa-envelope" style="margin-right: 8px; color: var(--gold, #C9A84C);"></i> awards@fashioncrown.co.ke</a>
+                        <a href="#"><i class="fab fa-whatsapp" style="margin-right: 8px; color: var(--gold, #C9A84C);"></i> +254 700 000 000</a>
+                        <a href="#"><i class="fas fa-map-marker-alt" style="margin-right: 8px; color: var(--gold, #C9A84C);"></i> Nairobi, Kenya</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Fashion Crown Kenya. All rights reserved. Powered by M-Pesa.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/config.js"></script>
+    <script src="js/countdown.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/contestants.js"></script>
+    <script>
+        window.addEventListener('scroll', function() {
+            var navbar = document.getElementById('navbar');
+            if (navbar) navbar.classList.toggle('scrolled', window.scrollY > 50);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard — Fashion Crown Admin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/admin.css">
+</head>
+<body class="admin-body">
+    <!-- Auth Check -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../js/supabase.js"></script>
+    <script>
+        (async () => {
+            try {
+                if (typeof window.supabaseClient !== 'undefined') {
+                    const { data: { session } } = await window.supabaseClient.auth.getSession();
+                    if (!session) { window.location.href = 'index.html'; }
+                } else {
+                    window.location.href = 'index.html';
+                }
+            } catch (e) { window.location.href = 'index.html'; }
+        })();
+    </script>
+
+    <!-- Mobile Sidebar Overlay -->
+    <div class="admin-sidebar-overlay" id="sidebar-overlay"></div>
+
+    <!-- Sidebar -->
+    <aside class="admin-sidebar" id="admin-sidebar">
+        <div class="sidebar-header">
+            <div class="sidebar-logo">
+                <span class="sidebar-logo-text"><i class="fa-solid fa-crown" style="color: var(--gold, #C9A84C); margin-right: 6px;"></i>FASHION CROWN</span>
+                <span class="sidebar-logo-sub">ADMIN PORTAL</span>
+            </div>
+            <button class="sidebar-close" id="sidebar-close" aria-label="Close sidebar">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+
+        <nav class="sidebar-nav">
+            <a href="dashboard.html" class="sidebar-link active">
+                <i class="fa-solid fa-gauge-high"></i>
+                <span>Dashboard</span>
+            </a>
+            <a href="manage.html#contestants" class="sidebar-link">
+                <i class="fa-solid fa-users"></i>
+                <span>Contestants</span>
+            </a>
+            <a href="manage.html#competitions" class="sidebar-link">
+                <i class="fa-solid fa-trophy"></i>
+                <span>Competitions</span>
+            </a>
+            <a href="manage.html#transactions" class="sidebar-link">
+                <i class="fa-solid fa-money-bill-transfer"></i>
+                <span>Transactions</span>
+            </a>
+            <a href="manage.html#settings" class="sidebar-link">
+                <i class="fa-solid fa-gear"></i>
+                <span>Settings</span>
+            </a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <button class="sidebar-logout" id="admin-logout">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <span>Logout</span>
+            </button>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="admin-main">
+        <!-- Top Bar -->
+        <header class="admin-topbar">
+            <div class="topbar-left">
+                <button class="topbar-menu-btn" id="sidebar-toggle" aria-label="Toggle sidebar">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+                <h1 class="topbar-title">Dashboard</h1>
+            </div>
+            <div class="topbar-right">
+                <button class="topbar-icon-btn" aria-label="Notifications">
+                    <i class="fa-solid fa-bell"></i>
+                    <span class="topbar-badge">3</span>
+                </button>
+                <div class="topbar-admin">
+                    <div class="topbar-avatar">
+                        <i class="fa-solid fa-user-shield"></i>
+                    </div>
+                    <span class="topbar-admin-name">Admin</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Dashboard Content -->
+        <div class="admin-content">
+            <!-- Stats Row -->
+            <section class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon stat-icon--revenue">
+                        <i class="fa-solid fa-coins"></i>
+                    </div>
+                    <div class="stat-info">
+                        <span class="stat-label">Total Revenue</span>
+                        <span class="stat-value" id="stat-revenue">KSh 0</span>
+                        <span class="stat-trend stat-trend--up">
+                            <i class="fa-solid fa-arrow-trend-up"></i> 12.5%
+                        </span>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon stat-icon--votes">
+                        <i class="fa-solid fa-check-to-slot"></i>
+                    </div>
+                    <div class="stat-info">
+                        <span class="stat-label">Total Votes</span>
+                        <span class="stat-value" id="stat-votes">0</span>
+                        <span class="stat-trend stat-trend--up">
+                            <i class="fa-solid fa-arrow-trend-up"></i> 8.3%
+                        </span>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon stat-icon--contestants">
+                        <i class="fa-solid fa-user-group"></i>
+                    </div>
+                    <div class="stat-info">
+                        <span class="stat-label">Active Contestants</span>
+                        <span class="stat-value" id="stat-contestants">0</span>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon stat-icon--competitions">
+                        <i class="fa-solid fa-trophy"></i>
+                    </div>
+                    <div class="stat-info">
+                        <span class="stat-label">Active Competitions</span>
+                        <span class="stat-value" id="stat-competitions">0</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Revenue Chart -->
+            <section class="admin-card chart-card">
+                <div class="admin-card-header">
+                    <h2 class="admin-card-title">
+                        <i class="fa-solid fa-chart-line"></i>
+                        Revenue Overview (Last 7 Days)
+                    </h2>
+                </div>
+                <div class="admin-card-body">
+                    <div id="revenue-chart" class="chart-container">
+                        <div class="chart-placeholder">
+                            <div class="chart-bars">
+                                <div class="chart-bar" style="height: 40%;" data-label="Mon"><span>Mon</span></div>
+                                <div class="chart-bar" style="height: 65%;" data-label="Tue"><span>Tue</span></div>
+                                <div class="chart-bar" style="height: 50%;" data-label="Wed"><span>Wed</span></div>
+                                <div class="chart-bar" style="height: 80%;" data-label="Thu"><span>Thu</span></div>
+                                <div class="chart-bar" style="height: 55%;" data-label="Fri"><span>Fri</span></div>
+                                <div class="chart-bar" style="height: 90%;" data-label="Sat"><span>Sat</span></div>
+                                <div class="chart-bar" style="height: 70%;" data-label="Sun"><span>Sun</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Two Column Section -->
+            <div class="admin-two-col">
+                <!-- Recent Transactions -->
+                <section class="admin-card">
+                    <div class="admin-card-header">
+                        <h2 class="admin-card-title">
+                            <i class="fa-solid fa-clock-rotate-left"></i>
+                            Recent Transactions
+                        </h2>
+                        <a href="manage.html#transactions" class="admin-card-link">View All <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                    <div class="admin-card-body">
+                        <div class="table-responsive">
+                            <table class="admin-table" id="recent-transactions">
+                                <thead>
+                                    <tr>
+                                        <th>Time</th>
+                                        <th>Phone</th>
+                                        <th>Amount</th>
+                                        <th>Contestant</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="text-muted">2 min ago</td>
+                                        <td><code>254***345</code></td>
+                                        <td>KSh 500</td>
+                                        <td>Amina W.</td>
+                                        <td><span class="badge badge--success">Success</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-muted">5 min ago</td>
+                                        <td><code>254***112</code></td>
+                                        <td>KSh 100</td>
+                                        <td>Brian K.</td>
+                                        <td><span class="badge badge--success">Success</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-muted">12 min ago</td>
+                                        <td><code>254***789</code></td>
+                                        <td>KSh 1,000</td>
+                                        <td>Faith N.</td>
+                                        <td><span class="badge badge--pending">Pending</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-muted">18 min ago</td>
+                                        <td><code>254***456</code></td>
+                                        <td>KSh 50</td>
+                                        <td>David M.</td>
+                                        <td><span class="badge badge--success">Success</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-muted">25 min ago</td>
+                                        <td><code>254***001</code></td>
+                                        <td>KSh 200</td>
+                                        <td>Grace L.</td>
+                                        <td><span class="badge badge--failed">Failed</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-muted">32 min ago</td>
+                                        <td><code>254***223</code></td>
+                                        <td>KSh 500</td>
+                                        <td>Amina W.</td>
+                                        <td><span class="badge badge--success">Success</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-muted">40 min ago</td>
+                                        <td><code>254***667</code></td>
+                                        <td>KSh 150</td>
+                                        <td>Brian K.</td>
+                                        <td><span class="badge badge--success">Success</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-muted">48 min ago</td>
+                                        <td><code>254***890</code></td>
+                                        <td>KSh 300</td>
+                                        <td>Cynthia A.</td>
+                                        <td><span class="badge badge--success">Success</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-muted">55 min ago</td>
+                                        <td><code>254***543</code></td>
+                                        <td>KSh 50</td>
+                                        <td>Faith N.</td>
+                                        <td><span class="badge badge--pending">Pending</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-muted">1 hr ago</td>
+                                        <td><code>254***321</code></td>
+                                        <td>KSh 1,000</td>
+                                        <td>Grace L.</td>
+                                        <td><span class="badge badge--success">Success</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Top Contestants -->
+                <section class="admin-card">
+                    <div class="admin-card-header">
+                        <h2 class="admin-card-title">
+                            <i class="fa-solid fa-ranking-star"></i>
+                            Top Contestants
+                        </h2>
+                        <a href="manage.html#contestants" class="admin-card-link">Manage <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                    <div class="admin-card-body">
+                        <div class="top-contestants-list" id="top-contestants">
+                            <div class="top-contestant-item">
+                                <span class="top-rank top-rank--1">1</span>
+                                <div class="top-avatar">
+                                    <img src="../images/placeholder-avatar.jpg" alt="Amina W." onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                                    <div class="top-avatar-fallback" style="display:none;">AW</div>
+                                </div>
+                                <div class="top-info">
+                                    <span class="top-name">Amina W.</span>
+                                    <span class="top-meta"><i class="fa-solid fa-check-to-slot"></i> 342 votes</span>
+                                </div>
+                                <span class="top-revenue">KSh 17,100</span>
+                            </div>
+                            <div class="top-contestant-item">
+                                <span class="top-rank top-rank--2">2</span>
+                                <div class="top-avatar">
+                                    <img src="../images/placeholder-avatar.jpg" alt="Brian K." onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                                    <div class="top-avatar-fallback" style="display:none;">BK</div>
+                                </div>
+                                <div class="top-info">
+                                    <span class="top-name">Brian K.</span>
+                                    <span class="top-meta"><i class="fa-solid fa-check-to-slot"></i> 278 votes</span>
+                                </div>
+                                <span class="top-revenue">KSh 13,900</span>
+                            </div>
+                            <div class="top-contestant-item">
+                                <span class="top-rank top-rank--3">3</span>
+                                <div class="top-avatar">
+                                    <img src="../images/placeholder-avatar.jpg" alt="Faith N." onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                                    <div class="top-avatar-fallback" style="display:none;">FN</div>
+                                </div>
+                                <div class="top-info">
+                                    <span class="top-name">Faith N.</span>
+                                    <span class="top-meta"><i class="fa-solid fa-check-to-slot"></i> 215 votes</span>
+                                </div>
+                                <span class="top-revenue">KSh 10,750</span>
+                            </div>
+                            <div class="top-contestant-item">
+                                <span class="top-rank">4</span>
+                                <div class="top-avatar">
+                                    <img src="../images/placeholder-avatar.jpg" alt="David M." onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                                    <div class="top-avatar-fallback" style="display:none;">DM</div>
+                                </div>
+                                <div class="top-info">
+                                    <span class="top-name">David M.</span>
+                                    <span class="top-meta"><i class="fa-solid fa-check-to-slot"></i> 189 votes</span>
+                                </div>
+                                <span class="top-revenue">KSh 9,450</span>
+                            </div>
+                            <div class="top-contestant-item">
+                                <span class="top-rank">5</span>
+                                <div class="top-avatar">
+                                    <img src="../images/placeholder-avatar.jpg" alt="Grace L." onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                                    <div class="top-avatar-fallback" style="display:none;">GL</div>
+                                </div>
+                                <div class="top-info">
+                                    <span class="top-name">Grace L.</span>
+                                    <span class="top-meta"><i class="fa-solid fa-check-to-slot"></i> 156 votes</span>
+                                </div>
+                                <span class="top-revenue">KSh 7,800</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Competition Status -->
+            <section class="admin-card competition-status-card">
+                <div class="admin-card-header">
+                    <h2 class="admin-card-title">
+                        <i class="fa-solid fa-flag-checkered"></i>
+                        Active Competition
+                    </h2>
+                </div>
+                <div class="admin-card-body">
+                    <div class="competition-status">
+                        <div class="competition-status-info">
+                            <h3 class="competition-status-name" id="active-comp-name">Nairobi Fashion Week 2025</h3>
+                            <div class="competition-status-dates">
+                                <span><i class="fa-regular fa-calendar"></i> Start: <strong id="active-comp-start">Jan 15, 2025</strong></span>
+                                <span><i class="fa-regular fa-calendar-check"></i> End: <strong id="active-comp-end">Jan 22, 2025</strong></span>
+                            </div>
+                            <div class="competition-status-stats">
+                                <span><i class="fa-solid fa-check-to-slot"></i> Total Votes: <strong id="active-comp-votes">1,180</strong></span>
+                            </div>
+                        </div>
+                        <div class="competition-status-progress">
+                            <div class="progress-label">
+                                <span>Progress</span>
+                                <span id="active-comp-progress-text">Day 4 of 7</span>
+                            </div>
+                            <div class="progress-bar-track">
+                                <div class="progress-bar-fill" id="active-comp-progress" style="width: 57%;"></div>
+                            </div>
+                        </div>
+                        <a href="manage.html#competitions" class="btn-admin-primary">
+                            <i class="fa-solid fa-gear"></i> Manage Competition
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Quick Actions -->
+            <section class="quick-actions">
+                <h2 class="quick-actions-title">Quick Actions</h2>
+                <div class="quick-actions-grid">
+                    <a href="manage.html#contestants" class="quick-action-btn">
+                        <i class="fa-solid fa-user-plus"></i>
+                        <span>Add Contestant</span>
+                    </a>
+                    <a href="manage.html#competitions" class="quick-action-btn">
+                        <i class="fa-solid fa-plus-circle"></i>
+                        <span>Create Competition</span>
+                    </a>
+                    <a href="manage.html#transactions" class="quick-action-btn">
+                        <i class="fa-solid fa-file-export"></i>
+                        <span>Export Data</span>
+                    </a>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <script src="../js/admin.js"></script>
+</body>
+</html>
