@@ -415,7 +415,7 @@ p {
 .hero-bg {
     position: absolute;
     inset: 0;
-    background: url('https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=1920&q=80&fit=crop') center center / cover no-repeat;
+    background: url('https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=1920&q=80&fit=crop') center 20% / cover no-repeat;
 }
 
 .hero-overlay {

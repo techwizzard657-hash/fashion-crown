@@ -13,12 +13,14 @@
 /* Remove the default body padding-top for admin pages */
 body.admin-body {
   padding-top: 0;
+  background-color: #F0E5DB;
+  color: #474329;
 }
 
 /* ---------- Admin Sidebar ---------- */
 .admin-sidebar {
-  background-color: var(--surface);
-  border-right: 1px solid var(--card-border);
+  background-color: #38341F;
+  border-right: 1px solid #4D492E;
   padding: 0;
   position: fixed;
   left: 0;
@@ -173,11 +175,26 @@ body.admin-body {
 }
 
 /* ---------- Admin Content Area ---------- */
-.admin-content {
+.admin-main {
   margin-left: 260px;
-  padding: 30px;
   min-height: 100vh;
-  background-color: var(--primary);
+  position: relative;
+  background-color: #F0E5DB;
+  background-image:
+    linear-gradient(135deg, rgba(240, 229, 219, 0.94) 0%, rgba(240, 229, 219, 0.88) 50%, rgba(240, 229, 219, 0.95) 100%),
+    url('https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=1920&q=80&fit=crop');
+  background-size: cover;
+  background-position: center top;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  transition: margin-left 0.3s ease;
+}
+
+.admin-content {
+  padding: 30px;
+  min-height: calc(100vh - 80px);
+  position: relative;
+  z-index: 2;
 }
 
 /* Admin Top Bar */
@@ -185,9 +202,15 @@ body.admin-body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 30px;
-  padding-bottom: 20px;
-  border-bottom: 1px solid var(--card-border);
+  margin-bottom: 0;
+  padding: 20px 30px;
+  border-bottom: 1px solid #E2D5C7;
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  position: sticky;
+  top: 0;
+  z-index: 50;
   flex-wrap: wrap;
   gap: 15px;
 }
@@ -1223,5 +1246,159 @@ body.admin-body {
     flex-direction: column;
     align-items: flex-start;
     gap: 10px;
+  }
+}
+
+
+/* Clean Luxury Suit Background for Admin Dashboard */
+.admin-main {
+  margin-left: 260px;
+  min-height: 100vh;
+  position: relative;
+  background-color: #F0E5DB;
+  background-image:
+    linear-gradient(135deg, rgba(240, 229, 219, 0.94) 0%, rgba(240, 229, 219, 0.88) 50%, rgba(240, 229, 219, 0.95) 100%),
+    url('https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=1920&q=80&fit=crop');
+  background-size: cover;
+  background-position: center top;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  transition: margin-left 0.3s ease;
+}
+
+.admin-content {
+  padding: 30px;
+  min-height: calc(100vh - 80px);
+  position: relative;
+  z-index: 2;
+}
+
+.stat-card,
+.admin-card,
+.admin-stat-card,
+.chart-card {
+  background: rgba(255, 255, 255, 0.94) !important;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid #E2D5C7 !important;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(71, 67, 41, 0.05);
+  color: #474329 !important;
+}
+
+.stat-card:hover,
+.admin-card:hover,
+.admin-stat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(71, 67, 41, 0.09);
+  border-color: #FF4D6D !important;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.stat-card {
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.stat-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 12px;
+  background: rgba(255, 77, 109, 0.1);
+  color: #FF4D6D;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  flex-shrink: 0;
+}
+
+.stat-info {
+  flex: 1;
+}
+
+.stat-label {
+  display: block;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #6B6543;
+  margin-bottom: 4px;
+  font-weight: 500;
+}
+
+.stat-value {
+  display: block;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #474329 !important;
+  font-family: 'Playfair Display', serif;
+  line-height: 1.1;
+}
+
+.admin-card-header {
+  padding: 20px 24px;
+  border-bottom: 1px solid #E2D5C7;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.admin-card-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #474329 !important;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.admin-card-title i {
+  color: #FF4D6D;
+}
+
+.admin-card-body {
+  padding: 24px;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.admin-table th {
+  padding: 14px 18px;
+  text-align: left;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #6B6543;
+  border-bottom: 1px solid #E2D5C7;
+  background: #FAF5F0;
+  font-weight: 600;
+}
+
+.admin-table td {
+  padding: 16px 18px;
+  border-bottom: 1px solid #E2D5C7;
+  color: #474329;
+  font-size: 0.9rem;
+}
+
+.admin-table tbody tr:hover {
+  background: rgba(255, 77, 109, 0.03);
+}
+
+@media (max-width: 991px) {
+  .admin-main {
+    margin-left: 0;
   }
 }
