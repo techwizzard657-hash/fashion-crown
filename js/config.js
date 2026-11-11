@@ -14,6 +14,9 @@
     // ── Configuration ──────────────────────────────────────────
     var SUPABASE_URL = 'YOUR_SUPABASE_URL';
     var SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY';
+    var PAYSTACK_PUBLIC_KEY = 'YOUR_PAYSTACK_PUBLIC_KEY'; // e.g. pk_live_... or pk_test_...
+
+    window.PAYSTACK_PUBLIC_KEY = PAYSTACK_PUBLIC_KEY;
 
     // ── Client Initialisation ──────────────────────────────────
     var supabaseClient = null;

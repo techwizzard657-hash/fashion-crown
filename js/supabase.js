@@ -5,6 +5,11 @@
 // ── Configuration ──────────────────────────────────────────
 const SUPABASE_URL = 'YOUR_SUPABASE_URL';
 const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY';
+const PAYSTACK_PUBLIC_KEY = 'YOUR_PAYSTACK_PUBLIC_KEY'; // e.g. pk_live_... or pk_test_...
+
+if (typeof window !== 'undefined') {
+    window.PAYSTACK_PUBLIC_KEY = PAYSTACK_PUBLIC_KEY;
+}
 
 // ── Client Initialisation ──────────────────────────────────
 let supabaseClient = null;

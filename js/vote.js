@@ -276,6 +276,55 @@
             setButtonLoading(true);
             hideResult();
 
+            // ── Paystack Inline Checkout ──────────────────────────────
+            if (
+                typeof window.PaystackPop !== 'undefined' &&
+                window.PAYSTACK_PUBLIC_KEY &&
+                window.PAYSTACK_PUBLIC_KEY !== 'YOUR_PAYSTACK_PUBLIC_KEY' &&
+                window.PAYSTACK_PUBLIC_KEY.startsWith('pk_')
+            ) {
+                try {
+                    var handler = window.PaystackPop.setup({
+                        key: window.PAYSTACK_PUBLIC_KEY,
+                        email: 'voter_' + phoneNumber + '@fashioncrown.co.ke',
+                        amount: selectedAmount * 100,
+                        currency: 'KES',
+                        channels: ['mobile_money', 'card'],
+                        mobile_money: {
+                            phone: phoneNumber,
+                            provider: 'mpesa'
+                        },
+                        metadata: {
+                            custom_fields: [
+                                { display_name: 'Contestant', variable_name: 'contestant_name', value: selectedContestant.name },
+                                { display_name: 'Contestant ID', variable_name: 'contestant_id', value: selectedContestant.id },
+                                { display_name: 'Votes', variable_name: 'votes', value: selectedVotes },
+                                { display_name: 'Phone Number', variable_name: 'phone_number', value: phoneNumber }
+                            ]
+                        },
+                        callback: function (response) {
+                            var receipt = response.reference || response.trxref || 'PS-' + Date.now();
+                            handleSuccess({
+                                status: 'completed',
+                                mpesa_receipt: receipt,
+                                votes: selectedVotes,
+                                amount: selectedAmount
+                            });
+                            setButtonLoading(false);
+                            isProcessing = false;
+                        },
+                        onClose: function () {
+                            setButtonLoading(false);
+                            isProcessing = false;
+                        }
+                    });
+                    handler.openIframe();
+                    return;
+                } catch (psErr) {
+                    console.warn('[PaystackPop] Error launching inline modal, falling back to direct:', psErr);
+                }
+            }
+
             try {
                 // Step 1: Initiate STK push
                 showResult('pending');
