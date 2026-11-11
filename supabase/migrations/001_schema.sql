@@ -527,58 +527,112 @@ GRANT EXECUTE ON FUNCTION get_public_stats(UUID) TO anon, authenticated, service
 ALTER PUBLICATION supabase_realtime ADD TABLE contestants;
 
 -- ============================================================
--- 8. SEED DATA (Fashion Crown Kenya 2026)
+-- ============================================================
+-- 8. STORAGE (Contestant Photo Uploads)
+-- ============================================================
+
+INSERT INTO storage.buckets (id, name, public)
+VALUES ('contestant-photos', 'contestant-photos', true)
+ON CONFLICT (id) DO UPDATE SET public = true;
+
+CREATE POLICY "contestant_photos_public_view"
+ON storage.objects FOR SELECT
+USING (bucket_id = 'contestant-photos');
+
+CREATE POLICY "contestant_photos_admin_upload"
+ON storage.objects FOR INSERT
+TO authenticated
+WITH CHECK (bucket_id = 'contestant-photos');
+
+CREATE POLICY "contestant_photos_admin_update"
+ON storage.objects FOR UPDATE
+TO authenticated
+USING (bucket_id = 'contestant-photos');
+
+CREATE POLICY "contestant_photos_admin_delete"
+ON storage.objects FOR DELETE
+TO authenticated
+USING (bucket_id = 'contestant-photos');
+
+-- ============================================================
+-- 9. SEED DATA (Selecting The New Face of Fashion Crown 2026)
 -- ============================================================
 
 INSERT INTO competitions (id, title, description, start_date, end_date, status)
 VALUES (
     'a1b2c3d4-e5f6-7890-abcd-ef1234567890',
-    'Fashion Crown Kenya 2026',
-    'Vote for your favourite fashion designer and help them claim the prestigious Fashion Crown! The top 3 contestants walk away with major cash prizes, brand endorsements, and an exclusive feature in Fashion Crown Magazine.',
+    'Selecting The New Face of Fashion Crown 2026',
+    'Vote for your favourite fashion contender and help them become the official Face of Fashion Crown! The winner claims brand ambassadorship, editorial campaigns, and a luxury cash purse.',
     NOW(),
     NOW() + INTERVAL '7 days',
     'active'
-);
+) ON CONFLICT (id) DO UPDATE SET
+    title = EXCLUDED.title,
+    description = EXCLUDED.description;
 
 INSERT INTO contestants (competition_id, name, bio, photo_url, is_demo, vote_count)
 VALUES
     (
         'a1b2c3d4-e5f6-7890-abcd-ef1234567890',
         'Amara Okafor',
-        'Haute couture evening wear and modern African silhouettes. Crafting statement pieces that command attention on international runways.',
-        'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600&h=750&fit=crop',
+        'High-fashion editorial model & runway muse. Leading contender for the official Face of Fashion Crown 2026.',
+        'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600&h=750&fit=crop&crop=face',
         false,
-        1420
+        847
     ),
     (
         'a1b2c3d4-e5f6-7890-abcd-ef1234567890',
-        '[Demo] Liam Chen',
-        'Urban streetwear innovator blending minimalist aesthetics with functional luxury accessories.',
-        'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=600&h=750&fit=crop',
-        true,
-        980
+        'Liam Chen',
+        'Streetwear & editorial model with international runway acclaim. Contender for the Face of Fashion Crown.',
+        'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=600&h=750&fit=crop&crop=face',
+        false,
+        623
     ),
     (
         'a1b2c3d4-e5f6-7890-abcd-ef1234567890',
-        '[Demo] Sofia Martinez',
-        'Sustainable luxury fashion made from ethically sourced organic silk and handcrafted artisanal textiles.',
-        'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=600&h=750&fit=crop',
-        true,
-        850
+        'Sofia Martinez',
+        'Haute couture editorial model and luxury brand muse with 10 years of runway experience.',
+        'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=600&h=750&fit=crop&crop=face',
+        false,
+        512
     ),
     (
         'a1b2c3d4-e5f6-7890-abcd-ef1234567890',
-        '[Demo] David Kimani',
-        'Bespoke tailoring and modern African luxury menswear inspired by Kenya''s architectural renaissance.',
-        'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=750&fit=crop',
-        true,
-        640
+        'David Kimani',
+        'Nairobi-based high-fashion model and style icon. Representing modern contemporary Kenyan elegance.',
+        'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=750&fit=crop&crop=face',
+        false,
+        389
     ),
     (
         'a1b2c3d4-e5f6-7890-abcd-ef1234567890',
-        '[Demo] Zara Ndung''u',
-        'Afro-futuristic avant-garde designs celebrating East African heritage through geometric structural draping.',
-        'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=600&h=750&fit=crop',
-        true,
-        510
+        'Zara Ndung''u',
+        'Top style ambassador, editorial model, and creative muse. Finalist for the New Face of Fashion Crown.',
+        'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=600&h=750&fit=crop&crop=face',
+        false,
+        256
+    ),
+    (
+        'a1b2c3d4-e5f6-7890-abcd-ef1234567890',
+        'Malik Adebayo',
+        'International menswear and luxury editorial ambassador. Known for striking contemporary and classic editorial style.',
+        'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=600&h=750&fit=crop&crop=face',
+        false,
+        215
+    ),
+    (
+        'a1b2c3d4-e5f6-7890-abcd-ef1234567890',
+        'Nia Wambui',
+        'Avant-garde runway model and beauty editorial ambassador with a strong presence in East African fashion week.',
+        'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=600&h=750&fit=crop&crop=face',
+        false,
+        178
+    ),
+    (
+        'a1b2c3d4-e5f6-7890-abcd-ef1234567890',
+        'Chloe Vance',
+        'High-fashion editorial and haute couture muse, acclaimed for minimalist and luxury campaign editorials.',
+        'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=600&h=750&fit=crop&crop=face',
+        false,
+        142
     );

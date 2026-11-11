@@ -160,16 +160,16 @@
                                             <label class="form-label" for="contestant-competition">Competition</label>
                                             <select id="contestant-competition" class="form-select" required>
                                                 <option value="">Select competition</option>
-                                                <option value="nairobi-fw-2025">Nairobi Fashion Week 2025</option>
+                                                <option value="nairobi-fw-2025">The New Face of Fashion Crown 2026</option>
                                             </select>
                                         </div>
                                         <div class="form-field form-field--checkbox">
                                             <label class="form-checkbox">
                                                 <input type="checkbox" id="contestant-is-demo">
                                                 <span class="checkmark"></span>
-                                                <span class="checkbox-label">Demo Profile</span>
+                                                <span class="checkbox-label">Active Contender</span>
                                             </label>
-                                            <span class="form-hint">Mark as [Demo] contestant</span>
+                                            <span class="form-hint">Publish to live voting roster</span>
                                         </div>
                                     </div>
                                     <button type="submit" class="btn-admin-primary btn-admin-submit">
@@ -200,7 +200,7 @@
                                         <th>Competition</th>
                                         <th>Votes</th>
                                         <th>Revenue</th>
-                                        <th>Demo?</th>
+                                        <th>Status</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
@@ -212,10 +212,10 @@
                                             </div>
                                         </td>
                                         <td><strong>Amina Wanjiku</strong></td>
-                                        <td>Nairobi FW 2025</td>
+                                        <td>Face of Fashion Crown</td>
                                         <td>342</td>
                                         <td>KSh 17,100</td>
-                                        <td><span class="badge badge--demo">Demo</span></td>
+                                        <td><span class="badge badge--success">Active</span></td>
                                         <td>
                                             <div class="table-actions">
                                                 <button class="action-btn action-btn--edit" title="Edit">
@@ -234,10 +234,10 @@
                                             </div>
                                         </td>
                                         <td><strong>Brian Kimani</strong></td>
-                                        <td>Nairobi FW 2025</td>
+                                        <td>Face of Fashion Crown</td>
                                         <td>278</td>
                                         <td>KSh 13,900</td>
-                                        <td><span class="badge badge--demo">Demo</span></td>
+                                        <td><span class="badge badge--success">Active</span></td>
                                         <td>
                                             <div class="table-actions">
                                                 <button class="action-btn action-btn--edit" title="Edit">
@@ -256,10 +256,10 @@
                                             </div>
                                         </td>
                                         <td><strong>Faith Njeri</strong></td>
-                                        <td>Nairobi FW 2025</td>
+                                        <td>Face of Fashion Crown</td>
                                         <td>215</td>
                                         <td>KSh 10,750</td>
-                                        <td><span class="badge badge--demo">Demo</span></td>
+                                        <td><span class="badge badge--success">Active</span></td>
                                         <td>
                                             <div class="table-actions">
                                                 <button class="action-btn action-btn--edit" title="Edit">
@@ -278,10 +278,10 @@
                                             </div>
                                         </td>
                                         <td><strong>David Mwangi</strong></td>
-                                        <td>Nairobi FW 2025</td>
+                                        <td>Face of Fashion Crown</td>
                                         <td>189</td>
                                         <td>KSh 9,450</td>
-                                        <td><span class="badge badge--demo">Demo</span></td>
+                                        <td><span class="badge badge--success">Active</span></td>
                                         <td>
                                             <div class="table-actions">
                                                 <button class="action-btn action-btn--edit" title="Edit">
@@ -300,10 +300,10 @@
                                             </div>
                                         </td>
                                         <td><strong>Grace Lilian</strong></td>
-                                        <td>Nairobi FW 2025</td>
+                                        <td>Face of Fashion Crown</td>
                                         <td>156</td>
                                         <td>KSh 7,800</td>
-                                        <td><span class="badge badge--demo">Demo</span></td>
+                                        <td><span class="badge badge--success">Active</span></td>
                                         <td>
                                             <div class="table-actions">
                                                 <button class="action-btn action-btn--edit" title="Edit">
@@ -322,10 +322,10 @@
                                             </div>
                                         </td>
                                         <td><strong>Cynthia Achieng</strong></td>
-                                        <td>Nairobi FW 2025</td>
+                                        <td>Face of Fashion Crown</td>
                                         <td>134</td>
                                         <td>KSh 6,700</td>
-                                        <td><span class="badge badge--demo">Demo</span></td>
+                                        <td><span class="badge badge--success">Active</span></td>
                                         <td>
                                             <div class="table-actions">
                                                 <button class="action-btn action-btn--edit" title="Edit">
@@ -360,7 +360,7 @@
                         <form id="create-competition-form" class="admin-form">
                             <div class="form-field">
                                 <label class="form-label" for="comp-title">Competition Title</label>
-                                <input type="text" id="comp-title" class="form-input" placeholder="e.g. Nairobi Fashion Week 2025" required>
+                                <input type="text" id="comp-title" class="form-input" placeholder="e.g. The New Face of Fashion Crown 2026" required>
                             </div>
                             <div class="form-field">
                                 <label class="form-label" for="comp-description">Description</label>
@@ -420,7 +420,7 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td><strong>Nairobi Fashion Week 2025</strong></td>
+                                        <td><strong>The New Face of Fashion Crown 2026</strong></td>
                                         <td><span class="badge badge--active">Active</span></td>
                                         <td>Jan 15, 2025</td>
                                         <td>Jan 22, 2025</td>
@@ -739,14 +739,14 @@
                         <div class="form-field">
                             <label class="form-label" for="edit-competition">Competition</label>
                             <select id="edit-competition" class="form-select" required>
-                                <option value="nairobi-fw-2025">Nairobi Fashion Week 2025</option>
+                                <option value="nairobi-fw-2025">The New Face of Fashion Crown 2026</option>
                             </select>
                         </div>
                         <div class="form-field form-field--checkbox">
                             <label class="form-checkbox">
                                 <input type="checkbox" id="edit-is-demo">
                                 <span class="checkmark"></span>
-                                <span class="checkbox-label">Demo Profile</span>
+                                <span class="checkbox-label">Active Contender</span>
                             </label>
                         </div>
                     </div>

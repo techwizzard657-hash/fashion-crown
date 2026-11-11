@@ -376,10 +376,11 @@
 
                 return '<tr data-id="' + c.id + '">' +
                     '<td>' + photoHTML + '</td>' +
-                    '<td>' + c.name + '</td>' +
+                    '<td><strong>' + c.name + '</strong></td>' +
+                    '<td>Face of Fashion Crown</td>' +
                     '<td>' + MalonteUtils.formatNumber(c.vote_count) + '</td>' +
                     '<td>' + MalonteUtils.formatCurrency(c.vote_count * 50) + '</td>' +
-                    '<td>' + (c.is_demo ? '<span class="badge badge-demo">Demo</span>' : '<span class="badge badge-success">Real</span>') + '</td>' +
+                    '<td><span class="badge badge-success">Active</span></td>' +
                     '<td>' +
                         '<button class="btn-edit" onclick="window.MalonteAdmin.editContestant(\'' + c.id + '\')"><i class="fas fa-pen"></i></button> ' +
                         '<button class="btn-delete" onclick="window.MalonteAdmin.deleteContestant(\'' + c.id + '\', \'' + c.name.replace(/'/g, "\\'") + '\')"><i class="fas fa-trash"></i></button>' +

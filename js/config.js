@@ -98,6 +98,36 @@
                 vote_count: 256,
                 competition_id: 'comp-1',
                 created_at: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000).toISOString()
+            },
+            {
+                id: 'cont-6',
+                name: 'Malik Adebayo',
+                bio: 'International menswear and luxury editorial ambassador. Known for striking contemporary and classic editorial style.',
+                photo_url: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=500&fit=crop&crop=face',
+                is_demo: false,
+                vote_count: 215,
+                competition_id: 'comp-1',
+                created_at: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000).toISOString()
+            },
+            {
+                id: 'cont-7',
+                name: 'Nia Wambui',
+                bio: 'Avant-garde runway model and beauty editorial ambassador with a strong presence in East African fashion week.',
+                photo_url: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=400&h=500&fit=crop&crop=face',
+                is_demo: false,
+                vote_count: 178,
+                competition_id: 'comp-1',
+                created_at: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000).toISOString()
+            },
+            {
+                id: 'cont-8',
+                name: 'Chloe Vance',
+                bio: 'High-fashion editorial and haute couture muse, acclaimed for minimalist and luxury campaign editorials.',
+                photo_url: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=500&fit=crop&crop=face',
+                is_demo: false,
+                vote_count: 142,
+                competition_id: 'comp-1',
+                created_at: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000).toISOString()
             }
         ],
 
@@ -105,8 +135,8 @@
     };
 
     function generateMockTransactions() {
-        var names = ['Amara Okafor', 'Liam Chen', 'Sofia Martinez', 'David Kimani', "Zara Ndung'u"];
-        var contestantIds = ['cont-1', 'cont-2', 'cont-3', 'cont-4', 'cont-5'];
+        var names = ['Amara Okafor', 'Liam Chen', 'Sofia Martinez', 'David Kimani', "Zara Ndung'u", 'Malik Adebayo', 'Nia Wambui', 'Chloe Vance'];
+        var contestantIds = ['cont-1', 'cont-2', 'cont-3', 'cont-4', 'cont-5', 'cont-6', 'cont-7', 'cont-8'];
         var statuses = ['completed', 'completed', 'completed', 'completed', 'completed',
                         'completed', 'completed', 'completed', 'pending', 'failed'];
         var amounts = [50, 100, 150, 200, 250, 300, 500, 1000];
