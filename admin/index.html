@@ -39,8 +39,8 @@
                 45deg,
                 transparent,
                 transparent 40px,
-                rgba(212,175,55,0.015) 40px,
-                rgba(212,175,55,0.015) 41px
+                rgba(255,77,109,0.015) 40px,
+                rgba(255,77,109,0.015) 41px
             );
             animation: loginPatternMove 60s linear infinite;
             pointer-events: none;
@@ -52,8 +52,8 @@
         }
 
         .login-card {
-            background: #1A1A1A;
-            border: 1px solid #2A2A2A;
+            background: #FAF5F0;
+            border: 1px solid #E2D5C7;
             border-radius: 16px;
             padding: 3rem 2.5rem;
             width: 100%;
@@ -72,7 +72,7 @@
             font-family: 'Playfair Display', serif;
             font-size: 2rem;
             font-weight: 700;
-            color: #D4AF37;
+            color: #FF4D6D;
             letter-spacing: 3px;
             display: block;
             margin-bottom: 0.25rem;
@@ -81,7 +81,7 @@
         .login-logo .logo-divider {
             width: 50px;
             height: 2px;
-            background: linear-gradient(90deg, transparent, #D4AF37, transparent);
+            background: linear-gradient(90deg, transparent, #FF4D6D, transparent);
             margin: 0.75rem auto;
         }
 
@@ -89,7 +89,7 @@
             font-family: 'Inter', sans-serif;
             font-size: 0.85rem;
             font-weight: 500;
-            color: #AAAAAA;
+            color: #6B6543;
             text-transform: uppercase;
             letter-spacing: 2px;
             text-align: center;
@@ -105,7 +105,7 @@
             font-family: 'Inter', sans-serif;
             font-size: 0.8rem;
             font-weight: 500;
-            color: #AAAAAA;
+            color: #6B6543;
             margin-bottom: 0.5rem;
             text-transform: uppercase;
             letter-spacing: 0.5px;
@@ -120,7 +120,7 @@
             left: 14px;
             top: 50%;
             transform: translateY(-50%);
-            color: #555;
+            color: #8C845B;
             font-size: 0.9rem;
             transition: color 0.3s ease;
         }
@@ -128,10 +128,10 @@
         .login-field input {
             width: 100%;
             padding: 0.85rem 1rem 0.85rem 2.75rem;
-            background: #111111;
-            border: 1px solid #2A2A2A;
+            background: #FFFFFF;
+            border: 1px solid #E2D5C7;
             border-radius: 10px;
-            color: #FFFFFF;
+            color: #474329;
             font-family: 'Inter', sans-serif;
             font-size: 0.95rem;
             transition: border-color 0.3s ease, box-shadow 0.3s ease;
@@ -140,28 +140,28 @@
         }
 
         .login-field input:focus {
-            border-color: #D4AF37;
-            box-shadow: 0 0 0 3px rgba(212,175,55,0.1);
+            border-color: #FF4D6D;
+            box-shadow: 0 0 0 3px rgba(255,77,109,0.1);
         }
 
         .login-field input:focus + i,
         .login-field input:focus ~ i {
-            color: #D4AF37;
+            color: #FF4D6D;
         }
 
         .login-field .input-wrapper:focus-within i {
-            color: #D4AF37;
+            color: #FF4D6D;
         }
 
         .login-field input::placeholder {
-            color: #555;
+            color: #8C845B;
         }
 
         .login-btn {
             width: 100%;
             padding: 0.9rem;
-            background: linear-gradient(135deg, #D4AF37, #B8972E);
-            color: #000000;
+            background: linear-gradient(135deg, #FF4D6D, #E63956);
+            color: #FFFFFF;
             border: none;
             border-radius: 10px;
             font-family: 'Inter', sans-serif;
@@ -188,9 +188,9 @@
         }
 
         .login-btn:hover {
-            background: linear-gradient(135deg, #F0D060, #D4AF37);
+            background: linear-gradient(135deg, #FF758F, #FF4D6D);
             transform: translateY(-1px);
-            box-shadow: 0 6px 20px rgba(212,175,55,0.3);
+            box-shadow: 0 6px 20px rgba(255,77,109,0.3);
         }
 
         .login-btn:hover::before {
@@ -251,19 +251,19 @@
             text-align: center;
             margin-top: 2rem;
             padding-top: 1.5rem;
-            border-top: 1px solid #2A2A2A;
+            border-top: 1px solid #E2D5C7;
         }
 
         .login-footer a {
             font-family: 'Inter', sans-serif;
             font-size: 0.8rem;
-            color: #AAAAAA;
+            color: #6B6543;
             text-decoration: none;
             transition: color 0.3s ease;
         }
 
         .login-footer a:hover {
-            color: #D4AF37;
+            color: #FF4D6D;
         }
 
         @media (max-width: 480px) {
@@ -324,8 +324,8 @@
         document.addEventListener('DOMContentLoaded', async () => {
             // If already logged in, redirect to dashboard
             try {
-                if (typeof window.supabaseClient !== 'undefined') {
-                    const { data: { session } } = await window.supabaseClient.auth.getSession();
+                if (window.MalonteAPI) {
+                    const session = await window.MalonteAPI.getSession();
                     if (session) {
                         window.location.href = 'dashboard.html';
                         return;
@@ -365,20 +365,13 @@
                 submitBtn.disabled = true;
 
                 try {
-                    if (typeof window.supabaseClient === 'undefined') {
+                    if (!window.MalonteAPI) {
                         throw new Error('Application not initialized. Please refresh and try again.');
                     }
 
-                    const { data, error } = await window.supabaseClient.auth.signInWithPassword({
-                        email: email,
-                        password: password
-                    });
+                    const result = await window.MalonteAPI.adminLogin(email, password);
 
-                    if (error) {
-                        throw error;
-                    }
-
-                    if (data.session) {
+                    if (result && result.success) {
                         window.location.href = 'dashboard.html';
                     } else {
                         showError('Authentication failed. Please try again.');

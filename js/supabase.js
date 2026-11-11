@@ -17,6 +17,7 @@ let isSupabaseConnected = false;
 
 try {
     if (
+        typeof window !== 'undefined' &&
         window.supabase &&
         SUPABASE_URL !== 'YOUR_SUPABASE_URL' &&
         SUPABASE_ANON_KEY !== 'YOUR_SUPABASE_ANON_KEY'
@@ -29,6 +30,11 @@ try {
     }
 } catch (err) {
     console.error('[Malonte] Supabase initialisation failed:', err);
+}
+
+if (typeof window !== 'undefined') {
+    window.supabaseClient = supabaseClient;
+    window.isSupabaseConnected = isSupabaseConnected;
 }
 
 // ── Mock Data ──────────────────────────────────────────────

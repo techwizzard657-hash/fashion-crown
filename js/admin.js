@@ -21,7 +21,7 @@
         if (window.showToast) {
             window.showToast(message, type);
         } else {
-            alert(message);
+            console.log("[AdminToast]", message);
         }
     }
 
@@ -54,6 +54,8 @@
         var form = document.getElementById('login-form');
         var errorEl = document.getElementById('login-error');
         if (!form) return;
+        // If index.html already attached its own submit handler, skip duplicate
+        if (document.getElementById('login-submit')) return;
 
         form.addEventListener('submit', async function (e) {
             e.preventDefault();
@@ -82,9 +84,7 @@
             try {
                 var result = await MalonteAPI.adminLogin(emailVal, passVal);
                 if (result && result.success) {
-                    if (result.demo) {
-                        showAdminToast('Demo mode: logged in as admin', 'info');
-                    }
+                    
                     window.location.href = 'dashboard.html';
                 } else {
                     throw new Error('Login failed');
@@ -117,26 +117,37 @@
         });
 
         // Mobile toggle
-        var toggleBtn = document.querySelector('.admin-menu-toggle, .sidebar-toggle, [data-sidebar-toggle]');
-        var sidebar = document.querySelector('.admin-sidebar, .sidebar');
-        var overlay = document.querySelector('.sidebar-overlay');
+        var toggleBtn = document.querySelector('.admin-menu-toggle, .sidebar-toggle, [data-sidebar-toggle], #sidebar-toggle');
+        var closeBtn = document.querySelector('#sidebar-close, .sidebar-close');
+        var sidebar = document.querySelector('.admin-sidebar, .sidebar, #admin-sidebar');
+        var overlay = document.querySelector('.sidebar-overlay, .admin-sidebar-overlay, #sidebar-overlay');
 
         if (toggleBtn && sidebar) {
             toggleBtn.addEventListener('click', function () {
                 sidebar.classList.toggle('open');
+                sidebar.classList.toggle('active');
                 if (overlay) overlay.classList.toggle('active');
             });
+        }
 
-            if (overlay) {
-                overlay.addEventListener('click', function () {
-                    sidebar.classList.remove('open');
-                    overlay.classList.remove('active');
-                });
-            }
+        if (closeBtn && sidebar) {
+            closeBtn.addEventListener('click', function () {
+                sidebar.classList.remove('open');
+                sidebar.classList.remove('active');
+                if (overlay) overlay.classList.remove('active');
+            });
+        }
+
+        if (overlay && sidebar) {
+            overlay.addEventListener('click', function () {
+                sidebar.classList.remove('open');
+                sidebar.classList.remove('active');
+                overlay.classList.remove('active');
+            });
         }
 
         // Logout
-        document.querySelectorAll('.logout-btn, [data-logout]').forEach(function (btn) {
+        document.querySelectorAll('.logout-btn, [data-logout], #admin-logout, .sidebar-logout').forEach(function (btn) {
             btn.addEventListener('click', async function (e) {
                 e.preventDefault();
                 await MalonteAPI.adminLogout();
