@@ -169,59 +169,69 @@
     function initPhoneInput() {
         if (!phoneInput) return;
 
-        phoneInput.addEventListener('input', function () {
-            var val = this.value.replace(/\D/g, ''); // digits only
+        function processPhoneInput(el) {
+            var raw = el.value.replace(/\D/g, ''); // digits only
 
-            // Auto-convert leading 0 to 254
-            if (val.startsWith('0')) {
-                val = '254' + val.substring(1);
-                this.value = val;
+            // If user enters/pastes 254... (e.g. 254712345678), strip the 254 because the +254 badge is already on the UI
+            if (raw.startsWith('254')) {
+                raw = raw.substring(3);
             }
 
-            // Auto-add 254 if starts with 7
-            if (val.length <= 9 && val.startsWith('7')) {
-                val = '254' + val;
-                this.value = val;
+            // If user enters leading 0 (e.g. 07... or 01...), strip the leading 0
+            if (raw.startsWith('0')) {
+                raw = raw.substring(1);
             }
 
-            phoneNumber = val;
-            updatePhoneValidation(val);
+            // Standard Kenyan mobile numbers are 9 digits (7XXXXXXXX or 1XXXXXXXX)
+            if (raw.length > 9) {
+                raw = raw.substring(0, 9);
+            }
+
+            // Keep the visible input as just the clean local digits (NO duplicate 254 in input!)
+            el.value = raw;
+
+            // Full international number (254XXXXXXXXX) for API submission and M-Pesa STK push
+            phoneNumber = raw.length > 0 ? '254' + raw : '';
+
+            updatePhoneValidation(raw, phoneNumber);
             updateSummary();
             validateForm();
+        }
+
+        phoneInput.addEventListener('input', function () {
+            processPhoneInput(this);
         });
 
         phoneInput.addEventListener('blur', function () {
-            var val = this.value.replace(/\D/g, '');
-            if (val.startsWith('0')) {
-                val = '254' + val.substring(1);
-                this.value = val;
-            }
-            phoneNumber = val;
-            updatePhoneValidation(val);
+            processPhoneInput(this);
         });
     }
 
     function isValidPhone(phone) {
-        // Must be 12 digits starting with 254, followed by 7 or 1
+        // Must be 12 digits starting with 254, followed by 7 or 1 (e.g. 254712345678, 254112345678)
         return /^254[71]\d{8}$/.test(phone);
     }
 
-    function updatePhoneValidation(phone) {
+    function updatePhoneValidation(localDigits, fullPhone) {
         if (!phoneValidation) return;
 
-        if (!phone || phone.length < 3) {
+        if (!localDigits || localDigits.length === 0) {
             phoneValidation.style.display = 'none';
             return;
         }
 
         phoneValidation.style.display = 'flex';
 
-        if (isValidPhone(phone)) {
+        if (isValidPhone(fullPhone)) {
             phoneValidation.className = 'phone-validation valid';
-            phoneValidation.innerHTML = '<i class="fas fa-circle-check"></i> <span>Valid M-Pesa number</span>';
+            phoneValidation.innerHTML = '<i class="fas fa-circle-check"></i> <span>Valid M-Pesa number (+254 ' + localDigits + ')</span>';
+        } else if (localDigits.length < 9) {
+            var remaining = 9 - localDigits.length;
+            phoneValidation.className = 'phone-validation invalid';
+            phoneValidation.innerHTML = '<i class="fas fa-circle-info"></i> <span>Enter ' + remaining + ' more digit' + (remaining === 1 ? '' : 's') + '</span>';
         } else {
             phoneValidation.className = 'phone-validation invalid';
-            phoneValidation.innerHTML = '<i class="fas fa-circle-xmark"></i> <span>Invalid number — use format 254XXXXXXXXX</span>';
+            phoneValidation.innerHTML = '<i class="fas fa-circle-xmark"></i> <span>Must start with 7 or 1 (e.g. 712 345 678)</span>';
         }
     }
 
@@ -237,7 +247,12 @@
             summaryVotes.textContent = selectedVotes > 0 ? selectedVotes + (selectedVotes === 1 ? ' vote' : ' votes') : '—';
         }
         if (summaryPhone) {
-            summaryPhone.textContent = phoneNumber.length >= 12 ? MalonteUtils.formatPhone(phoneNumber) : '—';
+            if (isValidPhone(phoneNumber)) {
+                var local = phoneNumber.substring(3);
+                summaryPhone.textContent = '+254 ' + local;
+            } else {
+                summaryPhone.textContent = '—';
+            }
         }
     }
 
