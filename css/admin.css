@@ -1402,3 +1402,389 @@ body.admin-body {
     margin-left: 0;
   }
 }
+
+
+/* ---------- Admin Forms & Layout Enhancements ---------- */
+.admin-form {
+  max-width: 900px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 28px;
+  align-items: flex-start;
+}
+
+@media (max-width: 768px) {
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+
+.form-group--details {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  align-items: center;
+}
+
+@media (max-width: 576px) {
+  .form-field-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+.form-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #474329;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.form-input,
+.form-select,
+.form-textarea {
+  width: 100%;
+  padding: 12px 16px;
+  background: #FFFFFF;
+  border: 1.5px solid #E2D5C7;
+  border-radius: 10px;
+  color: #474329;
+  font-size: 0.95rem;
+  font-family: 'Inter', sans-serif;
+  transition: all 0.25s ease;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+  border-color: #FF4D6D;
+  box-shadow: 0 0 0 4px rgba(255, 77, 109, 0.12);
+}
+
+.form-textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.form-field--checkbox {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: 14px;
+}
+
+.form-checkbox {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  font-weight: 500;
+  color: #474329;
+  font-size: 0.9rem;
+}
+
+.form-checkbox input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: #FF4D6D;
+  cursor: pointer;
+}
+
+.form-hint {
+  font-size: 0.75rem;
+  color: #6B6543;
+  margin-top: 4px;
+}
+
+/* ---------- Admin Buttons (Prominent Watermelon Pink CTAs) ---------- */
+.btn-admin-primary,
+.btn-admin-submit {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 10px !important;
+  background: linear-gradient(135deg, #FF4D6D 0%, #D81B60 100%) !important;
+  color: #FFFFFF !important;
+  font-family: 'Inter', -apple-system, sans-serif !important;
+  font-weight: 700 !important;
+  font-size: 0.95rem !important;
+  padding: 14px 28px !important;
+  border: none !important;
+  border-radius: 12px !important;
+  cursor: pointer !important;
+  box-shadow: 0 4px 18px rgba(255, 77, 109, 0.38) !important;
+  transition: all 0.25s ease !important;
+  text-decoration: none !important;
+  width: auto !important;
+}
+
+.btn-admin-primary:hover,
+.btn-admin-submit:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 26px rgba(255, 77, 109, 0.55) !important;
+  background: linear-gradient(135deg, #FF3358 0%, #C2185B 100%) !important;
+}
+
+.btn-admin-primary:active,
+.btn-admin-submit:active {
+  transform: translateY(0) !important;
+}
+
+.btn-admin-primary:disabled,
+.btn-admin-submit:disabled {
+  opacity: 0.65 !important;
+  cursor: not-allowed !important;
+  transform: none !important;
+}
+
+.btn-admin-outline {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  background: #FFFFFF !important;
+  border: 1.5px solid #E2D5C7 !important;
+  color: #474329 !important;
+  font-family: 'Inter', sans-serif !important;
+  font-weight: 600 !important;
+  font-size: 0.9rem !important;
+  padding: 12px 24px !important;
+  border-radius: 10px !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+  text-decoration: none !important;
+}
+
+.btn-admin-outline:hover {
+  border-color: #FF4D6D !important;
+  color: #FF4D6D !important;
+  background: rgba(255, 77, 109, 0.05) !important;
+}
+
+.btn-admin-danger {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  background: #E53935 !important;
+  color: #FFFFFF !important;
+  font-family: 'Inter', sans-serif !important;
+  font-weight: 600 !important;
+  font-size: 0.9rem !important;
+  padding: 12px 24px !important;
+  border: none !important;
+  border-radius: 10px !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+}
+
+.btn-admin-danger:hover {
+  background: #C62828 !important;
+}
+
+.btn-sm {
+  padding: 8px 16px !important;
+  font-size: 0.85rem !important;
+  border-radius: 8px !important;
+}
+
+/* ---------- Manage Tabs & Panels Visibility ---------- */
+.manage-tabs {
+  display: flex;
+  gap: 8px;
+  border-bottom: 2px solid #E2D5C7;
+  margin-bottom: 25px;
+  overflow-x: auto;
+}
+
+.manage-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 24px;
+  background: rgba(255, 255, 255, 0.6);
+  border: 1px solid #E2D5C7;
+  border-bottom: none;
+  border-radius: 12px 12px 0 0;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 0.92rem;
+  color: #6B6543;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-bottom: -2px;
+}
+
+.manage-tab:hover {
+  color: #FF4D6D;
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.manage-tab.active {
+  background: #FFFFFF;
+  color: #FF4D6D;
+  border-color: #E2D5C7;
+  border-bottom: 2px solid #FFFFFF;
+  box-shadow: 0 -3px 12px rgba(71, 67, 41, 0.05);
+}
+
+.manage-panel {
+  display: none !important;
+}
+
+.manage-panel.active {
+  display: block !important;
+}
+
+/* ---------- Admin Modals ---------- */
+.admin-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 99999;
+  padding: 20px;
+}
+
+.admin-modal-overlay.visible {
+  display: flex !important;
+}
+
+.admin-modal {
+  background: #FFFFFF;
+  border: 1px solid #E2D5C7;
+  border-radius: 18px;
+  padding: 30px;
+  max-width: 500px;
+  width: 100%;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+  animation: modalSlideIn 0.25s ease-out;
+}
+
+.admin-modal--lg {
+  max-width: 680px;
+}
+
+.admin-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #E2D5C7;
+}
+
+.admin-modal-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #474329;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.admin-modal-close {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  color: #6B6543;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.admin-modal-close:hover {
+  color: #FF4D6D;
+}
+
+.admin-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+@keyframes modalSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Floating Toast Notifications for Admin */
+.admin-toast-container {
+  position: fixed;
+  top: 24px;
+  right: 24px;
+  z-index: 100000;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  pointer-events: none;
+}
+
+.admin-toast-bubble {
+  pointer-events: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 22px;
+  background: #FFFFFF;
+  color: #474329;
+  border: 1.5px solid #E2D5C7;
+  border-left: 5px solid #FF4D6D;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  font-weight: 600;
+  font-size: 0.92rem;
+  font-family: 'Inter', sans-serif;
+  animation: toastSlide 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.admin-toast-bubble--success {
+  border-left-color: #10B981;
+}
+
+.admin-toast-bubble--error {
+  border-left-color: #EF4444;
+}
+
+@keyframes toastSlide {
+  from {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}

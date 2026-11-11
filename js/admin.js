@@ -20,9 +20,24 @@
     function showAdminToast(message, type) {
         if (window.showToast) {
             window.showToast(message, type);
-        } else {
-            console.log("[AdminToast]", message);
+            return;
         }
+        var container = document.querySelector('.admin-toast-container');
+        if (!container) {
+            container = document.createElement('div');
+            container.className = 'admin-toast-container';
+            document.body.appendChild(container);
+        }
+        var bubble = document.createElement('div');
+        bubble.className = 'admin-toast-bubble admin-toast-bubble--' + (type || 'info');
+        var icon = type === 'success' ? 'fa-circle-check' : (type === 'error' ? 'fa-triangle-exclamation' : 'fa-circle-info');
+        bubble.innerHTML = '<i class="fa-solid ' + icon + '" style="color:' + (type === 'success' ? '#10B981' : (type === 'error' ? '#EF4444' : '#FF4D6D')) + '"></i><span>' + message + '</span>';
+        container.appendChild(bubble);
+        setTimeout(function () {
+            bubble.style.opacity = '0';
+            bubble.style.transform = 'translateX(40px)';
+            setTimeout(function () { bubble.remove(); }, 300);
+        }, 3500);
     }
 
     // ── Init ───────────────────────────────────────────────────
@@ -441,8 +456,15 @@
             if (!preview) return;
             var reader = new FileReader();
             reader.onload = function (e) {
-                preview.innerHTML = '<img src="' + e.target.result + '" style="max-width:200px;border-radius:12px;">';
-                preview.style.display = 'block';
+                if (preview.tagName === 'IMG') {
+                    preview.src = e.target.result;
+                    preview.style.display = 'block';
+                    var content = form.querySelector('#upload-zone-content');
+                    if (content) content.style.display = 'none';
+                } else {
+                    preview.innerHTML = '<img src="' + e.target.result + '" style="max-width:200px;border-radius:12px;">';
+                    preview.style.display = 'block';
+                }
             };
             reader.readAsDataURL(file);
         }
@@ -453,7 +475,7 @@
 
             var nameInput = form.querySelector('#contestant-name, [name="name"]');
             var bioInput = form.querySelector('#contestant-bio, [name="bio"]');
-            var isDemoInput = form.querySelector('#contestant-demo, [name="is_demo"]');
+            var isDemoInput = form.querySelector('#contestant-is-demo, #contestant-demo, [name="is_demo"]');
             var compInput = form.querySelector('#contestant-competition, [name="competition_id"]');
             var submitBtn = form.querySelector('button[type="submit"]');
 
@@ -462,12 +484,18 @@
                 return;
             }
 
-            if (submitBtn) { submitBtn.disabled = true; submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Saving...'; }
+            if (submitBtn) {
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Saving Contestant...';
+            }
 
             try {
                 var photoUrl = '';
-                if (photoInput && photoInput.files.length) {
+                if (photoInput && photoInput.files && photoInput.files.length) {
                     photoUrl = await MalonteAPI.uploadPhoto(photoInput.files[0]);
+                }
+                if (!photoUrl) {
+                    photoUrl = 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600&q=80&fit=crop';
                 }
 
                 var competition = await MalonteAPI.getActiveCompetition();
@@ -475,22 +503,34 @@
                     name: nameInput.value.trim(),
                     bio: bioInput ? bioInput.value.trim() : '',
                     photo_url: photoUrl,
-                    is_demo: isDemoInput ? isDemoInput.checked : false,
-                    competition_id: compInput ? compInput.value : (competition ? competition.id : 'comp-1')
+                    is_demo: isDemoInput ? isDemoInput.checked : true,
+                    competition_id: (compInput && compInput.value) ? compInput.value : (competition ? competition.id : 'nairobi-fw-2025')
                 };
 
                 if (managePage.editingContestantId) {
                     await MalonteAPI.updateContestant(managePage.editingContestantId, data);
-                    showAdminToast('Contestant updated successfully', 'success');
+                    showAdminToast('Contestant updated successfully!', 'success');
                     managePage.editingContestantId = null;
                 } else {
                     await MalonteAPI.createContestant(data);
-                    showAdminToast('Contestant added successfully', 'success');
+                    showAdminToast('Contestant added successfully to roster!', 'success');
                 }
 
                 form.reset();
-                if (preview) { preview.innerHTML = ''; preview.style.display = 'none'; }
-                if (submitBtn) { submitBtn.innerHTML = '<i class="fas fa-plus"></i> Add Contestant'; }
+                if (preview) {
+                    if (preview.tagName === 'IMG') {
+                        preview.src = '';
+                        preview.style.display = 'none';
+                        var content = form.querySelector('#upload-zone-content');
+                        if (content) content.style.display = '';
+                    } else {
+                        preview.innerHTML = '';
+                        preview.style.display = 'none';
+                    }
+                }
+                if (submitBtn) {
+                    submitBtn.innerHTML = '<i class="fa-solid fa-user-plus"></i> Add Contestant to Roster';
+                }
 
                 await loadContestantsTab();
 

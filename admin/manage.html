@@ -96,6 +96,9 @@
                 <h1 class="topbar-title">Manage</h1>
             </div>
             <div class="topbar-right">
+                <a href="#add-contestant-form" class="btn-admin-primary btn-sm" onclick="document.getElementById('add-contestant-form').scrollIntoView({behavior:'smooth'});" style="text-decoration: none; margin-right: 12px;">
+                    <i class="fa-solid fa-user-plus"></i> + Add Contestant
+                </a>
                 <button class="topbar-icon-btn" aria-label="Notifications">
                     <i class="fa-solid fa-bell"></i>
                     <span class="topbar-badge">3</span>
@@ -170,22 +173,26 @@
                                         <div class="form-field">
                                             <label class="form-label" for="contestant-competition">Competition</label>
                                             <select id="contestant-competition" class="form-select" required>
-                                                <option value="">Select competition</option>
-                                                <option value="nairobi-fw-2025">The New Face of Fashion Crown 2026</option>
+                                                <option value="nairobi-fw-2025" selected>The New Face of Fashion Crown 2026</option>
                                             </select>
                                         </div>
                                         <div class="form-field form-field--checkbox">
                                             <label class="form-checkbox">
-                                                <input type="checkbox" id="contestant-is-demo">
+                                                <input type="checkbox" id="contestant-is-demo" checked>
                                                 <span class="checkmark"></span>
                                                 <span class="checkbox-label">Active Contender</span>
                                             </label>
                                             <span class="form-hint">Publish to live voting roster</span>
                                         </div>
                                     </div>
-                                    <button type="submit" class="btn-admin-primary btn-admin-submit">
-                                        <i class="fa-solid fa-plus"></i> Add Contestant
-                                    </button>
+                                    <div class="form-actions" style="margin-top: 24px; display: flex; align-items: center; gap: 14px; flex-wrap: wrap;">
+                                        <button type="submit" class="btn-admin-primary btn-admin-submit" id="add-contestant-submit-btn">
+                                            <i class="fa-solid fa-user-plus"></i> Add Contestant to Roster
+                                        </button>
+                                        <button type="reset" class="btn-admin-outline" id="add-contestant-reset-btn">
+                                            <i class="fa-solid fa-rotate-left"></i> Reset Form
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </form>
@@ -944,22 +951,7 @@
                 // In production: call Supabase to update
             });
 
-            // ── Form Submissions (prevent default, show feedback) ──
-            document.getElementById('add-contestant-form').addEventListener('submit', (e) => {
-                e.preventDefault();
-                // In production: call Supabase to insert contestant
-                alert('Contestant added successfully! (Connect Supabase to persist)');
-                e.target.reset();
-                if (photoPreview) { photoPreview.style.display = 'none'; uploadContent.style.display = ''; }
-            });
-
-            document.getElementById('create-competition-form').addEventListener('submit', (e) => {
-                e.preventDefault();
-                // In production: call Supabase to insert competition
-                alert('Competition created successfully! (Connect Supabase to persist)');
-                e.target.reset();
-                if (bannerPreview) { bannerPreview.style.display = 'none'; bannerContent.style.display = ''; }
-            });
+            // Form submissions handled seamlessly by admin.js
 
             // ── Export CSV ──
             const exportBtn = document.getElementById('export-csv');
