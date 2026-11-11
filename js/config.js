@@ -14,7 +14,7 @@
     // ── Configuration ──────────────────────────────────────────
     var SUPABASE_URL = 'YOUR_SUPABASE_URL';
     var SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY';
-    var PAYSTACK_PUBLIC_KEY = 'YOUR_PAYSTACK_PUBLIC_KEY'; // e.g. pk_live_... or pk_test_...
+    var PAYSTACK_PUBLIC_KEY = 'pk_test_64f386c737b3ee26f83738f3b7828e86367282e1';
 
     window.PAYSTACK_PUBLIC_KEY = PAYSTACK_PUBLIC_KEY;
 

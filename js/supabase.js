@@ -5,7 +5,7 @@
 // ── Configuration ──────────────────────────────────────────
 const SUPABASE_URL = 'YOUR_SUPABASE_URL';
 const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY';
-const PAYSTACK_PUBLIC_KEY = 'YOUR_PAYSTACK_PUBLIC_KEY'; // e.g. pk_live_... or pk_test_...
+const PAYSTACK_PUBLIC_KEY = 'pk_test_64f386c737b3ee26f83738f3b7828e86367282e1';
 
 if (typeof window !== 'undefined') {
     window.PAYSTACK_PUBLIC_KEY = PAYSTACK_PUBLIC_KEY;
