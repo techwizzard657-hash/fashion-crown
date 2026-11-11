@@ -23,6 +23,13 @@ const MPESA_CALLBACK_URL = Deno.env.get("MPESA_CALLBACK_URL") || "";
 const MPESA_CALLBACK_SECRET = Deno.env.get("MPESA_CALLBACK_SECRET") || "";
 const MPESA_ENV = Deno.env.get("MPESA_ENV") || "sandbox";
 
+// Paystack Configuration (Option: Starter Business)
+const PAYSTACK_SECRET_KEY = Deno.env.get("PAYSTACK_SECRET_KEY") || "";
+const IS_PAYSTACK = Boolean(
+  PAYSTACK_SECRET_KEY ||
+  Deno.env.get("PAYMENT_PROVIDER") === "paystack"
+);
+
 const SUPABASE_URL = Deno.env.get("SUPABASE_URL")!;
 const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
 
@@ -287,7 +294,52 @@ serve(async (req: Request) => {
 
     // --------------- 4. Dispatch Payment Request ---------------
 
-    if (IS_INTASEND) {
+    if (IS_PAYSTACK) {
+      // ═══════════════════════════════════════════════════════
+      // PAYSTACK M-PESA STK PUSH (Kenya Mobile Money)
+      // ═══════════════════════════════════════════════════════
+      console.log(`Initiating Paystack M-Pesa STK Push for ${formattedPhone}, KSh ${numericAmount}`);
+
+      const apiRef = `FC-${contestantId.slice(0, 4)}-${Date.now()}`;
+      const paystackPayload = {
+        email: `voter_${formattedPhone}@fashioncrown.co.ke`,
+        amount: numericAmount * 100,
+        currency: "KES",
+        reference: apiRef,
+        mobile_money: {
+          phone: formattedPhone,
+          provider: "mpesa",
+        },
+        metadata: {
+          contestant_id: contestantId,
+          contestant_name: contestant.name,
+          competition_id: competitionId,
+          votes: votes,
+          api_ref: apiRef,
+        },
+      };
+
+      const paystackRes = await fetch("https://api.paystack.co/charge", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${PAYSTACK_SECRET_KEY}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(paystackPayload),
+      });
+
+      const paystackData = await paystackRes.json();
+
+      if (!paystackRes.ok || !paystackData.status) {
+        console.error("Paystack M-Pesa STK Push Error:", paystackData);
+        const errMsg = paystackData.message || "Failed to trigger M-Pesa STK Push via Paystack.";
+        return jsonResponse({ success: false, error: errMsg }, 400, origin);
+      }
+
+      checkoutRequestId = paystackData.data?.reference || apiRef;
+      merchantRequestId = apiRef;
+
+    } else if (IS_INTASEND) {
       // ═══════════════════════════════════════════════════════
       // INTASEND PAYMENT GATEWAY (Option 1: Privacy Preserved)
       // ═══════════════════════════════════════════════════════

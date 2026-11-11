@@ -59,7 +59,33 @@ serve(async (req: Request) => {
     console.log(JSON.stringify(body, null, 2));
 
     // ═════════════════════════════════════════════════════════
-    // FORMAT A: INTASEND WEBHOOK
+    // FORMAT A: PAYSTACK WEBHOOK (event: 'charge.success')
+    // ═════════════════════════════════════════════════════════
+    if (body.event === "charge.success" && body.data) {
+      const reference = body.data.reference;
+      const amountPaid = Number(body.data.amount || 0) / 100;
+      const rawReceipt = body.data.id ? String(body.data.id) : reference;
+      const receipt = `PAY-${rawReceipt}`;
+
+      console.log(`Paystack Webhook for ${reference} — Amount: KSh ${amountPaid}, Receipt: ${receipt}`);
+
+      const { data: creditResult, error: creditError } = await supabase.rpc("credit_votes", {
+        p_checkout_request_id: reference,
+        p_mpesa_receipt: receipt,
+        p_amount_paid: amountPaid,
+      });
+
+      if (creditError) {
+        console.error("Error executing credit_votes (Paystack):", creditError);
+      } else {
+        console.log("Votes credited successfully (Paystack):", creditResult);
+      }
+
+      return successResponse({ status: "processed", reference });
+    }
+
+    // ═════════════════════════════════════════════════════════
+    // FORMAT B: INTASEND WEBHOOK
     // ═════════════════════════════════════════════════════════
     if (body.invoice_id) {
       const invoiceId = body.invoice_id;
