@@ -276,8 +276,9 @@
             setButtonLoading(true);
             hideResult();
 
-            // ── Paystack Inline Checkout ──────────────────────────────
+            // ── Paystack Inline Checkout (only active if PAYMENT_GATEWAY === 'paystack') ──
             if (
+                window.PAYMENT_GATEWAY === 'paystack' &&
                 typeof window.PaystackPop !== 'undefined' &&
                 window.PAYSTACK_PUBLIC_KEY &&
                 window.PAYSTACK_PUBLIC_KEY !== 'YOUR_PAYSTACK_PUBLIC_KEY' &&

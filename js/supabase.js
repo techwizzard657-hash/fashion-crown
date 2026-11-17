@@ -5,9 +5,11 @@
 // ── Configuration ──────────────────────────────────────────
 const SUPABASE_URL = 'YOUR_SUPABASE_URL';
 const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY';
+const PAYMENT_GATEWAY = 'daraja'; // 'daraja' (Direct Safaricom M-Pesa) or 'paystack'
 const PAYSTACK_PUBLIC_KEY = 'pk_test_64f386c737b3ee26f83738f3b7828e86367282e1';
 
 if (typeof window !== 'undefined') {
+    window.PAYMENT_GATEWAY = window.PAYMENT_GATEWAY || PAYMENT_GATEWAY;
     window.PAYSTACK_PUBLIC_KEY = PAYSTACK_PUBLIC_KEY;
 }
 

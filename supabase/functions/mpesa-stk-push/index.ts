@@ -23,22 +23,21 @@ const MPESA_CALLBACK_URL = Deno.env.get("MPESA_CALLBACK_URL") || "";
 const MPESA_CALLBACK_SECRET = Deno.env.get("MPESA_CALLBACK_SECRET") || "";
 const MPESA_ENV = Deno.env.get("MPESA_ENV") || "sandbox";
 
-// Paystack Configuration (Option: Starter Business)
+// Provider Configuration: 'daraja' (Direct M-Pesa), 'paystack', or 'intasend'
+const PAYMENT_PROVIDER = (Deno.env.get("PAYMENT_PROVIDER") || "daraja").toLowerCase();
+
+// Paystack Configuration
 const PAYSTACK_SECRET_KEY = Deno.env.get("PAYSTACK_SECRET_KEY") || "";
-const IS_PAYSTACK = Boolean(
-  PAYSTACK_SECRET_KEY ||
-  Deno.env.get("PAYMENT_PROVIDER") === "paystack"
-);
+const IS_PAYSTACK = PAYMENT_PROVIDER === "paystack" && Boolean(PAYSTACK_SECRET_KEY);
+
+// IntaSend Configuration
+const IS_INTASEND = PAYMENT_PROVIDER === "intasend" && Boolean(INTASEND_PUBLISHABLE_KEY || INTASEND_SECRET_KEY);
+
+// Direct Daraja is the primary gateway when PAYMENT_PROVIDER=daraja or default
+const IS_DARAJA = PAYMENT_PROVIDER === "daraja" || (!IS_PAYSTACK && !IS_INTASEND);
 
 const SUPABASE_URL = Deno.env.get("SUPABASE_URL")!;
 const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
-
-// Determine active provider: IntaSend or Direct Daraja
-const IS_INTASEND = Boolean(
-  INTASEND_PUBLISHABLE_KEY ||
-  INTASEND_SECRET_KEY ||
-  Deno.env.get("PAYMENT_PROVIDER") === "intasend"
-);
 
 const INTASEND_BASE_URL =
   INTASEND_ENV === "production"

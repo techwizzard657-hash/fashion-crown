@@ -14,8 +14,11 @@
     // ── Configuration ──────────────────────────────────────────
     var SUPABASE_URL = 'YOUR_SUPABASE_URL';
     var SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY';
+    // 'daraja' for direct Safaricom M-Pesa Till integration; 'paystack' for Paystack modal
+    var PAYMENT_GATEWAY = 'daraja';
     var PAYSTACK_PUBLIC_KEY = 'pk_test_64f386c737b3ee26f83738f3b7828e86367282e1';
 
+    window.PAYMENT_GATEWAY = PAYMENT_GATEWAY;
     window.PAYSTACK_PUBLIC_KEY = PAYSTACK_PUBLIC_KEY;
 
     // ── Client Initialisation ──────────────────────────────────
