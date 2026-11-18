@@ -55,6 +55,9 @@ const ALLOWED_ORIGINS = [
   "http://localhost:8080",
   "http://127.0.0.1",
   "http://127.0.0.1:8080",
+  "https://fashioncrown.co.ke",
+  "https://www.fashioncrown.co.ke",
+  "https://fashioncrown.netlify.app",
 ];
 
 const CF_PAGES_DOMAIN = Deno.env.get("CLOUDFLARE_PAGES_DOMAIN");
@@ -80,6 +83,8 @@ function getCorsHeaders(origin: string | null): Record<string, string> {
   const isAllowed = origin && (
     ALLOWED_ORIGINS.includes(origin) ||
     origin.endsWith(".pages.dev") ||
+    origin.endsWith(".netlify.app") ||
+    origin.includes("fashioncrown.co.ke") ||
     origin.includes("localhost")
   );
 
