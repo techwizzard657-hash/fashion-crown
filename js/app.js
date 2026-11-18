@@ -392,9 +392,9 @@
                     '<i class="fa-solid fa-heart" style="color:var(--accent-pink,#FF4D6D);"></i> ' +
                     '<span class="vote-count">' + MalonteUtils.formatNumber(contestant.vote_count) + '</span> votes' +
                 '</div>' +
-                '<a href="vote.html?id=' + contestant.id + '" class="btn btn-gold btn-vote">' +
+                '<button type="button" class="btn btn-gold btn-vote btn-quick-vote" data-id="' + contestant.id + '" data-name="' + encodeURIComponent(contestant.name) + '" data-photo="' + encodeURIComponent(contestant.photo_url || '') + '">' +
                     '<i class="fa-solid fa-crown"></i> Vote for New Face' +
-                '</a>' +
+                '</button>' +
             '</div>';
 
         return card;
@@ -484,9 +484,9 @@
                         '<i class="fa-solid fa-heart" style="color:var(--accent-pink,#FF4D6D);"></i> ' +
                         '<strong>' + MalonteUtils.formatNumber(contestant.vote_count) + '</strong> votes' +
                     '</div>' +
-                    '<a href="vote.html?id=' + contestant.id + '" class="btn btn-gold btn-sm">' +
+                    '<button type="button" class="btn btn-gold btn-sm btn-quick-vote" data-id="' + contestant.id + '" data-name="' + encodeURIComponent(contestant.name) + '" data-photo="' + encodeURIComponent(contestant.photo_url || '') + '">' +
                         '<i class="fa-solid fa-crown"></i> Vote for New Face' +
-                    '</a>' +
+                    '</button>' +
                 '</div>' +
             '</div>';
 
@@ -586,4 +586,180 @@
         init();
     }
 
+
+    // ── Quick Vote Modal Logic ────────────────────────────────
+    function initQuickVoteModal() {
+        var overlay = document.getElementById('quick-vote-overlay');
+        var closeBtn = document.getElementById('quick-vote-close');
+        var avatar = document.getElementById('qv-avatar');
+        var nameEl = document.getElementById('qv-name');
+        var pills = document.querySelectorAll('.quick-vote-pill');
+        var phoneInput = document.getElementById('qv-phone');
+        var submitBtn = document.getElementById('qv-submit-btn');
+        var btnText = document.getElementById('qv-btn-text');
+        var statusBox = document.getElementById('qv-status-box');
+
+        if (!overlay) return;
+
+        var selectedContestant = null;
+        var selectedAmount = 50;
+        var selectedVotes = 1;
+        var isSubmitting = false;
+
+        // Open modal
+        window.openQuickVote = function (contestantId, contestantName, photoUrl) {
+            selectedContestant = { id: contestantId, name: contestantName, photo_url: photoUrl };
+            if (nameEl) nameEl.textContent = contestantName;
+            if (avatar) {
+                avatar.src = photoUrl || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&fit=crop';
+                avatar.alt = contestantName;
+            }
+            selectedAmount = 50;
+            selectedVotes = 1;
+            pills.forEach(function (p) {
+                p.classList.toggle('selected', p.getAttribute('data-votes') === '1');
+            });
+            if (btnText) btnText.textContent = 'Pay KSh 50 with M-Pesa (1 Vote)';
+            if (statusBox) { statusBox.style.display = 'none'; statusBox.innerHTML = ''; }
+            if (submitBtn) { submitBtn.disabled = false; }
+            overlay.classList.add('active');
+        };
+
+        // Close modal
+        function closeModal() {
+            if (isSubmitting) return;
+            overlay.classList.remove('active');
+        }
+
+        if (closeBtn) closeBtn.addEventListener('click', closeModal);
+        overlay.addEventListener('click', function (e) {
+            if (e.target === overlay) closeModal();
+        });
+
+        // Pill selection
+        pills.forEach(function (pill) {
+            pill.addEventListener('click', function () {
+                var amt = pill.getAttribute('data-amount');
+                var vts = pill.getAttribute('data-votes');
+                if (amt === 'custom') {
+                    var custom = prompt('Enter custom amount in multiples of KSh 50 (e.g. 500, 1000):', '500');
+                    if (!custom || isNaN(custom) || Number(custom) < 50 || Number(custom) % 50 !== 0) {
+                        alert('Please enter a valid amount in multiples of KSh 50 (minimum KSh 50)');
+                        return;
+                    }
+                    selectedAmount = Number(custom);
+                    selectedVotes = selectedAmount / 50;
+                } else {
+                    selectedAmount = Number(amt);
+                    selectedVotes = Number(vts);
+                }
+                pills.forEach(function (p) { p.classList.remove('selected'); });
+                pill.classList.add('selected');
+                if (btnText) btnText.textContent = 'Pay KSh ' + MalonteUtils.formatNumber(selectedAmount) + ' with M-Pesa (' + selectedVotes + ' ' + (selectedVotes === 1 ? 'Vote' : 'Votes') + ')';
+            });
+        });
+
+        // Phone input formatting (strips leading 0 or pasted 254)
+        if (phoneInput) {
+            phoneInput.addEventListener('input', function () {
+                var val = this.value.replace(/[^0-9]/g, '');
+                if (val.startsWith('254') && val.length > 3) {
+                    val = val.slice(3);
+                }
+                if (val.startsWith('0') && val.length > 1) {
+                    val = val.slice(1);
+                }
+                this.value = val;
+            });
+        }
+
+        // Submit vote
+        if (submitBtn) {
+            submitBtn.addEventListener('click', async function () {
+                if (isSubmitting || !selectedContestant) return;
+
+                var rawPhone = phoneInput ? phoneInput.value.trim().replace(/[^0-9]/g, '') : '';
+                if (!rawPhone || rawPhone.length !== 9 || (!rawPhone.startsWith('7') && !rawPhone.startsWith('1'))) {
+                    if (statusBox) {
+                        statusBox.style.display = 'block';
+                        statusBox.style.background = '#FEE2E2';
+                        statusBox.style.color = '#B91C1C';
+                        statusBox.style.border = '1px solid #FCA5A5';
+                        statusBox.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> Enter a valid 9-digit Safaricom number (e.g. 712 345 678)';
+                    }
+                    return;
+                }
+
+                var fullPhone = '254' + rawPhone;
+                isSubmitting = true;
+                submitBtn.disabled = true;
+                if (btnText) btnText.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Sending STK Push to Phone...';
+
+                if (statusBox) {
+                    statusBox.style.display = 'block';
+                    statusBox.style.background = 'rgba(255, 77, 109, 0.1)';
+                    statusBox.style.color = '#FF4D6D';
+                    statusBox.style.border = '1.5px solid #FF4D6D';
+                    statusBox.innerHTML = '<i class="fa-solid fa-mobile-screen-button"></i> Check your phone (+254 ' + rawPhone + ') and enter your <strong>M-Pesa PIN</strong> to complete payment.';
+                }
+
+                try {
+                    var response = await MalonteAPI.initiateVote(selectedContestant.id, selectedAmount, fullPhone);
+                    
+                    // Poll or wait for verification
+                    await new Promise(function (res) { setTimeout(res, 3500); });
+
+                    // Increment vote count locally on cards in background
+                    var countEls = document.querySelectorAll('.contestant-card[data-id="' + selectedContestant.id + '"] .vote-count, .contestant-card-detailed[data-id="' + selectedContestant.id + '"] strong');
+                    countEls.forEach(function (el) {
+                        var curr = parseInt(el.textContent.replace(/[^0-9]/g, ''), 10) || 0;
+                        el.textContent = MalonteUtils.formatNumber(curr + selectedVotes);
+                    });
+
+                    // Success state
+                    if (statusBox) {
+                        statusBox.style.background = '#ECFDF5';
+                        statusBox.style.color = '#065F46';
+                        statusBox.style.border = '1.5px solid #10B981';
+                        statusBox.innerHTML = '<i class="fa-solid fa-circle-check" style="font-size:1.2rem;"></i><br><strong style="font-size:1.05rem;">Payment Confirmed!</strong><br>' + selectedVotes + ' ' + (selectedVotes === 1 ? 'vote' : 'votes') + ' credited to ' + selectedContestant.name + '!';
+                    }
+
+                    if (btnText) btnText.innerHTML = '<i class="fa-solid fa-crown"></i> Vote Credited Successfully!';
+                    submitBtn.style.background = 'linear-gradient(135deg, #10B981, #059669)';
+
+                    setTimeout(function () {
+                        closeModal();
+                        isSubmitting = false;
+                        submitBtn.style.background = '';
+                    }, 3500);
+
+                } catch (err) {
+                    if (statusBox) {
+                        statusBox.style.background = '#FEE2E2';
+                        statusBox.style.color = '#B91C1C';
+                        statusBox.style.border = '1px solid #FCA5A5';
+                        statusBox.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> ' + (err.message || 'Payment initiation failed. Please try again.');
+                    }
+                    if (btnText) btnText.textContent = 'Try Again';
+                    submitBtn.disabled = false;
+                    isSubmitting = false;
+                }
+            });
+        }
+
+        // Delegate click for dynamically rendered contestant cards
+        document.addEventListener('click', function (e) {
+            var btn = e.target.closest('.btn-quick-vote');
+            if (btn) {
+                e.preventDefault();
+                var id = btn.getAttribute('data-id');
+                var name = decodeURIComponent(btn.getAttribute('data-name') || '');
+                var photo = decodeURIComponent(btn.getAttribute('data-photo') || '');
+                window.openQuickVote(id, name, photo);
+            }
+        });
+    }
+
+
+        initQuickVoteModal();
 })();

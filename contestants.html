@@ -157,5 +157,67 @@
             if (navbar) navbar.classList.toggle('scrolled', window.scrollY > 50);
         });
     </script>
+    <!-- Quick Vote Modal (Instant One-Tap Voting) -->
+    <div class="quick-vote-overlay" id="quick-vote-overlay">
+        <div class="quick-vote-modal" id="quick-vote-modal">
+            <button class="quick-vote-close" id="quick-vote-close" aria-label="Close">&times;</button>
+            <div class="quick-vote-header">
+                <img src="" alt="" class="quick-vote-avatar" id="qv-avatar">
+                <div>
+                    <h3 class="quick-vote-candidate-name" id="qv-name">Contender Name</h3>
+                    <span class="quick-vote-tag"><i class="fa-solid fa-crown"></i> Voting for New Face of Fashion Crown</span>
+                </div>
+            </div>
+            
+            <label class="form-label" style="font-size: 0.8rem; font-weight: 600; text-transform: uppercase; color: #474329; display: block; margin-bottom: 8px;">Select Voting Package</label>
+            <div class="quick-vote-packages" id="qv-packages">
+                <div class="quick-vote-pill selected" data-votes="1" data-amount="50">
+                    <span class="pill-votes">1 Vote</span>
+                    <span class="pill-amount">KSh 50</span>
+                </div>
+                <div class="quick-vote-pill" data-votes="3" data-amount="150">
+                    <span class="pill-votes">3 Votes</span>
+                    <span class="pill-amount">KSh 150</span>
+                </div>
+                <div class="quick-vote-pill" data-votes="5" data-amount="250">
+                    <span class="pill-votes">5 Votes 🔥</span>
+                    <span class="pill-amount">KSh 250</span>
+                </div>
+                <div class="quick-vote-pill" data-votes="10" data-amount="500">
+                    <span class="pill-votes">10 Votes</span>
+                    <span class="pill-amount">KSh 500</span>
+                </div>
+                <div class="quick-vote-pill" data-votes="20" data-amount="1000">
+                    <span class="pill-votes">20 Votes 👑</span>
+                    <span class="pill-amount">KSh 1,000</span>
+                </div>
+                <div class="quick-vote-pill" data-votes="custom" data-amount="custom" id="qv-custom-pill">
+                    <span class="pill-votes">Custom</span>
+                    <span class="pill-amount">More</span>
+                </div>
+            </div>
+
+            <div class="quick-vote-phone-box">
+                <label class="form-label" style="font-size: 0.8rem; font-weight: 600; text-transform: uppercase; color: #474329; display: block; margin-bottom: 8px;">M-Pesa Phone Number</label>
+                <div class="quick-vote-input-wrap">
+                    <div class="quick-vote-prefix">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 900 600'%3E%3Crect width='900' height='200' fill='%23000'/%3E%3Crect y='200' width='900' height='200' fill='%23b00'/%3E%3Crect y='400' width='900' height='200' fill='%23060'/%3E%3Crect y='185' width='900' height='30' fill='%23fff'/%3E%3Crect y='385' width='900' height='30' fill='%23fff'/%3E%3C/svg%3E" alt="KE" style="width:20px; border-radius:3px;">
+                        <span>+254</span>
+                    </div>
+                    <input type="tel" id="qv-phone" class="quick-vote-input" placeholder="712 345 678" maxlength="10">
+                </div>
+                <p style="font-size: 0.75rem; color: #6B6543; margin-top: 6px;">You will receive an instant M-Pesa PIN prompt on your phone</p>
+            </div>
+
+            <button type="button" class="quick-vote-btn" id="qv-submit-btn">
+                <i class="fa-solid fa-mobile-screen-button"></i>
+                <span id="qv-btn-text">Pay KSh 50 with M-Pesa</span>
+            </button>
+
+            <!-- State feedback -->
+            <div id="qv-status-box" style="display: none; margin-top: 16px; padding: 14px; border-radius: 12px; text-align: center; font-size: 0.9rem; font-weight: 600;"></div>
+        </div>
+    </div>
+
 </body>
 </html>
