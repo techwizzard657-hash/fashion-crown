@@ -908,6 +908,7 @@ p {
 .contestant-card-header {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: 12px;
     margin-bottom: 12px;
 }
@@ -3632,4 +3633,54 @@ textarea:focus-visible {
     opacity: 0.65;
     cursor: not-allowed;
     transform: none;
+}
+
+/* Exact Horizontal Card & Vote Pill Styling (Matches User Screenshot) */
+.btn-vote-pill {
+    background: linear-gradient(135deg, #FF4D6D 0%, #D81B60 100%) !important;
+    color: #FFFFFF !important;
+    border-radius: 50px !important;
+    padding: 12px 24px !important;
+    font-weight: 700 !important;
+    font-size: 0.84rem !important;
+    letter-spacing: 0.08em !important;
+    text-transform: uppercase !important;
+    box-shadow: 0 4px 18px rgba(255, 77, 109, 0.42) !important;
+    border: none !important;
+    cursor: pointer !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    transition: all 0.25s ease !important;
+    text-decoration: none !important;
+}
+
+.btn-vote-pill:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 8px 25px rgba(255, 77, 109, 0.6) !important;
+    background: linear-gradient(135deg, #FF3358 0%, #C2185B 100%) !important;
+}
+
+.btn-vote-pill:active {
+    transform: translateY(0) !important;
+}
+
+.contestant-card-detailed {
+    background: #FFFFFF !important;
+    border: 1px solid #E2D5C7 !important;
+    border-radius: 20px !important;
+    box-shadow: 0 4px 20px rgba(71, 67, 41, 0.06) !important;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.contestant-card-detailed:hover {
+    transform: translateY(-3px) !important;
+    box-shadow: 0 12px 35px rgba(71, 67, 41, 0.12) !important;
+    border-color: #FF4D6D !important;
+}
+
+.contestant-card-left img {
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
 }

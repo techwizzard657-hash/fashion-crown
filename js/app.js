@@ -298,12 +298,15 @@
             // Populate stats bar
             populateHomeStats(competition, contestants);
 
-            // Populate featured contestants grid
+            // Populate featured contestants as horizontal detailed cards (matches screenshot)
             var grid = document.getElementById('contestants-grid');
             if (grid && contestants.length) {
+                var sorted = contestants.slice().sort(function (a, b) {
+                    return (b.vote_count || 0) - (a.vote_count || 0);
+                });
                 grid.innerHTML = '';
-                contestants.forEach(function (contestant) {
-                    grid.appendChild(createContestantCard(contestant));
+                sorted.forEach(function (contestant, index) {
+                    grid.appendChild(createDetailedContestantCard(contestant, index + 1));
                 });
             }
 
@@ -475,8 +478,8 @@
             '</div>' +
             '<div class="contestant-card-body">' +
                 '<div class="contestant-card-header">' +
-                    rankBadge +
                     '<h3 class="contestant-name">' + contestant.name + '</h3>' +
+                    rankBadge +
                 '</div>' +
                 '<p class="contestant-bio">' + (contestant.bio || '') + '</p>' +
                 '<div class="contestant-card-footer">' +
@@ -484,7 +487,7 @@
                         '<i class="fa-solid fa-heart" style="color:var(--accent-pink,#FF4D6D);"></i> ' +
                         '<strong>' + MalonteUtils.formatNumber(contestant.vote_count) + '</strong> votes' +
                     '</div>' +
-                    '<button type="button" class="btn btn-gold btn-sm btn-quick-vote" data-id="' + contestant.id + '" data-name="' + encodeURIComponent(contestant.name) + '" data-photo="' + encodeURIComponent(contestant.photo_url || '') + '">' +
+                    '<button type="button" class="btn-vote-pill btn-quick-vote" data-id="' + contestant.id + '" data-name="' + encodeURIComponent(contestant.name) + '" data-photo="' + encodeURIComponent(contestant.photo_url || '') + '">' +
                         '<i class="fa-solid fa-crown"></i> Vote for New Face' +
                     '</button>' +
                 '</div>' +
