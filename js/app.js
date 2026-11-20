@@ -103,6 +103,7 @@
                 initials + '</div>';
         }
     };
+    window.FashionCrownUtils = window.MalonteUtils;
 
     // ── Toast Notifications ────────────────────────────────
     var toastContainer = null;
@@ -308,6 +309,7 @@
                 sorted.forEach(function (contestant, index) {
                     grid.appendChild(createDetailedContestantCard(contestant, index + 1));
                 });
+                initScrollAnimations();
             }
 
             // Store competition info for countdown
@@ -559,6 +561,7 @@
         initNavigation();
         initScrollAnimations();
         initCounterAnimations();
+        initQuickVoteModal();
 
         // Show demo mode banner
         if (window.MalonteAPI && window.MalonteAPI._isDemo) {

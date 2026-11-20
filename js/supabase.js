@@ -859,6 +859,8 @@ function buildDailyRevenue(transactions, days) {
 }
 
 window.FashionCrownAPI = MalonteAPI;
-window.FashionCrownUtils = MalonteUtils;
+if (typeof MalonteUtils !== 'undefined') {
+    window.FashionCrownUtils = MalonteUtils;
+}
 
 console.log('[Fashion Crown] API layer ready —', isSupabaseConnected ? 'LIVE' : 'DEMO MODE');
